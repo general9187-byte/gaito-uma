@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#ff9ec7">
+<title>せんきょ プロデュース</title>
+<style>
+:root{--ink:#2b2140;--paper:#fffbf2;--pink:#ff6fa5;--gold:#ffcf3a;--blue:#3f8cff;--green:#3bb36b;--red:#e0442f;--purple:#8a5cf5}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;background:#ffd6e7;color:var(--ink);overscroll-behavior:none;
+ font-family:"Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",sans-serif;font-weight:800}
+button{font:inherit;color:inherit;cursor:pointer}
+.hide{display:none!important}
+canvas#cv{position:fixed;inset:0;width:100%;height:100%;display:block}
+#ui{position:fixed;inset:0;display:flex;flex-direction:column;max-width:560px;margin:0 auto;padding:max(6px,env(safe-area-inset-top)) 8px max(8px,env(safe-area-inset-bottom));pointer-events:none}
+#ui>*{pointer-events:auto}
+#ui.pass>.sp{pointer-events:none}
+.sp{flex:1;min-height:0}
+.panel{background:#fffbf2ee;border:3px solid var(--ink);border-radius:14px;padding:7px 9px;box-shadow:0 3px 0 #0003}
+.pill{display:inline-block;background:var(--ink);color:#fff;border-radius:9px;padding:3px 9px;font-size:12.5px;white-space:nowrap}
+.pill.g{background:var(--gold);color:var(--ink)}.pill.p{background:var(--pink)}
+.bar{height:12px;border-radius:7px;background:#0002;border:2px solid var(--ink);overflow:hidden}
+.bar i{display:block;height:100%;transition:width .35s}
+.row{display:flex;gap:6px;align-items:center}
+.wrap{display:flex;gap:6px;flex-wrap:wrap}
+#stats{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:6px}
+.stc{background:#fff;border:2px solid var(--ink);border-radius:9px;text-align:center;font-size:11px;padding:2px 0;line-height:1.25}
+.stc b{display:block;font-size:17px}
+.stc em{font-style:normal;color:var(--green);font-size:12px;display:block;min-height:15px}
+#tr{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.tb{position:relative;background:#fff;border:3px solid var(--ink);border-radius:13px;padding:14px 2px 5px;text-align:center;font-size:12px;line-height:1.25;box-shadow:0 4px 0 var(--ink);min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px}
+.tb .ic{font-size:24px}
+.tb.sel{background:var(--gold);transform:translateY(-8px);box-shadow:0 12px 0 var(--ink)}
+.tb .fail{position:absolute;right:-4px;bottom:-9px;font-size:11px;background:var(--red);color:#fff;border-radius:8px;padding:0 5px;border:2px solid var(--ink)}
+.tb .fail.ok{background:var(--green)}
+.tb .cards{position:absolute;left:0;right:0;top:-13px;display:flex;justify-content:center;gap:1px}
+.cd{width:25px;height:25px;border-radius:50%;background:#fff;border:2px solid var(--ink);font-size:14px;display:flex;align-items:center;justify-content:center}
+.cd.fr{box-shadow:0 0 0 3px var(--gold),0 0 10px 2px #ff0;animation:pl .8s infinite alternate}
+@keyframes pl{to{transform:scale(1.15)}}
+.mini{flex:1;background:#fff;border:3px solid var(--ink);border-radius:12px;padding:7px 2px;font-size:13px;box-shadow:0 3px 0 var(--ink)}
+.mini:active,.btn:active,.opt:active{transform:translateY(3px);box-shadow:0 0 0 var(--ink)}
+.btn{display:block;width:100%;margin-top:8px;background:var(--gold);border:3px solid var(--ink);border-radius:12px;padding:10px;font-size:17px;box-shadow:0 4px 0 var(--ink)}
+.btn.sub{background:#fff;font-size:14px;padding:8px}.btn.pk{background:var(--pink);color:#fff}
+.btn:disabled,.opt:disabled,.mini:disabled{opacity:.4}
+#sheet{position:fixed;inset:0;background:#2b214099;display:flex;align-items:center;justify-content:center;padding:12px;z-index:10;overflow:auto}
+#box{width:100%;max-width:500px;max-height:100%;overflow:auto}
+h1{margin:0;font-size:28px;text-align:center;line-height:1.2;color:#fff;text-shadow:0 3px 0 var(--ink),3px 0 var(--ink),-3px 0 var(--ink),0 -3px 0 var(--ink)}
+h2{margin:0 0 6px;font-size:18px}
+p{margin:5px 0;line-height:1.55;font-size:13.5px}
+small{font-size:11.5px}
+.memo{background:#eaf3ff;border:2px dashed var(--blue);border-radius:10px;padding:6px 9px;font-size:12.5px;line-height:1.55;margin:7px 0}
+.memo b{color:var(--blue)}
+.opt{display:block;width:100%;text-align:left;margin-top:7px;background:#fff;border:3px solid var(--ink);border-radius:12px;padding:8px 10px;font-size:14px;line-height:1.45;box-shadow:0 3px 0 var(--ink)}
+.opt.on{background:var(--gold)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.crd{border:3px solid var(--ink);border-radius:11px;padding:5px;background:#fff;font-size:11.5px;line-height:1.35;text-align:center}
+.crd .em{font-size:26px}
+.crd.SSR{background:linear-gradient(135deg,#fff3b0,#ffd0f0,#c9e8ff)}.crd.SR{background:#fff0c4}.crd.R{background:#e5edf6}
+.crd.on{outline:4px solid var(--pink)}
+.crd.lock{opacity:.4}
+.rar{font-size:11px;background:var(--ink);color:#fff;border-radius:6px;padding:0 5px}
+.big{font-size:34px;text-align:center;line-height:1.2;margin:4px 0}
+ul.tips{padding-left:18px;margin:4px 0;font-size:12.5px;line-height:1.6}
+.rk{display:flex;align-items:center;gap:5px;font-size:11.5px;margin:2px 0;color:#fff;text-shadow:0 1px 0 #000a}
+.rk .bar{flex:1;height:8px;border-width:1.5px}
+.rk .bar i{background:var(--pink)}
+#toast{position:fixed;left:50%;top:26%;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:14px;padding:8px 16px;font-size:16px;opacity:0;pointer-events:none;z-index:20;white-space:nowrap;max-width:94vw}
+#toast.go{animation:tt 1.7s}
+@keyframes tt{0%{opacity:0;transform:translate(-50%,10px)}12%,78%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-14px)}}
+#cmt{position:fixed;left:8px;right:8px;top:max(8px,env(safe-area-inset-top));max-width:540px;margin:0 auto;pointer-events:none}
+#tap{height:92px;border:4px solid var(--ink);border-radius:22px;background:var(--red);color:#fff;font-size:26px;box-shadow:0 6px 0 var(--ink);width:100%}
+#tap:active{transform:translateY(4px);box-shadow:0 2px 0 var(--ink)}
+.flash{animation:fl .9s}
+@keyframes fl{0%{box-shadow:0 0 0 0 #fff}50%{box-shadow:0 0 40px 20px #ffe}100%{box-shadow:0 0 0 0 #fff}}
+.logo{font-size:44px;margin:6px 0 0;line-height:1.12;letter-spacing:.04em;background:linear-gradient(#fff,#ffd0e8);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:2px var(--ink);paint-order:stroke;text-shadow:none;filter:drop-shadow(0 4px 0 #2b2140)}
+.blink{text-align:center;color:#fff;font-size:20px;text-shadow:0 2px 0 var(--ink),2px 0 var(--ink),-2px 0 var(--ink),0 -2px 0 var(--ink);animation:bl 1.2s infinite;margin-bottom:10px;padding:8px}
+@keyframes bl{50%{opacity:.25}}
+#ui.pass>.sp[data-k]{pointer-events:auto}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div id="ui"></div>
+<div id="cmt"></div>
+<div id="toast"></div>
+<div id="sheet" class="hide"><div id="box" class="panel"></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* ================= データ ================= */
+const SN={voi:"声",sta:"体力",pow:"行動力",tru:"信頼",pol:"政策"};
+const SK=["voi","sta","pow","tru","pol"];
+const TR=[
+ {k:"voi",n:"はっせい",e:"📣",g:{voi:14,pow:5},en:-20,bg:0xffb3c7},
+ {k:"sta",n:"ランニング",e:"🏃",g:{sta:13,tru:5},en:-20,bg:0xb3e0ff},
+ {k:"pow",n:"あいさつ回り",e:"🤝",g:{pow:13,sta:5},en:-22,bg:0xffd9a0},
+ {k:"tru",n:"ボランティア",e:"🧹",g:{tru:13,voi:3,pow:3},en:-23,bg:0xc6f0b0},
+ {k:"pol",n:"せいさく",e:"📖",g:{pol:13,tru:3},en:5,bg:0xd9c6ff}
+];
+const MOOD=["😫 絶不調","😟 不調","🙂 普通","😊 好調","😆 絶好調"];
+const CAND=[
+ {id:"nagata",n:"ながた",col:0xe0442f,hair:0x3a2a20,apt:{voi:1.10},strat:"senko",d:"声が とおる 先行タイプ。 はっせい が のびやすい！",start:{voi:60,sta:45,pow:45,tru:45,pol:45}},
+ {id:"kasumi",n:"かすみ",col:0x8a5cf5,hair:0x6b3a8a,apt:{pol:1.10,tru:1.05},strat:"sashi",d:"かしこい 差しタイプ。 せいさく が のびやすい！",start:{voi:45,sta:45,pow:45,tru:50,pol:60}},
+ {id:"chiyoda",n:"ちよだ",col:0x2fae6e,hair:0xc08a30,apt:{sta:1.10,pow:1.05},strat:"nige",d:"スタミナ ばつぐんの 逃げタイプ。 たいりょく が のびやすい！",start:{voi:45,sta:60,pow:50,tru:45,pol:45}}
+];
+const STRAT={
+ nige:{n:"逃げ",d:"序盤から トップで ひっぱる。 つかれやすい",m:[1.06,1.01,.99,.97],hp:1.15},
+ senko:{n:"先行",d:"前めで レースを すすめる バランス型",m:[1.03,1.0,1.0,1.0],hp:1.0},
+ sashi:{n:"差し",d:"中ほどで ためて 終盤に ぬく",m:[.98,.99,1.01,1.04],hp:.95},
+ oikomi:{n:"追い込み",d:"うしろから ラストスパート 一気に！",m:[.95,.97,1.01,1.07],hp:.9}
+};
+const RAR={SSR:{tr:20,flat:3,bond:30,fr:35},SR:{tr:15,flat:2,bond:20,fr:28},R:{tr:10,flat:1,bond:10,fr:22}};
+const CARDS=[
+ {id:"c1",n:"ハル",role:"広報担当",t:"voi",r:"SSR",e:"📣",line:"次の ポスター、 声を 活かす デザインに しましょう！"},
+ {id:"c2",n:"ミナ",role:"アナウンサー",t:"voi",r:"SR",e:"🎙️",line:"腹式こきゅう、 おしえますよ。"},
+ {id:"c3",n:"ケン",role:"合唱部",t:"voi",r:"R",e:"🎤",line:"あーあーあー！ いっしょに 発声！"},
+ {id:"c4",n:"ゴウ",role:"元マラソン選手",t:"sta",r:"SSR",e:"🏃",line:"42キロも 最初の一歩から。 さあ 走ろう！"},
+ {id:"c5",n:"リク",role:"水泳コーチ",t:"sta",r:"SR",e:"🏊",line:"全身を つかうと 疲れにくいよ。"},
+ {id:"c6",n:"タク",role:"野球部",t:"sta",r:"R",e:"⚾",line:"ノックだ ノック！ 声だせー！"},
+ {id:"c7",n:"サクラ",role:"後援会の会長",t:"pow",r:"SSR",e:"👵",line:"町内会、 ぜんぶ まわるわよ！ ついてらっしゃい。"},
+ {id:"c8",n:"ダイ",role:"商店街の店主",t:"pow",r:"SR",e:"🏮",line:"うちの 店 から まわってくれ！"},
+ {id:"c9",n:"ユイ",role:"タクシー運転手",t:"pow",r:"R",e:"🚕",line:"近道なら まかせて！"},
+ {id:"c10",n:"ミコト",role:"町内会長",t:"tru",r:"SSR",e:"🏘️",line:"まじめに コツコツ。 それが 信頼だよ。"},
+ {id:"c11",n:"アヤ",role:"保育士",t:"tru",r:"SR",e:"🧸",line:"こどもたち、 きみの こと 好きだって。"},
+ {id:"c12",n:"ソラ",role:"ボランティア",t:"tru",r:"R",e:"🤝",line:"ごみ ひろい、 いっしょに しよ！"},
+ {id:"c13",n:"レイ",role:"大学教授",t:"pol",r:"SSR",e:"🎓",line:"データを みれば、 まちの 課題が 見えてくる。"},
+ {id:"c14",n:"ノア",role:"新聞記者",t:"pol",r:"SR",e:"📰",line:"その 公約、 ほんとうに できるの？"},
+ {id:"c15",n:"ヒビキ",role:"図書館司書",t:"pol",r:"R",e:"📚",line:"この 本、 まちづくりの ヒントに なるよ。"}
+];
+const SKILLS=[
+ {id:"s1",n:"好スタート",d:"序盤で 加速 +6%",cost:90,ph:0,spd:.06},
+ {id:"s2",n:"ひろがる声",d:"中盤で 加速 +5%",cost:100,ph:1,spd:.05},
+ {id:"s3",n:"データで説得",d:"中盤で 体力を 12 回復",cost:110,ph:1,hp:12},
+ {id:"s4",n:"地元の声援",d:"中盤で 加速 +6%",cost:130,ph:1,spd:.06},
+ {id:"s5",n:"ねばりづよさ",d:"終盤で 体力を 15 回復",cost:120,ph:2,hp:15},
+ {id:"s6",n:"熱い演説",d:"終盤で 加速 +7%",cost:140,ph:2,spd:.07},
+ {id:"s7",n:"冷静な返し",d:"終盤で トップの 足を ひっぱる",cost:150,ph:2,deb:.04},
+ {id:"s8",n:"最後のひとこと",d:"ラストスパートで 加速 +9%",cost:180,ph:3,spd:.09},
+ {id:"s9",n:"逆転劇",d:"スパートで 3位いかなら 加速 +12%",cost:240,ph:3,spd:.12,behind:true},
+ {id:"s10",n:"まけない心",d:"体力が 0でも 失速しない",cost:200,ph:3,immune:true},
+ {id:"s11",n:"いつもどおり",d:"どの場面でも 加速 +2%",cost:160,ph:-1,spd:.02},
+ {id:"s12",n:"一票の重み",d:"スパートで 加速 +6%・体力 回復",cost:170,ph:3,spd:.06,hp:8}
+];
+const RIVALS=[["星野 まもる",0xe0442f],["山川 ひなた",0x3f8cff],["風間 つよし",0x2fae6e],["月島 あおい",0xf2a516],["森 だいち",0xd96aa0],["雪村 けい",0x6a8a9a],["海野 そら",0x2fb0c8]];
+const TIPS={
+ a:"選挙は「<b>告示日</b>」に スタート。立候補の とどけを 出して、そこから 選挙運動が はじまるよ。",
+ b:"選挙運動が できるのは <b>告示日から 投票日の前日まで</b>。期間は 決まっているんだ。",
+ c:"お金や 物で 票を たのむのは <b>買収</b>。ぜったいダメ！ 公正な 選挙を まもる ルールだよ。",
+ d:"<b>期日前投票</b>を つかえば、投票日に 行けない 人も 先に 投票できるよ。",
+ e:"<b>18さい</b>から 投票できる（2016年から）。君も 数年後には 有権者だ！",
+ f:"<b>投票日の 当日は 選挙運動が できない</b>。 最終日までに ぜんぶ 伝えよう。",
+ g:"街頭演説で <b>拡声器</b>を つかえるのは <b>朝8時〜夜8時</b> まで。まわりへの 思いやりも ルールだよ。"
+};
+const EVT={
+ bribe:{icon:"🍱",q:"商店街の おじさん「お弁当を 配るから、みんなに 投票してって 言ってよ！」",
+  c:[{l:"きっぱり ことわる",fx:G=>{G.st.tru+=14;G.refused=true},r:"「お金や 物で 票を 買うのは 買収。 気持ちだけ もらうね」 信頼が 大きく 上がった！(信頼+14)",tip:"c"},
+     {l:"うけとって ありがとう！",fx:G=>{G.st.tru-=20;G.mood=Math.max(-2,G.mood-1)},r:"あとで 大さわぎに…。 買収は 法律で 禁止！ 信頼が 下がり、気分も おちこんだ。(信頼-20)",tip:"c"}]},
+ net:{icon:"📱",q:"ネットに ライバルの ウワサが 流れてきた。 ほんとうか わからない…。",
+  c:[{l:"おなじ ウワサで 言い返す",fx:G=>{G.st.tru-=12},r:"けんかみたいに なって 信頼が 下がった… (信頼-12)"},
+     {l:"事実だけを 落ち着いて 伝える",fx:G=>{G.st.tru+=8;G.st.pol+=8},r:"ていねいな 説明が 好印象！(信頼+8 / 政策+8)"}],
+  tip2:"ネットの 情報は 出どころを たしかめてから 広めよう。"},
+ kid:{icon:"🧒",q:"小学生「ねえ、どうして 選挙って あるの？」",
+  c:[{l:"えらい 人が きめるから",fx:G=>{G.st.tru-=5},r:"うーん、 ちょっと ちがうかも。(信頼-5)"},
+     {l:"みんなで まちの ことを きめる 人を えらぶため",fx:G=>{G.st.pol+=12;G.st.tru+=6},r:"「そっか！ ぼくたちの まちだもんね」(政策+12 / 信頼+6)"},
+     {l:"えらく なりたいから",fx:G=>{G.st.tru-=8},r:"ひそひそ… 信頼が 下がった。(信頼-8)"}],
+  tip2:"選挙は 住んでいる みんなが 意見を 出す 大切な しくみ。"},
+ youth:{icon:"🗳️",q:"駅で 若い 人が「投票なんて いっても 変わらないよ」と つぶやいた…。",
+  c:[{l:"その場で 投票の 大切さを 話す",fx:G=>{G.st.voi+=10;G.st.pow+=6;G.energy-=10},r:"「一票は 小さくても みんなで 大きく なる」 声が とどいた！(声+10 / 行動力+6)"},
+     {l:"わかりやすい 動画を つくる",fx:G=>{G.st.pol+=10;G.st.voi+=4},r:"政策を まとめ直せた。(政策+10 / 声+4)"}],
+  tip2:"投票率が 低いと、一部の 人の 意見だけで きまってしまう。"},
+ dog:{icon:"🐕",q:"まいごの 子犬が ついてきた！ 首輪に 電話番号が ある。",
+  c:[{l:"交番に とどける",fx:G=>{G.st.tru+=10;G.energy-=8},r:"おまわりさんも 飼い主さんも にっこり。(信頼+10)"},
+     {l:"見なかった ことに する",fx:G=>{G.st.tru-=4},r:"…ちょっと 気に なる。(信頼-4)"}]},
+ rain:{icon:"☔",q:"急に 雨が ふってきた…。 どうする？",
+  c:[{l:"カッパを きて つづける！",fx:G=>{G.energy-=12;G.st.sta+=8;G.st.tru+=5},r:"ずぶぬれでも がんばる すがたに 拍手。(体力+8 / 信頼+5 / 元気-12)"},
+     {l:"きょうは ゆっくり やすむ",fx:G=>{G.energy+=18},r:"体力を ためた。(元気+18)"}]},
+ poster:{icon:"🪧",q:"電柱に ポスターを はって いいか 迷っている…。",
+  c:[{l:"決められた 掲示板に だけ はる",fx:G=>{G.st.tru+=8;G.st.pol+=4},r:"ルールを まもる すがたに 信頼が 上がった。(信頼+8)"},
+     {l:"目立つから 電柱に はる",fx:G=>{G.st.tru-=10},r:"注意されて しまった…。(信頼-10)"}],
+  tip2:"ポスターは 決められた <b>掲示板</b> にだけ はろう。 かってに はるのは ルール違反。"}
+};
+const SEV={ // サポートカードイベント
+ a:{q:n=>`${n}「ちょっと 練習 つきあって もらえる？」`,c:[{l:"いっしょに がんばる",fx:(G,c)=>{addBond(c,12);G.st[c.t]+=9;G.energy-=8},r:"きずなが ふかまった！"},{l:"おしゃべり して すごす",fx:(G,c)=>{addBond(c,8);G.energy+=12;G.mood=Math.min(2,G.mood+1)},r:"気分が よく なった！"}]},
+ b:{q:n=>`${n}「いい アイデア、 思いついたんだ！」`,c:[{l:"ぜひ 聞かせて",fx:(G,c)=>{addBond(c,10);G.sp+=22},r:"スキルポイント を ゲット！"},{l:"あとで 聞くね",fx:(G,c)=>{addBond(c,5);G.energy+=8},r:"ちょっと ひと休み。"}]}
+};
+
+/* ================= 保存 ================= */
+let SV={gems:1500,cards:{c3:0,c6:0,c9:0,c12:0,c15:0},deck:["c3","c6","c9","c12","c15"],legacy:[],hist:[],login:"",pulls:0};
+try{const x=JSON.parse(localStorage.getItem("gaito_uma")||"null");if(x)SV=Object.assign(SV,x)}catch(e){}
+function save(){try{localStorage.setItem("gaito_uma",JSON.stringify(SV))}catch(e){}}
+const todayS=()=>{const d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()};
+let loginMsg="";
+if(SV.login!==todayS()){SV.login=todayS();SV.gems+=150;loginMsg="📅 ログインボーナス ジェム +150！";save()}
+
+/* ================= 音 ================= */
+let actx=null;
+function beep(f,t,type,v){try{if(!actx)actx=new (window.AudioContext||window.webkitAudioContext)();if(actx.state==="suspended")actx.resume();
+ const o=actx.createOscillator(),g=actx.createGain();o.type=type||"square";o.frequency.value=f;g.gain.value=v||.05;o.connect(g);g.connect(actx.destination);o.start();
+ g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+t);o.stop(actx.currentTime+t)}catch(e){}}
+const sfx={ok:()=>{beep(660,.08);setTimeout(()=>beep(990,.12),70)},sel:()=>beep(800,.04),bad:()=>beep(160,.25,"sawtooth"),
+ win:()=>[523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,.2),i*120)),
+ gacha:()=>[400,500,650,800,1000,1300].forEach((f,i)=>setTimeout(()=>beep(f,.12,"triangle"),i*70)),tick:()=>beep(900,.03)};
+function toast(t){const e=$("toast");e.textContent=t;e.classList.remove("go");void e.offsetWidth;e.classList.add("go")}
+
+/* ================= three.js ================= */
+const cv=$("cv");
+const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();scene.fog=new THREE.Fog(0xffd6e7,40,190);
+const cam=new THREE.PerspectiveCamera(42,1,.1,500);
+const hemi=new THREE.HemisphereLight(0xdfeeff,0x8a9a78,.62);scene.add(hemi);
+const sun=new THREE.DirectionalLight(0xfff4e0,.8);sun.position.set(10,25,14);sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-26,right:26,top:26,bottom:-26,near:1,far:80});sun.shadow.bias=-.0006;
+scene.add(sun,sun.target);
+const rim=new THREE.DirectionalLight(0xffc6e0,.35);rim.position.set(-10,8,-12);scene.add(rim);
+function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.fov=w<h?50:40;cam.updateProjectionMatrix()}
+addEventListener("resize",resize);resize();
+const mat=(c,o)=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.75,metalness:0},o||{}));
+const box=(w,h,d,c)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(c));return m};
+function canvasTex(w,h,draw,rx,ry){const c=document.createElement("canvas");c.width=w;c.height=h;draw(c.getContext("2d"),w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rx||1,ry||1);t.anisotropy=4;return t}
+const grassTex=(rx,ry)=>canvasTex(256,256,(g,w,h)=>{g.fillStyle="#78bf62";g.fillRect(0,0,w,h);for(let i=0;i<3500;i++){g.fillStyle=`hsla(${90+Math.random()*30},55%,${34+Math.random()*22}%,.55)`;g.fillRect(Math.random()*w,Math.random()*h,2,4)}},rx,ry);
+const trackTex=(rx,ry)=>canvasTex(256,256,(g,w,h)=>{g.fillStyle="#d79a68";g.fillRect(0,0,w,h);for(let i=0;i<4000;i++){g.fillStyle=`hsla(${22+Math.random()*10},45%,${45+Math.random()*18}%,.5)`;g.fillRect(Math.random()*w,Math.random()*h,2,2)}},rx,ry);
+const tileTex=(rx,ry)=>canvasTex(128,128,(g,w,h)=>{for(let y=0;y<2;y++)for(let x=0;x<2;x++){g.fillStyle=(x+y)%2?"#fff4f8":"#ffdbe9";g.fillRect(x*64,y*64,64,64)}g.strokeStyle="#ffffff";g.lineWidth=3;g.strokeRect(0,0,w,h)},rx,ry);
+function label(text,sz,bg){
+ const c=document.createElement("canvas");c.width=512;c.height=128;const g=c.getContext("2d");
+ g.fillStyle=bg||"rgba(43,33,64,.88)";g.fillRect(0,0,512,128);g.fillStyle="#fff";g.font="bold 58px sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(text,256,68);
+ const t=new THREE.CanvasTexture(c);return new THREE.Mesh(new THREE.PlaneGeometry(sz,sz/4),new THREE.MeshBasicMaterial({map:t}));
+}
+/* ---- きゃら ---- */
+function makeHero(color,hair,style,skin){
+ skin=skin||0xffdcc0;style=style||0;
+ const g=new THREE.Group();
+ const M=(c,o)=>mat(c,Object.assign({roughness:.6},o||{}));
+ const suit=M(0x25325c),skinM=M(skin,{roughness:.5});
+ const put=(mesh,x,y,z,p)=>{mesh.position.set(x,y,z);mesh.castShadow=true;(p||g).add(mesh);return mesh};
+ const mkLeg=x=>{const l=new THREE.Group();l.position.set(x,.98,0);g.add(l);
+  put(new THREE.Mesh(new THREE.CylinderGeometry(.17,.13,.9,14),suit),0,-.45,0,l);
+  put(new THREE.Mesh(new THREE.BoxGeometry(.3,.16,.46),M(0x1a1a22,{roughness:.3})),0,-.92,.08,l);return l};
+ const legL=mkLeg(-.2),legR=mkLeg(.2);
+ put(new THREE.Mesh(new THREE.CylinderGeometry(.42,.4,.3,18),suit),0,1.0,0);
+ put(new THREE.Mesh(new THREE.CylinderGeometry(.45,.41,1.0,18),suit),0,1.5,0);
+ put(new THREE.Mesh(new THREE.BoxGeometry(.24,.55,.05),M(0xffffff)),0,1.62,.42);
+ put(new THREE.Mesh(new THREE.BoxGeometry(.09,.5,.04),M(0xe0442f)),0,1.55,.45);
+ const sash=put(new THREE.Mesh(new THREE.BoxGeometry(1.1,.15,.1),M(color,{roughness:.4})),0,1.5,.43);sash.rotation.z=.85;
+ put(new THREE.Mesh(new THREE.CylinderGeometry(.12,.13,.18,10),skinM),0,2.04,0);
+ const mkArm=x=>{const a=new THREE.Group();a.position.set(x,1.9,0);g.add(a);
+  put(new THREE.Mesh(new THREE.CylinderGeometry(.11,.09,.8,12),suit),0,-.4,0,a);
+  put(new THREE.Mesh(new THREE.SphereGeometry(.1,10,8),skinM),0,-.86,0,a);
+  put(new THREE.Mesh(new THREE.SphereGeometry(.12,10,8),suit),0,0,0,a);return a};
+ const armL=mkArm(-.58),armR=mkArm(.58);
+ const head=put(new THREE.Mesh(new THREE.SphereGeometry(.4,24,18),skinM),0,2.42,0);head.scale.set(1,1.06,1);
+ [-1,1].forEach(s=>{
+  const w=new THREE.Mesh(new THREE.SphereGeometry(.075,12,10),M(0xffffff,{roughness:.2}));w.scale.set(1,1.25,.5);put(w,s*.15,2.46,.34);
+  const ir=new THREE.Mesh(new THREE.SphereGeometry(.052,12,10),M(0x2b2140,{roughness:.2}));ir.scale.set(1,1.25,.5);put(ir,s*.15,2.46,.365);
+  const hl=new THREE.Mesh(new THREE.SphereGeometry(.02,8,6),new THREE.MeshBasicMaterial({color:0xffffff}));put(hl,s*.15+.018,2.485,.385);
+  const br=new THREE.Mesh(new THREE.BoxGeometry(.15,.025,.02),M(hair));br.rotation.z=s*.12;put(br,s*.15,2.57,.36);
+  const ck=new THREE.Mesh(new THREE.CircleGeometry(.055,12),new THREE.MeshBasicMaterial({color:0xff8aa8,transparent:true,opacity:.45}));put(ck,s*.25,2.35,.33);
+ });
+ const mo=new THREE.Mesh(new THREE.TorusGeometry(.05,.012,6,12,Math.PI),M(0xb04050));mo.rotation.z=Math.PI;put(mo,0,2.31,.385);
+ const hm=M(hair,{roughness:.45});
+ put(new THREE.Mesh(new THREE.SphereGeometry(.44,24,16,0,Math.PI*2,0,Math.PI*.4),hm),0,2.43,-.02);
+ for(let i=-3;i<=3;i++){const f=new THREE.Mesh(new THREE.ConeGeometry(.075,.26,6),hm);f.rotation.x=Math.PI;f.rotation.z=i*.05;put(f,i*.115,2.67-Math.abs(i)*.02,.33)}
+ const back=put(new THREE.Mesh(new THREE.SphereGeometry(.43,18,12,Math.PI,Math.PI,Math.PI*.25,Math.PI*.6),hm),0,2.35,-.1);back.scale.set(1,1.05,.9);
+ if(style===0){const t=put(new THREE.Mesh(new THREE.CylinderGeometry(.08,.17,.95,10),hm),0,2.15,-.55);t.rotation.x=-.45}
+ else if(style===1){put(new THREE.Mesh(new THREE.CylinderGeometry(.46,.42,.45,18,1,true,.6,Math.PI*2-1.2),new THREE.MeshStandardMaterial({color:hair,roughness:.45,side:THREE.DoubleSide})),0,2.2,-.05)}
+ else{[-1,1].forEach(s=>{const t=put(new THREE.Mesh(new THREE.ConeGeometry(.15,.95,10),hm),s*.46,2.2,-.12);t.rotation.x=Math.PI;t.rotation.z=s*.1})}
+ g.userData={legL,legR,armL,armR,phase:0};return g;
+}
+function animHero(g,sp,dt){
+ const u=g.userData;u.phase+=dt*sp*11;const a=Math.sin(u.phase)*.8*Math.min(1,sp);
+ u.legL.rotation.x=a;u.legR.rotation.x=-a;u.armL.rotation.x=-a;u.armR.rotation.x=a;
+}
+CAND[0].style=0;CAND[1].style=1;CAND[2].style=2;
+/* ---- そら ---- */
+const skyU={top:{value:new THREE.Color(0x5a9be8)},bot:{value:new THREE.Color(0xffd6e7)}};
+const sky=new THREE.Mesh(new THREE.SphereGeometry(300,24,14),new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,fog:false,uniforms:skyU,
+ vertexShader:"varying float h;void main(){h=normalize(position).y;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}",
+ fragmentShader:"uniform vec3 top;uniform vec3 bot;varying float h;void main(){gl_FragColor=vec4(mix(bot,top,clamp(h*1.5,0.,1.)),1.);}"}));
+sky.renderOrder=-10;scene.add(sky);
+(function(){
+ const t=canvasTex(128,128,(g,w,h)=>{const r=g.createRadialGradient(64,64,4,64,64,60);r.addColorStop(0,"rgba(255,255,255,.95)");r.addColorStop(1,"rgba(255,255,255,0)");g.fillStyle=r;g.fillRect(0,0,w,h)});
+ for(let i=0;i<16;i++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:t,fog:false,transparent:true,opacity:.85,depthWrite:false}));
+  const a=Math.random()*Math.PI*2,r=rnd(180,260);s.position.set(Math.cos(a)*r,rnd(45,110),Math.sin(a)*r);s.scale.set(rnd(50,90),rnd(18,30),1);sky.add(s)}
+})();
+function setBg(c){
+ const col=new THREE.Color(c);skyU.bot.value.copy(col);
+ skyU.top.value.copy(col).multiplyScalar(.7).lerp(new THREE.Color(0x4f95ee),.55);
+ scene.fog.color.copy(col);
+}
+/* ---- ホーム／タイトルの せかい ---- */
+const homeG=new THREE.Group(),raceG=new THREE.Group();raceG.position.x=2000;scene.add(homeG,raceG);
+let hero=null,mode="none",heroSpeed=0,spin=true,titleHeroes=[],sparkles=null;
+function buildHome(){
+ while(homeG.children.length)homeG.remove(homeG.children[0]);titleHeroes=[];
+ const fl=new THREE.Mesh(new THREE.CircleGeometry(16,48),mat(0xffffff,{map:tileTex(10,10),roughness:.35}));fl.rotation.x=-Math.PI/2;fl.position.y=-.02;fl.receiveShadow=true;homeG.add(fl);
+ const ped=new THREE.Mesh(new THREE.CylinderGeometry(2.4,2.6,.35,40),mat(0xffffff,{roughness:.2,metalness:.15}));ped.position.y=.17;ped.receiveShadow=true;ped.castShadow=true;homeG.add(ped);
+ const ring=new THREE.Mesh(new THREE.TorusGeometry(2.45,.07,10,48),new THREE.MeshStandardMaterial({color:0xff6fa5,emissive:0xff2f85,emissiveIntensity:.8}));ring.rotation.x=Math.PI/2;ring.position.y=.35;homeG.add(ring);
+ for(let i=0;i<7;i++){const f=new THREE.Mesh(new THREE.ConeGeometry(.9,2.2,3),mat([0xff6fa5,0xffcf3a,0x3f8cff,0x3bb36b][i%4],{roughness:.5}));f.rotation.x=Math.PI;f.position.set((i-3)*3,6.8,-9);homeG.add(f)}
+ const cord=box(22,.06,.06,0x2b2140);cord.position.set(0,7.9,-9);homeG.add(cord);
+ const wall=new THREE.Mesh(new THREE.PlaneGeometry(60,16),mat(0xfff0f6,{roughness:.9}));wall.position.set(0,6,-10);wall.receiveShadow=true;homeG.add(wall);
+ const n=140,pos=new Float32Array(n*3);for(let i=0;i<n;i++){pos.set([rnd(-9,9),rnd(0,8),rnd(-7,5)],i*3)}
+ const gg=new THREE.BufferGeometry();gg.setAttribute("position",new THREE.BufferAttribute(pos,3));
+ sparkles=new THREE.Points(gg,new THREE.PointsMaterial({color:0xffe36b,size:.16,transparent:true,opacity:.95,fog:false}));homeG.add(sparkles);
+}
+function setHero(c){
+ if(hero)hero.parent&&hero.parent.remove(hero);
+ hero=makeHero(c.col,c.hair,c.style);hero.position.y=.35;homeG.add(hero);
+}
+function buildTitle(){
+ buildHome();hero=null;
+ CAND.forEach((c,i)=>{const h=makeHero(c.col,c.hair,c.style);h.position.set((i-1)*3.4,.35,i===1?.6:0);h.rotation.y=(1-i)*.22;homeG.add(h);titleHeroes.push(h)});
+}
+function camHome(){cam.position.set(0,2.8,8.4);cam.lookAt(0,2.0,0)}
+
+/* ================= ゲーム状態 ================= */
+let G=null;
+const lbOf=id=>SV.cards[id]||0;
+const card=id=>CARDS.find(c=>c.id===id);
+const cbonus=c=>{const b=RAR[c.r],lb=lbOf(c.id);return{tr:b.tr+2*lb,flat:b.flat+(lb>=2?1:0),bond:b.bond+3*lb,fr:b.fr+2*lb}};
+function addBond(c,v){G.bond[c.id]=clamp((G.bond[c.id]||0)+v,0,100)}
+function newGame(cand,N,leg,deck){
+ const NORM=40+N*7;
+ G={cand,N,t:1,NORM,st:Object.assign({},cand.start),energy:100,mood:0,sp:50,skills:[],hints:{},
+  deck:deck.map(card),bond:{},tcount:{voi:0,sta:0,pow:0,tru:0,pol:0},place:{},sel:null,
+  goals:[Math.round(N*.25),Math.round(N*.5),Math.round(N*.75)],evtUsed:{},seen:[],refused:false,failed:0,friend:0,disc:null,strat:cand.strat,log:[]};
+ G.deck.forEach(c=>G.bond[c.id]=cbonus(c).bond);
+ if(leg){SK.forEach(k=>G.st[k]+=leg.stars*3+(k===leg.main?leg.stars*4:0));if(leg.skill&&!G.skills.includes(leg.skill))G.skills.push(leg.skill);G.legName=leg.name}
+ const pool=shuffle(Object.keys(EVT));G.evtOrder=pool;
+ SK.forEach(k=>G.st[k]=Math.round(G.st[k]));
+}
+const avg=()=>SK.reduce((a,k)=>a+G.st[k],0)/5;
+const normS=()=>{SK.forEach(k=>G.st[k]=clamp(Math.round(G.st[k]),0,1000));G.energy=clamp(Math.round(G.energy),0,100);G.mood=clamp(G.mood,-2,2);G.sp=Math.max(0,Math.round(G.sp))};
+
+/* ---- 配置・プレビュー ---- */
+function assign(){
+ G.place={voi:[],sta:[],pow:[],tru:[],pol:[]};
+ G.deck.forEach(c=>{
+  const w=TR.map(t=>t.k===c.t?4:1),tot=w.reduce((a,b)=>a+b,0);let r=Math.random()*tot,i=0;
+  while(r>w[i]){r-=w[i];i++}
+  G.place[TR[i].k].push(c);
+ });
+}
+const isFr=(c,k)=>c.t===k&&(G.bond[c.id]||0)>=80;
+function level(k){return Math.min(5,1+Math.floor(G.tcount[k]/4))}
+function preview(k){
+ const T=TR.find(t=>t.k===k),cs=G.place[k],L=level(k);
+ let tr=0,flat=0,fr=1;
+ cs.forEach(c=>{const b=cbonus(c);tr+=b.tr;flat+=b.flat;if(isFr(c,k))fr*=1+b.fr/100});
+ const mf=1+.1*G.mood;
+ const g={};
+ for(const s in T.g){
+  let base=T.g[s]+(L-1)*(s===T.k?2:0.8)+flat*(s===T.k?1:.5);
+  base*=(1+tr/100)*mf*fr;base*=(G.cand.apt[s]||1);
+  g[s]=Math.round(base);
+ }
+ const fail=G.energy>=60?0:Math.min(70,Math.round((60-G.energy)*.9));
+ return{g,fail,en:T.en+(k==="pol"?0:Math.min(0,cs.length?0:0)),sp:4+cs.length,fr:cs.filter(c=>isFr(c,k)),L};
+}
+
+/* ================= UI基盤 ================= */
+function ui(h,pass){const u=$("ui");u.className=pass?"pass":"";u.innerHTML=h}
+function sheet(h){$("sheet").classList.remove("hide");$("box").innerHTML=h;$("sheet").scrollTop=0}
+function closeSheet(){$("sheet").classList.add("hide")}
+function moodChip(){return `<span class="pill g">${MOOD[G.mood+2]}</span>`}
+
+/* ================= ホーム ================= */
+let selCand=0,selTurns=24,selLeg=-1,selDeck=null;
+function title(){
+ mode="title";buildTitle();setBg(0xffd0e4);$("cmt").innerHTML="";
+ ui(`<div style="text-align:center;margin-top:18px"><span class="pill p" style="font-size:13px">〜 まちの 星を 育てて 当選せよ！ 〜</span><h1 class="logo">せんきょ<br>プロデュース</h1></div>
+ <div class="sp" data-k="toHome"></div>
+ <div class="blink" data-k="toHome">▶ タップして スタート</div>
+ ${loginMsg?`<div class="panel" style="text-align:center;margin-bottom:6px;font-size:13px">${loginMsg}</div>`:""}
+ <div class="row"><button class="mini" data-k="howto">❓ あそびかた</button><button class="mini" data-k="toHome">🌟 はじめる</button></div>`,true);
+}
+function howto(){
+ sheet(`<h2>❓ あそびかた</h2>
+ <p><b>① 育成：</b>練習を えらんで 声・体力・行動力・信頼・政策を きたえよう。元気が 低いと 失敗しやすいよ。</p>
+ <p><b>② サポートカード：</b>仲間が 集まる 練習は 効果アップ！ きずな80で 🌟友情トレーニング。</p>
+ <p><b>③ 目標：</b>途中の 目標を クリアしないと 立候補できないよ。討論会も あるよ。</p>
+ <p><b>④ 本番：</b>投票日の 3D 選挙レース！ 作戦を えらび、ラストスパートは れんだで 応援しよう。</p>
+ <p><b>⑤ ガチャ：</b>ジェムで 新しい サポートカードを 手に入れて 次の 育成に 活かそう。</p>
+ <button class="btn" data-k="closeS">とじる</button>`);
+}
+function home(){
+ mode="home";buildHome();setHero(CAND[selCand]);camHome();setBg(0xffd6e7);spin=true;$("cmt").innerHTML="";
+ ui(`<div style="text-align:center;margin-top:6px"><h1>🌟 せんきょ<br>プロデュース！</h1></div>
+ <div class="sp"></div>
+ ${loginMsg?`<div class="panel" style="text-align:center;margin-bottom:6px">${loginMsg}</div>`:""}
+ <div class="panel"><div class="row" style="justify-content:space-between"><span class="pill">💎 ${SV.gems}</span><span class="pill g">育成 ${SV.hist.length}回</span></div>
+ <div class="wrap" style="margin-top:6px">${CAND.map((c,i)=>`<button class="mini ${i===selCand?"on":""}" style="${i===selCand?"background:var(--gold)":""}" data-k="cand" data-v="${i}">${c.n}</button>`).join("")}</div>
+ <p style="margin:6px 0 0"><b>${CAND[selCand].n}</b>：${CAND[selCand].d}</p></div>
+ <button class="btn pk" data-k="setup">▶ 育成スタート</button>
+ <div class="row" style="margin-top:6px"><button class="mini" data-k="gacha">🎰 ガチャ</button><button class="mini" data-k="cards">🃏 サポートカード</button><button class="mini" data-k="hist">📜 きろく</button></div>`);
+ loginMsg="";
+}
+function setup(){
+ mode="home";
+ const owned=Object.keys(SV.cards).map(card);
+ if(!selDeck)selDeck=SV.deck.filter(id=>SV.cards[id]!=null).slice(0,5);
+ ui(`<div class="sp" style="max-height:20%"></div>
+ <div class="panel" style="overflow:auto;max-height:78%">
+ <h2>🎓 育成の じゅんび</h2>
+ <p style="margin:0"><b>育成ターン数</b></p>
+ <div class="row">${[[12,"短い(約5分)"],[24,"ふつう(約10分)"],[48,"長い(約20分)"]].map(([n,l])=>`<button class="mini" style="${selTurns===n?"background:var(--gold)":""}" data-k="turns" data-v="${n}">${n}<br><small>${l}</small></button>`).join("")}</div>
+ <p style="margin:6px 0 0"><b>継承</b>（まえの 育成の 力を ひきつぐ）</p>
+ <div class="wrap"><button class="mini" style="min-width:90px;${selLeg===-1?"background:var(--gold)":""}" data-k="leg" data-v="-1">なし</button>
+ ${SV.legacy.map((l,i)=>`<button class="mini" style="min-width:110px;${selLeg===i?"background:var(--gold)":""}" data-k="leg" data-v="${i}">${l.name}<br><small>${"★".repeat(l.stars)} ${SN[l.main]}${l.skill?" +"+SKILLS.find(s=>s.id===l.skill).n:""}</small></button>`).join("")}</div>
+ <p style="margin:6px 0 0"><b>サポートカード（最大5まい）</b> ${selDeck.length}/5</p>
+ <div class="grid3">${owned.map(c=>`<div class="crd ${c.r} ${selDeck.includes(c.id)?"on":""}" data-k="deck" data-v="${c.id}"><div class="em">${c.e}</div><span class="rar">${c.r}</span> ${c.n}<br><small>${SN[c.t]} / 限界突破 ${lbOf(c.id)}</small></div>`).join("")}</div>
+ <button class="btn pk" data-k="start" ${selDeck.length?"":"disabled"}>この せっていで 立候補！</button><button class="btn sub" data-k="home">もどる</button></div>`);
+}
+
+/* ================= 育成（メイン画面） ================= */
+function turnInfo(){
+ const nextGoal=G.goals.find(g=>g>=G.t);
+ const idx=G.goals.indexOf(nextGoal);
+ let gt;
+ if(nextGoal===undefined)gt=`投票日（選挙レース）まで あと ${G.N-G.t+1}ターン`;
+ else if(idx===1)gt=`第${nextGoal}ターン：公開討論会 まで あと ${nextGoal-G.t+1}ターン`;
+ else gt=`第${nextGoal}ターン：目標 平均 ${thr(idx===0?.25:.75)} まで あと ${nextGoal-G.t+1}ターン`;
+ return gt;
+}
+const thr=f=>Math.round(40+(G.NORM-40)*f*.8);
+function train(sel){
+ mode="train";G.sel=sel===undefined?G.sel:sel;
+ const T=G.sel?TR.find(t=>t.k===G.sel):null,pv=T?preview(G.sel):null;
+ setBg(T?T.bg:0xcfeaff);
+ const phase=G.t<=G.goals[0]?"準備期":G.t<=G.goals[2]?"活動期":"追い込み期";
+ ui(`<div class="panel">
+  <div class="row" style="justify-content:space-between"><span class="pill">第${G.t}/${G.N}ターン ${phase}</span>${moodChip()}<span class="pill p">SP ${G.sp}</span></div>
+  <div class="row" style="margin-top:5px"><span style="font-size:12px">元気</span><div class="bar" style="flex:1"><i style="width:${G.energy}%;background:${G.energy<30?"var(--red)":"var(--green)"}"></i></div><b style="font-size:12px;width:26px;text-align:right">${G.energy}</b></div>
+  <div style="font-size:12px;margin-top:4px">🎯 ${turnInfo()}</div>
+  <div id="stats">${SK.map(k=>`<div class="stc">${SN[k]}<b>${G.st[k]}</b><em>${pv&&pv.g[k]?"+"+pv.g[k]:""}</em></div>`).join("")}</div></div>
+  <div class="sp"></div>
+  ${T?`<div class="panel" id="pmsg" style="margin-bottom:8px;font-size:12.5px;text-align:center"><b>${T.e} ${T.n}</b> Lv${pv.L}　元気 ${T.en>0?"+":""}${T.en}　SP +${pv.sp}　${pv.fr.length?"🌟友情トレーニング！":""}<br>失敗率 <b style="color:${pv.fail?"var(--red)":"var(--green)"}">${pv.fail}%</b> ／ もういちど タップで けってい</div>`:`<div class="panel" id="pmsg" style="margin-bottom:8px;font-size:12.5px;text-align:center">練習を えらぼう（タップで 見る → もういちどで けってい）</div>`}
+  <div id="tr" style="margin-top:8px">${TR.map(t=>{const p=preview(t.k);return `<button class="tb ${G.sel===t.k?"sel":""}" data-k="tr" data-v="${t.k}">
+   <div class="cards">${G.place[t.k].map(c=>`<span class="cd ${isFr(c,t.k)?"fr":""}">${c.e}</span>`).join("")}</div>
+   <span class="ic">${t.e}</span>${t.n}<small>Lv${p.L}</small><span class="fail ${p.fail?"":"ok"}">${p.fail}%</span></button>`}).join("")}</div>
+  <div class="row" style="margin-top:12px"><button class="mini" data-k="rest">🛌 休む</button><button class="mini" data-k="out">🎈 おでかけ</button><button class="mini" data-k="skills">✨ スキル</button><button class="mini" data-k="sheetS">📊 じょうほう</button></div>`,true);
+ // hero pose
+ heroSpeed=0;
+}
+function stage(msg){const e=$("pmsg");if(e&&msg){e.dataset.def=e.dataset.def||e.innerHTML;e.innerHTML=msg}else if(e&&!msg&&e.dataset.def){e.innerHTML=e.dataset.def}}
+
+function pickTrain(k){
+ if(G.sel===k)return doTrain(k);
+ sfx.sel();train(k);
+}
+function addSt(g){for(const s in g)G.st[s]+=g[s];}
+function doTrain(k){
+ const pv=preview(k),T=TR.find(t=>t.k===k);
+ const failed=Math.random()*100<pv.fail;
+ let txt;
+ if(failed){
+  G.failed++;
+  const loss=pick(SK);G.st[loss]-=6;G.mood-=1;G.energy+=T.en<0?T.en*0.5:0;sfx.bad();
+  txt=`😵 ${T.n}に 失敗…！ ${SN[loss]}が -6、 気分も おちこんだ…`;
+ }else{
+  addSt(pv.g);G.energy+=T.en;G.sp+=pv.sp;G.tcount[k]++;
+  G.place[k].forEach(c=>{addBond(c,7+(isFr(c,k)?3:0))});
+  if(pv.fr.length)G.friend++;
+  const parts=Object.entries(pv.g).map(([s,v])=>`${SN[s]}+${v}`).join(" ");
+  txt=`${pv.fr.length?"🌟友情トレーニング！ ":"✅ "}${T.n} せいこう！ ${parts}`;
+  sfx.ok();
+  // 変動: ランダムで気分
+  if(!pv.fr.length&&Math.random()<.04)G.mood=Math.min(2,G.mood+1);
+ }
+ normS();
+ heroSpeed=1.4;stage(txt);toast(txt.slice(0,30));
+ afterAction(failed?"fail":"train",pv);
+}
+function afterAction(){
+ G.sel=null;
+ setTimeout(()=>{heroSpeed=0;turnEvent()},1100);
+}
+function doRest(){
+ G.energy+=40+(Math.random()<.15?10:0);G.sel=null;
+ if(Math.random()<.2)G.mood=Math.min(2,G.mood+1);
+ normS();sfx.ok();stage("🛌 ぐっすり 休んだ！ 元気 +40");toast("🛌 元気 +40");setTimeout(turnEvent,900);
+}
+function doOut(){
+ G.energy+=8;G.mood=Math.min(2,G.mood+1);G.sel=null;normS();sfx.ok();
+ const c=G.deck.length?pick(G.deck):null;
+ if(c)addBond(c,8);
+ stage(`🎈 ${c?c.n+"と ":""}おでかけ！ 気分が 上がった！`);toast("🎈 気分 UP！");setTimeout(turnEvent,900);
+}
+/* ---- イベント ---- */
+function turnEvent(){
+ // 教育イベント／サポートイベント
+ const r=Math.random();
+ const used=Object.keys(G.evtUsed).length;
+ if(r<.2&&used<G.evtOrder.length){
+  const key=G.evtOrder[used];G.evtUsed[key]=true;
+  const e=EVT[key];
+  return sheet(`<h2>📣 イベント</h2><div style="font-size:42px;text-align:center">${e.icon}</div><p><b>${e.q}</b></p>`+e.c.map((c,i)=>`<button class="opt" data-k="ev" data-v="${key}:${i}">${c.l}</button>`).join(""));
+ }
+ if(r<.5&&G.deck.length){
+  const present=G.deck.filter(c=>Object.values(G.place).some(a=>a.includes(c)));
+  if(present.length){
+   const c=pick(present),se=pick([SEV.a,SEV.b]);
+   G.curCard=c;G.curSev=se;
+   return sheet(`<h2>${c.e} ${c.n}（${c.role}）</h2><p><b>${se.q(c.n)}</b></p><p style="font-size:12px">${c.line}</p>`+se.c.map((x,i)=>`<button class="opt" data-k="sev" data-v="${i}">${x.l}</button>`).join(""));
+  }
+ }
+ nextTurn();
+}
+function resolveEvt(v){
+ const[key,i]=v.split(":"),e=EVT[key],c=e.c[+i];
+ c.fx(G);normS();
+ const tip=c.tip?TIPS[c.tip]:e.tip2;
+ if(tip&&!G.seen.includes(tip))G.seen.push(tip);
+ sheet(`<h2>けっか</h2><p>${c.r}</p>${tip?`<div class="memo"><b>📝 ことばメモ</b><br>${tip}</div>`:""}<button class="btn" data-k="next">つぎへ</button>`);
+}
+function resolveSev(i){
+ const x=G.curSev.c[+i];x.fx(G,G.curCard);normS();sfx.ok();
+ sheet(`<h2>けっか</h2><p>${x.r}</p><button class="btn" data-k="next">つぎへ</button>`);
+}
+/* ---- ターン進行／目標 ---- */
+function nextTurn(){
+ closeSheet();stage("");
+ const done=G.t;
+ const gi=G.goals.indexOf(done);
+ G.t++;
+ if(gi===0||gi===2)return goalCheck(gi);
+ if(gi===1)return debate();
+ afterGoal();
+}
+function afterGoal(){
+ closeSheet();
+ if(G.t>G.N)return finalPrep();
+ G.energy+=(G.t%6===0?0:0);normS();
+ assign();train(null);
+ // タイミングの学び
+ if(G.t===2)toast("🎯 まずは 目標を めざそう！");
+}
+function goalCheck(gi){
+ const f=gi===0?.25:.75,need=thr(f),a=Math.round(avg()),ok=a>=need;
+ const tip=gi===0?TIPS.d:TIPS.f;if(!G.seen.includes(tip))G.seen.push(tip);
+ if(ok){
+  G.sp+=30;sfx.win();
+  sheet(`<h2>🎯 目標 たっせい！</h2><div class="big">🎉</div><p style="text-align:center">${gi===0?"街頭演説会":"期日前投票スタート"}で 支持を ひろげた！<br>平均 <b>${a}</b> ／ 目標 ${need}</p><p style="text-align:center">スキルポイント +30</p><div class="memo"><b>📝 ことばメモ</b><br>${tip}</div><button class="btn" data-k="afterGoal">つぎへ</button>`);
+ }else{
+  sfx.bad();
+  sheet(`<h2>💦 目標 みたっせい…</h2><div class="big">😢</div><p style="text-align:center">平均 <b>${a}</b> ／ 目標 ${need}<br>支持が のびず、 立候補を あきらめることに…。</p><div class="memo"><b>📝 ことばメモ</b><br>${tip}</div><button class="btn" data-k="gameover">けっかへ</button>`);
+ }
+}
+function debate(){
+ const tip="選挙の 前には <b>公開討論会</b>などで 候補者の 考えを くらべられる。 相手の 主張を よく 聞いて 自分の 考えを 伝えよう。";
+ if(!G.seen.includes(tip))G.seen.push(tip);
+ G.deb={r:0,w:0,rv:pick(RIVALS)[0]};debRound();
+}
+const ARG=[["数字","📊 データで 攻めてくる"],["体験談","🗣️ 体験談で 訴えてくる"],["理想","🌈 ビジョンを かたってくる"]];
+// 数字←体験談, 体験談←理想, 理想←数字
+const COUNTER={0:1,1:2,2:0};
+function debRound(){
+ const d=G.deb;if(d.r>=3)return debEnd();
+ d.type=Math.floor(Math.random()*3);
+ sheet(`<h2>🎤 公開討論会 ${d.r+1}/3</h2><p>${d.rv}「${ARG[d.type][1]}…！」</p><p style="font-size:12.5px">こちらは どう こたえる？（${d.w}勝）</p>`+
+  [["体験談で 心に 訴える",1],["理想の ビジョンを かたる",2],["データで 反論する",0]].map(([l,i])=>`<button class="opt" data-k="deb" data-v="${i}">${l}</button>`).join(""));
+}
+function debPick(i){
+ const d=G.deb,good=COUNTER[d.type]===i;
+ const stat=[G.st.pol,G.st.tru,G.st.voi][i===0?0:i===1?1:2]; // 参考
+ const p=(good?.78:.28)+clamp((avg()/G.NORM-.5)*.2,-.1,.12);
+ const win=Math.random()<p;if(win)d.w++;d.r++;
+ sfx[win?"ok":"bad"]();
+ toast(win?"✅ 論破！":"❌ 押し返された…");
+ setTimeout(debRound,700);
+}
+function debEnd(){
+ const d=G.deb;let bonus="";
+ if(d.w>=2){SK.forEach(k=>G.st[k]+=8);G.sp+=25;bonus="全能力 +8、SP +25！";sfx.win()}
+ else if(d.w===1){G.st.pol+=8;G.st.voi+=8;bonus="政策+8 / 声+8";}
+ else bonus="ざんねん…。 つぎは がんばろう。";
+ normS();
+ sheet(`<h2>🎤 討論会 けっか</h2><div class="big">${d.w>=2?"🏆":d.w===1?"👍":"😅"} ${d.w}勝</div><p style="text-align:center">${bonus}</p><div class="memo"><b>📝 ことばメモ</b><br>${G.seen[G.seen.length-1]}</div><button class="btn" data-k="afterGoal">つぎへ</button>`);
+}
+
+/* ================= スキル ================= */
+function skCost(s){const h=G.hints[s.id]||0;return Math.round(s.cost*(1-h))}
+function skillSheet(back){
+ sheet(`<h2>✨ スキル</h2><p style="margin:0">スキルポイント：<b>${G.sp}</b>（レースで 発動するよ。 政策が 高いと 発動しやすい）</p>`+
+  SKILLS.map(s=>{const own=G.skills.includes(s.id),c=skCost(s);return `<button class="opt" data-k="buy" data-v="${s.id}|${back||""}" ${own||G.sp<c?"disabled":""}><b>${s.n}</b> ${own?"✅ しゅとく":`<span class="pill p">${c}SP</span>`}${G.hints[s.id]?" 🔖ヒント割引":""}<br><small>${s.d}</small></button>`}).join("")+
+  `<button class="btn sub" data-k="${back==="prep"?"prep":"closeS"}">${back==="prep"?"もどる":"とじる"}</button>`);
+}
+function infoSheet(){
+ sheet(`<h2>📊 じょうほう</h2><p>公約：——（この ゲームでは 政策の 数字で あらわします）</p>`+
+ `<p><b>サポートカード の きずな</b></p>`+G.deck.map(c=>`<div class="row" style="margin:3px 0;font-size:12px"><span class="cd">${c.e}</span><span style="width:70px">${c.n}</span><div class="bar" style="flex:1"><i style="width:${G.bond[c.id]}%;background:${G.bond[c.id]>=80?"var(--gold)":"var(--blue)"}"></i></div><b>${G.bond[c.id]}</b></div>`).join("")+
+ `<p style="font-size:12px">きずなが <b>80</b> いじょうで、 そのカードの 得意な 練習に いると 🌟友情トレーニング！</p>
+ <p><b>おぼえた スキル</b>：${G.skills.length?G.skills.map(id=>SKILLS.find(s=>s.id===id).n).join("、"):"なし"}</p>
+ <button class="btn" data-k="closeS">とじる</button>`);
+}
+
+/* ================= 本番前 ================= */
+function finalPrep(){
+ mode="train";stage("");
+ const tip=TIPS.g;if(!G.seen.includes(tip))G.seen.push(tip);
+ const tip2="投票日の 当日は 選挙運動が できない。 だから 前日までの 積み重ねが 大切なんだ。";if(!G.seen.includes(tip2))G.seen.push(tip2);
+ prep();
+}
+function prep(){
+ closeSheet();
+ const rec=Object.keys(STRAT).includes(G.cand.strat)?G.cand.strat:"senko";
+ sheet(`<h2>🏁 いよいよ 投票日！ 選挙レース</h2><p>${G.cand.n}の 作戦を えらぼう。<br><small>得意な 作戦は スタミナ配分が ラクに なるよ（おすすめ：${STRAT[rec].n}）</small></p>`+
+  Object.entries(STRAT).map(([k,s])=>`<button class="opt ${G.strat===k?"on":""}" data-k="strat" data-v="${k}"><b>${s.n}</b> ${k===rec?"⭐おすすめ":""}<br><small>${s.d}</small></button>`).join("")+
+  `<button class="btn sub" data-k="skillsP">✨ スキルを とる（SP ${G.sp}）</button><button class="btn pk" data-k="race">🏁 レース スタート！</button>`);
+}
+
+/* ================= レース ================= */
+let RC=null,runners=[];
+const PH=[.2,.55,.8,1];
+let crowdArr=[];
+function addSpectator(x,y,z,col,skin){
+ const g=new THREE.Group();
+ const b=new THREE.Mesh(SPG.body,SPM[col]);b.position.y=.55;g.add(b);
+ const h=new THREE.Mesh(SPG.head,SPM[skin]);h.position.y=1.28;g.add(h);
+ const a1=new THREE.Mesh(SPG.arm,SPM[col]),a2=a1.clone();a1.position.set(-.38,.9,0);a2.position.set(.38,.9,0);g.add(a1,a2);
+ g.position.set(x,y,z);g.rotation.y=0;raceG.add(g);crowdArr.push({g,y,ph:rnd(0,6),a1,a2});
+}
+const SPG={body:new THREE.CylinderGeometry(.3,.36,1.1,10),head:new THREE.SphereGeometry(.28,12,10),arm:new THREE.CylinderGeometry(.07,.07,.5,6)};
+const SPM={};[0xe0442f,0x3f8cff,0xf2a516,0x2fae6e,0xd96aa0,0x8a5cf5,0xffffff,0x555a68,0xffdcc0,0xe8bd98,0xc99772].forEach(c=>SPM[c]=mat(c,{roughness:.8}));
+function buildRace(){
+ while(raceG.children.length)raceG.remove(raceG.children[0]);crowdArr=[];
+ const L=140;
+ const ground=new THREE.Mesh(new THREE.PlaneGeometry(L+240,110),mat(0xffffff,{map:grassTex(60,10)}));ground.rotation.x=-Math.PI/2;ground.position.set(L/2,-.02,6);ground.receiveShadow=true;raceG.add(ground);
+ const track=new THREE.Mesh(new THREE.PlaneGeometry(L+30,16.6),mat(0xffffff,{map:trackTex(34,2),roughness:.95}));track.rotation.x=-Math.PI/2;track.position.set(L/2,.01,6.5);track.receiveShadow=true;raceG.add(track);
+ for(let i=0;i<=6;i++){const ln=new THREE.Mesh(new THREE.PlaneGeometry(L+30,.1),new THREE.MeshBasicMaterial({color:0xffffff}));ln.rotation.x=-Math.PI/2;ln.position.set(L/2,.02,i*2.6-1.3);raceG.add(ln)}
+ // スタート／ゴール
+ const sl=new THREE.Mesh(new THREE.PlaneGeometry(.35,16),new THREE.MeshBasicMaterial({color:0xffe36b}));sl.rotation.x=-Math.PI/2;sl.position.set(0,.025,6.5);raceG.add(sl);
+ const chk=canvasTex(64,64,(g)=>{for(let y=0;y<8;y++)for(let x=0;x<2;x++){g.fillStyle=(x+y)%2?"#111":"#fff";g.fillRect(x*32,y*8,32,8)}},1,1);
+ const fl=new THREE.Mesh(new THREE.PlaneGeometry(.8,16),new THREE.MeshBasicMaterial({map:chk}));fl.rotation.x=-Math.PI/2;fl.position.set(L,.03,6.5);raceG.add(fl);
+ [-2.6,15.6].forEach(z=>{const p=box(.5,8,.5,0xff6fa5);p.position.set(L,4,z);p.castShadow=true;raceG.add(p)});
+ const beam=box(.6,1.4,19,0xff6fa5);beam.position.set(L,8.2,6.5);beam.castShadow=true;raceG.add(beam);
+ const gl=label("🏁 開票所  ゴール",9,"rgba(224,68,47,.95)");gl.rotation.y=0;gl.position.set(L-.35,8.2,6.5);gl.rotation.y=-Math.PI/2;raceG.add(gl);
+ const sg=label("スタート",6,"rgba(59,179,107,.95)");sg.position.set(0,5.5,-2.6);raceG.add(sg);
+ [-2.6,15.6].forEach(z=>{const p=box(.35,5.5,.35,0x3bb36b);p.position.set(0,2.75,z);raceG.add(p)});
+ // さく
+ [-2.4,15.4].forEach(z=>{const r=box(L+30,.12,.12,0xffffff);r.position.set(L/2,1,z);raceG.add(r);const r2=r.clone();r2.position.y=.55;raceG.add(r2);
+  for(let x=-14;x<=L+14;x+=7){const p=box(.14,1.2,.14,0xdddddd);p.position.set(x,.6,z);raceG.add(p)}});
+ // ふえ
+ const cols=[0xe0442f,0x3f8cff,0xf2a516,0x2fae6e,0xd96aa0,0x8a5cf5];
+ for(let x=7;x<L;x+=14){const p=box(.1,3.2,.1,0x666666);p.position.set(x,1.6,-2.4);p.castShadow=true;raceG.add(p);const f=box(1.6,.9,.04,pick(cols));f.position.set(x+.85,2.7,-2.4);raceG.add(f)}
+ // きょりの かんばん
+ ["序盤","中盤","終盤","スパート"].forEach((n,i)=>{const x=i===0?6:PH[i-1]*L;const s=label(n,4.2);s.position.set(x,3.4,15.4);s.rotation.y=Math.PI;raceG.add(s);const p=box(.12,3.2,.12,0x666666);p.position.set(x,1.6,15.4);raceG.add(p)});
+ // かんらん席（だんだん）
+ const skins=[0xffdcc0,0xe8bd98,0xc99772];
+ for(let k=0;k<4;k++){
+  const st=box(L+50,.9,3,0x9aa0b0);st.position.set(L/2,.45+k*.9,-5-k*3);st.castShadow=true;st.receiveShadow=true;raceG.add(st);
+  for(let x=-18;x<L+26;x+=2.1)if(Math.random()<.88)addSpectator(x+rnd(-.4,.4),.9+k*.9,-5-k*3,pick(cols.concat([0xffffff,0x555a68])),pick(skins));
+ }
+ const roof=box(L+54,.4,14,0xeeeeee);roof.position.set(L/2,9.6,-9);raceG.add(roof);
+ [-20,L/2,L+20].forEach(x=>[-3,-15].forEach(z=>{const p=box(.4,9.5,.4,0xcccccc);p.position.set(x,4.8,z);raceG.add(p)}));
+ const scr=label("📺 開票速報  選挙レース",12,"rgba(20,24,50,.95)");scr.position.set(L*.7,7.2,-3.4);raceG.add(scr);
+ // 木
+ for(let i=0;i<40;i++){const t=new THREE.Mesh(new THREE.CylinderGeometry(.3,.4,2.4,8),mat(0x7a5230));const c=new THREE.Mesh(new THREE.SphereGeometry(2.2,12,10),mat(0x3f9d52));
+  const gp=new THREE.Group();t.position.y=1.2;c.position.y=4;t.castShadow=c.castShadow=true;gp.add(t,c);gp.position.set(rnd(-40,L+60),0,rnd(-38,-26));gp.scale.setScalar(rnd(.9,1.6));raceG.add(gp)}
+ return L;
+}
+function makeRunners(){
+ const L=buildRace();RC={L,t:0,state:"ready",finished:[],tapBoost:0,tapTimer:0,sparkAt:0,msgT:0,ranking:[]};
+ const N=G.NORM,x=s=>clamp(G.st[s]/N,.25,2.2);
+ const pl={name:G.cand.n,color:G.cand.col,hair:G.cand.hair,pl:true,
+  x:{voi:x("voi"),sta:x("sta"),pow:x("pow"),tru:x("tru"),pol:x("pol")},strat:G.strat,skills:G.skills.slice()};
+ if(G.strat===G.cand.strat)pl.apt=.015;
+ const rv=shuffle(RIVALS).slice(0,5).map(([n,c],i)=>{
+  const base=rnd(.8,1.04)*(i===0?1.04:1);
+  const r=()=>clamp(base*rnd(.85,1.15),.3,2);
+  const st=pick(Object.keys(STRAT));
+  return{name:n,color:c,hair:pick([0x2a2a2a,0x6b4a2a,0xb08040,0x888888]),x:{voi:r(),sta:r(),pow:r(),tru:r(),pol:r()},strat:st,skills:shuffle(SKILLS.filter(s=>s.ph!==-1)).slice(0,1+Math.floor(Math.random()*2)).map(s=>s.id)};
+ });
+ runners=[pl,...rv];
+ const lanes=shuffle([0,1,2,3,4,5]);
+ runners.forEach((r,i)=>{
+  r.lane=lanes[i];r.pos=0;r.hp=100*clamp(.55+.45*r.x.sta,.4,1.5);r.hp0=r.hp;r.noise=[0,0,0,0];r.phase=-1;r.act=[];r.fin=null;r.sdone={};r.deb=0;
+  r.m=makeHero(r.color,r.hair,r.pl?G.cand.style:Math.floor(Math.random()*3));r.m.scale.setScalar(.8);r.m.rotation.y=Math.PI/2;r.m.position.set(0,0,r.lane*2.6);raceG.add(r.m);
+ });
+ const mk=new THREE.Mesh(new THREE.ConeGeometry(.45,.9,4),mat(0xffe36b,{emissive:0x886600}));mk.rotation.x=Math.PI;RC.mk=mk;raceG.add(mk);
+}
+function rankList(){return runners.slice().sort((a,b)=>(b.fin!==null?2-b.fin/1000:b.pos)-(a.fin!==null?2-a.fin/1000:a.pos))}
+function startRace(){
+ closeSheet();mode="race";setBg(0xa8dcff);$("cmt").innerHTML="";
+ if(hero)hero.parent&&hero.parent.remove(hero);
+ makeRunners();
+ RC.state="count";RC.cd=3.2;cam.position.set(2003,13,21);
+ const p=runners[0];RC.cam=new THREE.Vector3();
+ ui(`<div class="sp"></div><div id="rk"></div><div style="height:8px"></div><button id="tap" data-k="tap">応援 れんだ！！</button>`,true);
+ $("tap").style.visibility="hidden";
+ cmt("🏁 まもなく 開票レース スタート！");
+}
+function cmt(t){$("cmt").style.top="max(8px,env(safe-area-inset-top))";$("cmt").innerHTML=`<div class="panel" style="font-size:13.5px;text-align:center">${t}</div>`}
+function phaseOf(p){return p<PH[0]?0:p<PH[1]?1:p<PH[2]?2:3}
+function runnerSpeed(r,dt){
+ const b=1/36,ph=phaseOf(r.pos),S=STRAT[r.strat].m;
+ let f;
+ if(ph===0)f=(1+.05*(r.x.pow-1)+.02*(r.x.voi-1))*S[0];
+ else if(ph===1)f=(1+.05*(r.x.voi-1)+.02*(r.x.pol-1))*S[1];
+ else if(ph===2)f=(1+.05*(r.x.voi-1)+.04*(r.x.pow-1))*S[2];
+ else f=(1+.07*(r.x.tru-1)+.05*(r.x.pow-1)+.04*(r.x.voi-1))*S[3];
+ f*=1+(r.apt||0)+r.noise[ph];
+ // スキル
+ let imm=false;
+ r.act=r.act.filter(a=>(a.t-=dt)>0);
+ r.act.forEach(a=>{if(a.s.spd)f*=1+a.s.spd;if(a.s.immune)imm=true});
+ if(r.deb>0){f*=1-r.deb;r.deb=Math.max(0,r.deb-dt*.02)}
+ if(r.hp<=0&&!imm)f*=.86;
+ if(r.pl&&RC.tapBoost>0)f*=1+RC.tapBoost;
+ return{spd:b*f,rel:f};
+}
+function enterPhase(r,ph){
+ r.phase=ph;
+ const prob=clamp(.25+.5*r.x.pol/1.2,.2,.92);
+ r.skills.forEach(id=>{
+  const s=SKILLS.find(q=>q.id===id);if(!s)return;
+  if(s.ph!==ph&&s.ph!==-1)return;
+  if(s.ph===-1){r.act.push({s,t:99});return}
+  if(r.sdone[id])return;r.sdone[id]=true;
+  if(s.behind){const rk=rankList().indexOf(r)+1;if(rk<=2)return}
+  if(Math.random()<prob){
+   if(s.hp)r.hp=Math.min(r.hp0*1.1,r.hp+s.hp);
+   if(s.deb){const top=rankList().find(q=>q!==r);if(top)top.deb=s.deb}
+   r.act.push({s,t:3.2});
+   if(r.pl){cmt(`✨ スキル発動！「${s.n}」`);sfx.gacha();if(r.m)flashSkill()}
+  }
+ });
+}
+function flashSkill(){const b=document.body;b.classList.remove("flash");void b.offsetWidth;b.classList.add("flash")}
+function updateRace(dt){
+ const p0=runners[0];
+ if(RC.state==="count"){
+  RC.cd-=dt;
+  runners.forEach(r=>animHero(r.m,0,dt));
+  const n=Math.ceil(RC.cd);
+  if(RC.lastN!==n&&n>0&&n<=3){RC.lastN=n;cmt(`<span style="font-size:30px">${n}</span>`);sfx.tick()}
+  if(RC.cd<=0){RC.state="run";cmt("🏁 スタート！！");sfx.win();runners.forEach(r=>{r.noise=[0,1,2,3].map(()=>rnd(-.012,.012))})}
+ }else if(RC.state==="run"||RC.state==="end"){
+  RC.t+=dt;
+  RC.tapBoost=Math.max(0,RC.tapBoost-dt*.06);
+  runners.forEach(r=>{
+   if(r.fin!==null){r.pos+=r.endSp*dt*.5;animHero(r.m,.6,dt);r.m.position.x=r.pos*RC.L;return}
+   const ph=phaseOf(r.pos);if(ph!==r.phase)enterPhase(r,ph);
+   const{spd,rel}=runnerSpeed(r,dt);
+   r.pos+=spd*dt;
+   const dr=3.2*Math.pow(rel,2.5)*(ph===0?STRAT[r.strat].hp:1)*(ph===3?1.1:1);
+   r.hp=Math.max(0,r.hp-dr*dt*(r.hp0/100>1?.9:1));
+   if(r.pos>=1){r.fin=RC.t;r.endSp=spd;RC.finished.push(r)}
+   r.m.position.x=r.pos*RC.L;animHero(r.m,1.1+rel*0.2,dt);
+   r.m.position.y=Math.abs(Math.sin(r.m.userData.phase))*.18;
+  });
+  const near=!p0.fin&&p0.pos>.76;
+  const tb=$("tap");if(tb)tb.style.visibility=near?"visible":"hidden";
+  if(near&&!RC.spark){RC.spark=true;cmt("🔥 ラストスパート！ れんだで 応援しよう！")}
+  if(RC.state==="run"&&p0.fin!==null){RC.state="end";RC.endT=2.2;}
+  if(RC.state==="end"){RC.endT-=dt;if(RC.endT<=0||RC.finished.length>=6){RC.state="done";raceEnd()}}
+  RC.msgT-=dt;
+  if(RC.msgT<=0&&RC.state==="run"){
+   RC.msgT=3.2;const rk=rankList(),i=rk.indexOf(p0)+1;
+   if(!RC.spark)cmt(`実況「現在 ${rk[0].name} が トップ！ ${G.cand.n}は ${i}位！」`);
+  }
+ }
+ // かめら
+ const tgt=p0.m.position;
+ const cx=2000+tgt.x+3,cy=13,cz=21;
+ if(Math.abs(cx-cam.position.x)>15)cam.position.x=cx;cam.position.x+=(cx-cam.position.x)*Math.min(1,dt*5);cam.position.y=cy;cam.position.z=cz;
+ cam.lookAt(cam.position.x,0,5);
+ RC.mk.position.set(p0.m.position.x,4.6+Math.sin(performance.now()/200)*.2,p0.m.position.z);RC.mk.rotation.y+=dt*3;
+ // ランキング
+ if(!RC.acc)RC.acc=0;RC.acc+=dt;
+ if(RC.acc>.12&&$("rk")){RC.acc=0;
+  const rk=rankList();
+  $("rk").innerHTML=rk.map((r,i)=>`<div class="rk"><b style="width:18px">${i+1}</b><span style="width:70px;${r.pl?"color:#ffe36b":""}">${r.name}</span><div class="bar"><i style="width:${Math.min(100,r.pos*100)}%;${r.pl?"background:var(--gold)":""}"></i></div><span style="width:62px;text-align:right">${Math.round(Math.min(1,r.pos)*(r.pl?1:1)*(8000+Math.round(r.x.pol*1000)))}票</span></div>`).join("");
+ }
+}
+function tapRace(){
+ if(!RC||RC.state!=="run")return;
+ if(runners[0].pos<.76)return;
+ RC.tapBoost=Math.min(.08,RC.tapBoost+.012);sfx.tick();
+}
+function raceEnd(){
+ const order=RC.finished.slice();
+ runners.forEach(r=>{if(!order.includes(r))order.push(r)});
+ const rank=order.indexOf(runners[0])+1;
+ const W=[34,23,17,12,8,6],T=30000;
+ const votes=order.map((r,i)=>Math.round(T*W[i]/100*rnd(.97,1.03)));
+ raceResult(rank,order,votes);
+}
+
+/* ================= 結果 ================= */
+function evalStats(){
+ const total=SK.reduce((a,k)=>a+G.st[k],0)+G.skills.length*40;
+ const r=total/(5*G.NORM);
+ const grade=r<.45?"E":r<.6?"D":r<.75?"C":r<.9?"B":r<1.05?"A":r<1.25?"S":"SS";
+ return{total,grade,pts:Math.round(total)};
+}
+function raceResult(rank,order,votes,over){
+ const e=evalStats();
+ const gem=over?40:[400,250,150,100,80,60][rank-1];
+ SV.gems+=gem;
+ const mainK=SK.slice().sort((a,b)=>G.st[b]-G.st[a])[0];
+ const stars=over?1:rank===1?3:rank<=3?2:1;
+ const skill=G.skills.length?pick(G.skills):null;
+ const entry={cand:G.cand.n,rank:over?0:rank,eval:e.pts,grade:e.grade,turns:G.N,date:todayS()};
+ SV.hist.unshift(entry);SV.hist=SV.hist.slice(0,10);
+ SV.legacy.unshift({name:G.cand.n,main:mainK,stars,skill});SV.legacy=SV.legacy.slice(0,5);
+ save();
+ sfx[rank===1&&!over?"win":"bad"]();
+ mode="done";
+ $("cmt").innerHTML="";
+ const win=!over&&rank===1;
+ if(!over){setBg(win?0xfff2b0:0xcfd8e8)}
+ ui(`<div class="sp"></div>`,true);
+ sheet(over?`<h2>🏁 育成 しゅうりょう</h2><div class="big">😢</div><p style="text-align:center">立候補に 届かなかった…。 でも 経験は むだじゃない！</p>
+  <p style="text-align:center">評価 <b>${e.grade}</b>（${e.pts}てん）　ジェム +${gem}</p>`:
+  `<h2>📺 開票結果</h2><div class="big">${win?"🎊 当選！！":rank<=3?"😢 おしくも 落選":"🌧️ 落選…"}</div>
+  ${order.map((r,i)=>`<div class="row" style="font-size:13px;margin:2px 0;${r.pl?"background:#fff3b0;border-radius:8px;padding:2px 4px":""}"><b style="width:22px">${i+1}</b><span style="flex:1">${r.name}</span><span>${votes[i].toLocaleString()}票</span></div>`).join("")}
+  <p style="text-align:center;margin-top:8px">育成 評価 <b style="font-size:22px">${e.grade}</b>（${e.pts}てん）　ジェム +${gem}${G.refused?"　🕊️ クリーン選挙！":""}</p>`
+  +`<div class="memo"><b>📝 今回 まなんだこと</b><ul class="tips">${G.seen.map(t=>`<li>${t}</li>`).join("")}<li><b>開票</b>：票を 数えて いちばん 多い 人が 当選。 たった 1票でも 結果が かわることが あるよ。</li></ul></div>
+  <p style="font-size:12px">継承：次の 育成で ${"★".repeat(stars)} の 力を ひきつげるよ（${SN[mainK]}${skill?" ／ スキル「"+SKILLS.find(s=>s.id===skill).n+"」":""}）</p>
+  <button class="btn pk" data-k="home">ホームへ</button>`);
+}
+
+/* ================= ガチャ ================= */
+function pull(){
+ const r=Math.random();
+ const rar=r<.03?"SSR":r<.21?"SR":"R";
+ return pick(CARDS.filter(c=>c.r===rar));
+}
+function gacha(){
+ mode="home";
+ ui(`<div style="text-align:center;margin-top:6px"><h1>🎰 サポートカード<br>ガチャ</h1></div><div class="sp"></div>
+ <div class="panel"><div class="row" style="justify-content:space-between"><span class="pill">💎 ${SV.gems}</span><span class="pill g">${SV.pulls}回 ひいた</span></div>
+ <p style="margin:6px 0 0;font-size:12.5px">排出：SSR 3% ／ SR 18% ／ R 79%（10れんは SR いじょう 1まい かくてい）<br>おなじ カードが でると <b>限界突破</b>（効果アップ・最大4）！</p></div>
+ <button class="btn" data-k="p1" ${SV.gems<150?"disabled":""}>1回 ひく（💎150）</button>
+ <button class="btn pk" data-k="p10" ${SV.gems<1500?"disabled":""}>10れん（💎1500）</button>
+ <button class="btn sub" data-k="home">もどる</button>`);
+}
+function doPulls(n){
+ const cost=n===1?150:1500;if(SV.gems<cost)return;
+ SV.gems-=cost;const res=[];
+ for(let i=0;i<n;i++){let c=pull();if(n===10&&i===9&&!res.some(x=>x.r!=="R"))c=pick(CARDS.filter(q=>q.r==="SR"));
+  res.push(c);SV.pulls++;
+  if(SV.cards[c.id]==null)SV.cards[c.id]=0;else SV.cards[c.id]=Math.min(4,SV.cards[c.id]+1)}
+ save();sfx.gacha();
+ const best=res.some(c=>c.r==="SSR");
+ if(best)setTimeout(sfx.win,500);
+ sheet(`<h2>${best?"🌈 SSR 登場！！":"🎰 けっか"}</h2><div class="grid3">${res.map(c=>`<div class="crd ${c.r}"><div class="em">${c.e}</div><span class="rar">${c.r}</span> ${c.n}<br><small>${c.role}</small><br><small>${SN[c.t]} ／ 突破 ${lbOf(c.id)}</small></div>`).join("")}</div>
+ <button class="btn" data-k="gacha">もどる</button>`);
+}
+function cards(){
+ mode="home";
+ ui(`<div class="panel" style="margin-top:6px;overflow:auto;max-height:92%"><h2>🃏 サポートカード</h2>
+ <p style="font-size:12.5px;margin:0">${Object.keys(SV.cards).length}/${CARDS.length}まい もっているよ（ガチャで ふやそう）</p>
+ <div class="grid3">${CARDS.map(c=>{const own=SV.cards[c.id]!=null,b=cbonus(c);return `<div class="crd ${c.r} ${own?"":"lock"}"><div class="em">${own?c.e:"❓"}</div><span class="rar">${c.r}</span> ${own?c.n:"???"}<br><small>${own?c.role+"<br>"+SN[c.t]+" 練習 +"+b.tr+"% ／ 友情 +"+b.fr+"%<br>突破 "+lbOf(c.id)+"/4":"みつけて ないよ"}</small></div>`}).join("")}</div>
+ <button class="btn sub" data-k="home">もどる</button></div>`);
+}
+function hist(){
+ mode="home";
+ ui(`<div class="panel" style="margin-top:6px"><h2>📜 きろく</h2>${SV.hist.length?SV.hist.map(h=>`<div class="row" style="font-size:13px;margin:3px 0"><span class="pill">${h.date}</span><span style="flex:1">${h.cand}（${h.turns}T）</span><b>${h.rank?h.rank+"位":"未出馬"}</b><span class="pill g">評価 ${h.grade}</span></div>`).join(""):"<p>まだ きろくが ないよ</p>"}
+ <button class="btn sub" data-k="home">もどる</button></div>`);
+}
+
+/* ================= イベント処理 ================= */
+const H={
+ cand:v=>{selCand=+v;home()},
+ setup:()=>{selDeck=null;setup()},
+ turns:v=>{selTurns=+v;setup()},
+ leg:v=>{selLeg=+v;setup()},
+ deck:v=>{const i=selDeck.indexOf(v);if(i>=0)selDeck.splice(i,1);else if(selDeck.length<5)selDeck.push(v);setup()},
+ start:()=>{
+  const cand=CAND[selCand];newGame(cand,selTurns,selLeg>=0?SV.legacy[selLeg]:null,selDeck.slice());
+  SV.deck=selDeck.slice();save();
+  mode="train";hero.parent&&homeG.add(hero);
+  assign();
+  sheet(`<h2>📅 告示日！</h2><div class="big">${cand.n}</div><p style="text-align:center">${selTurns}ターンの 選挙戦が はじまる！<br>練習で 力を つけ、 目標を クリアして、 投票日の 選挙レースに 勝とう！</p><div class="memo"><b>📝 ことばメモ</b><br>${TIPS.a}<br>${TIPS.b}</div><button class="btn" data-k="go">がんばる！</button>`);
+  G.seen.push(TIPS.a,TIPS.b);
+ },
+ go:()=>{closeSheet();train(null);stage(`${G.cand.n}「よろしくお願いします！」`)},
+ tr:v=>pickTrain(v),
+ rest:()=>doRest(),out:()=>doOut(),
+ skills:()=>skillSheet(),sheetS:()=>infoSheet(),
+ skillsP:()=>skillSheet("prep"),prep:()=>prep(),
+ buy:v=>{const[id,b]=v.split("|"),s=SKILLS.find(x=>x.id===id),c=skCost(s);if(G.sp>=c&&!G.skills.includes(id)){G.sp-=c;G.skills.push(id);sfx.ok()}skillSheet(b)},
+ closeS:()=>{closeSheet()},
+ ev:v=>resolveEvt(v),sev:v=>resolveSev(v),
+ next:()=>nextTurn(),
+ afterGoal:()=>afterGoal(),
+ deb:v=>debPick(+v),
+ gameover:()=>{closeSheet();raceResult(0,[],[],true)},
+ strat:v=>{G.strat=v;prep()},
+ race:()=>startRace(),
+ tap:()=>tapRace(),
+ home:()=>{closeSheet();home()},toHome:()=>{sfx.ok();home()},howto:()=>howto(),
+ gacha:()=>{closeSheet();gacha()},p1:()=>doPulls(1),p10:()=>doPulls(10),
+ cards:()=>cards(),hist:()=>hist()
+};
+document.addEventListener("pointerdown",e=>{
+ const t=e.target.closest("[data-k]");if(!t||t.disabled)return;
+ e.preventDefault();H[t.dataset.k]&&H[t.dataset.k](t.dataset.v);
+},true);
+addEventListener("keydown",e=>{if(mode==="race"&&(e.code==="Space"||e.code==="Enter")){e.preventDefault();tapRace()}});
+
+/* ================= ループ ================= */
+const clock=new THREE.Clock();
+function frame(){
+ const dt=Math.min(clock.getDelta(),.05),t=performance.now()/1000;
+ let fx=0,fz=0;
+ if(mode==="race"&&RC){updateRace(dt);fx=2000+runners[0].m.position.x;fz=6;
+  crowdArr.forEach(c=>{const run=RC.state==="run";c.ph+=dt*(run?7:3);const j=Math.max(0,Math.sin(c.ph));c.g.position.y=c.y+(run?j*.12:0);c.a1.rotation.z=run?.4+j*1.8:.1;c.a2.rotation.z=run?-.4-j*1.8:-.1})}
+ else if(mode==="title"){
+  cam.position.set(Math.sin(t*.25)*2.4,3.0,10.8);cam.lookAt(0,2.1,0);
+  titleHeroes.forEach((h,i)=>{h.userData.armR.rotation.z=-2.6+Math.sin(t*5+i*1.3)*.4;h.position.y=.35+Math.abs(Math.sin(t*2.5+i))*.07});
+ }
+ else if(hero){
+  if(mode==="home"){hero.rotation.y+=dt*.8;animHero(hero,0,dt);camHome()}
+  else{hero.rotation.y*=.9;animHero(hero,heroSpeed,dt);hero.position.y=.35+(heroSpeed?Math.abs(Math.sin(hero.userData.phase))*.15:0)}
+  if(mode==="train"){cam.position.set(0,2.6,8.4);cam.lookAt(0,2.3,0)}
+ }
+ if(sparkles&&mode!=="race"){sparkles.rotation.y=t*.06;sparkles.position.y=Math.sin(t)*.15}
+ sky.position.copy(cam.position);sky.rotation.y=t*.004;
+ sun.position.set(fx+10,25,fz+14);sun.target.position.set(fx,0,fz);sun.target.updateMatrixWorld();
+ renderer.render(scene,cam);requestAnimationFrame(frame);
+}
+title();frame();
+</script>
+</body>
+</html>
