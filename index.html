@@ -78,6 +78,100 @@ ul.tips{padding-left:18px;margin:4px 0;font-size:12.5px;line-height:1.6}
 .blink{text-align:center;color:#fff;font-size:20px;text-shadow:0 2px 0 var(--ink),2px 0 var(--ink),-2px 0 var(--ink),0 -2px 0 var(--ink);animation:bl 1.2s infinite;margin-bottom:10px;padding:8px}
 @keyframes bl{50%{opacity:.25}}
 #ui.pass>.sp[data-k]{pointer-events:auto}
+.fl{float:left;width:92px;margin:0 10px 6px 0;border-radius:10px;overflow:hidden;border:3px solid var(--ink);box-shadow:0 3px 0 #0003}
+.fl svg,.crd .art svg{width:100%;height:auto;display:block}
+.crd .art{border-radius:8px;overflow:hidden;margin-bottom:3px;border:2px solid var(--ink)}
+.lockart{aspect-ratio:200/260;display:flex;align-items:center;justify-content:center;font-size:30px;background:#ccd}
+.cd{width:30px;height:30px;overflow:hidden}.cd svg{width:100%;height:100%;display:block}
+#gc{position:fixed;inset:0;z-index:30;background:radial-gradient(circle at 50% 40%,#4a3490,#150b2c 75%);overflow:hidden;color:#fff;text-align:center;display:flex;align-items:center;justify-content:center}
+#gc.shake{animation:shk .1s infinite}
+@keyframes shk{0%{transform:translate(3px,2px)}25%{transform:translate(-3px,-2px)}50%{transform:translate(2px,-3px)}75%{transform:translate(-2px,3px)}100%{transform:translate(3px,2px)}}
+#gcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+#gst{position:relative;z-index:2;width:100%}
+.rays{position:absolute;width:170vmax;height:170vmax;left:50%;top:42%;margin:-85vmax 0 0 -85vmax;background:repeating-conic-gradient(rgba(255,255,255,.3) 0 6deg,transparent 6deg 16deg);animation:spn 9s linear infinite;z-index:1;border-radius:50%}
+@keyframes spn{to{transform:rotate(360deg)}}
+.orbwrap{display:flex;flex-direction:column;align-items:center;gap:22px}
+.orb{width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--oc) 55%,#10081f 135%);box-shadow:0 0 50px 14px var(--oc),0 0 120px 40px var(--oc);animation:orbf .45s infinite alternate;transition:box-shadow .4s}
+.orb.rb{animation:orbf .2s infinite alternate,rbw 1s linear infinite}
+@keyframes orbf{from{transform:translateY(-8px) rotate(-8deg) scale(1)}to{transform:translateY(8px) rotate(8deg) scale(1.08)}}
+@keyframes rbw{to{filter:hue-rotate(360deg)}}
+.orbtxt{font-size:22px;letter-spacing:.4em;animation:bl 1s infinite}
+#gflash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:4}
+#gflash.go{animation:gf .6s}
+@keyframes gf{0%{opacity:1}100%{opacity:0}}
+.gcardwrap{display:inline-block;padding:6px;border-radius:20px;animation:flp .75s cubic-bezier(.2,1.2,.4,1)}
+.gcardwrap.R{background:linear-gradient(135deg,#dde6f2,#9aa8bd)}
+.gcardwrap.SR{background:linear-gradient(135deg,#fff0a0,#e8a21a,#fff0a0);box-shadow:0 0 40px #ffcf3a}
+.gcardwrap.SSR{background:linear-gradient(120deg,#ff6fa5,#ffcf3a,#7cf0a0,#5ab0ff,#c88aff,#ff6fa5);background-size:300% 300%;animation:flp .75s cubic-bezier(.2,1.2,.4,1),holo 2.4s linear infinite;box-shadow:0 0 60px #ff6fe0,0 0 120px #ffcf3a}
+@keyframes holo{to{background-position:300% 0}}
+@keyframes flp{from{transform:rotateY(100deg) scale(.5);opacity:0}to{transform:none;opacity:1}}
+.gcard{width:min(58vw,250px);border-radius:14px;overflow:hidden;background:#fff}
+.gcard svg{display:block;width:100%;height:auto}
+.gname{font-size:28px;margin-top:12px;text-shadow:0 3px 0 #000a}
+.grole{font-size:15px;margin-top:2px}
+.gbadge{display:inline-block;margin:8px 4px 0;background:var(--pink);border-radius:10px;padding:3px 12px;font-size:14px}
+.ghint{margin-top:12px;font-size:12px;opacity:.7;animation:bl 1.4s infinite}
+.gskip{position:absolute;right:10px;top:max(10px,env(safe-area-inset-top));z-index:6;background:#fffc;border:3px solid var(--ink);border-radius:12px;padding:6px 12px;font-size:13px;color:var(--ink)}
+#gcnt{position:absolute;left:12px;top:max(14px,env(safe-area-inset-top));z-index:6;font-size:14px;background:#0006;border-radius:10px;padding:3px 10px}
+.scn{position:relative;height:270px;border:3px solid var(--ink);border-radius:12px;overflow:hidden;background:#cde;touch-action:manipulation;user-select:none;margin-bottom:8px}
+.scn.dark:before{content:"";position:absolute;inset:0;background:rgba(10,10,40,.45);z-index:4;pointer-events:none}
+.scn.shk{animation:shk2 .08s 6}
+@keyframes shk2{0%{transform:translateX(0)}25%{transform:translateX(6px)}75%{transform:translateX(-6px)}100%{transform:translateX(0)}}
+#scbg,.scbg2{position:absolute;inset:0}.scbg2{animation:fin .7s forwards}@keyframes fin{from{opacity:0}to{opacity:1}}
+#scbg svg,.scbg2 svg{width:100%;height:100%;display:block}
+#scact,#scfx{position:absolute;inset:0;pointer-events:none}
+#scfx{z-index:5;overflow:hidden}
+.act{position:absolute;transform:translateX(-50%);width:var(--w,90px);transition:left .9s ease,bottom .9s ease,opacity .4s;z-index:2;pointer-events:none}
+.act .ain svg{width:100%;height:auto;display:block;overflow:visible}
+.act .ain{transform-origin:50% 100%}
+.act.popin .ain{animation:popin .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes popin{from{transform:scale(0)}to{transform:scale(1)}}
+.emo{display:block;font-size:44px;line-height:1;text-align:center}
+.chibi g{transform-box:fill-box}.ch-legL,.ch-legR,.ch-armL,.ch-armR{transform-origin:50% 0}
+.a-walk .ch-legL,.a-run .ch-legL,.a-walk .ch-armR,.a-run .ch-armR{animation:lgA .5s infinite alternate}
+.a-walk .ch-legR,.a-run .ch-legR,.a-walk .ch-armL,.a-run .ch-armL{animation:lgB .5s infinite alternate}
+.a-run .ch-legL,.a-run .ch-legR,.a-run .ch-armL,.a-run .ch-armR{animation-duration:.25s}
+@keyframes lgA{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+@keyframes lgB{from{transform:rotate(28deg)}to{transform:rotate(-28deg)}}
+.a-cheer .ch-armL,.a-jump .ch-armL{animation:chL .45s infinite alternate}.a-cheer .ch-armR,.a-jump .ch-armR{animation:chR .45s infinite alternate}
+@keyframes chL{from{transform:rotate(150deg)}to{transform:rotate(172deg)}}@keyframes chR{from{transform:rotate(-150deg)}to{transform:rotate(-172deg)}}
+.a-wave .ch-armR{animation:chR .4s infinite alternate}
+.a-bounce{animation:bnc .5s ease-in-out infinite}.a-cheer{animation:bnc .45s ease-in-out infinite}
+@keyframes bnc{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.a-jump{animation:jmp .6s ease-out infinite}@keyframes jmp{0%,100%{transform:translateY(0)}50%{transform:translateY(-26px)}}
+.a-shake{animation:shk2 .12s 8}
+.a-nod{animation:nod 1s ease-in-out infinite}@keyframes nod{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(3deg) translateY(4px)}}
+.a-spin{animation:spn2 1.3s linear infinite}@keyframes spn2{to{transform:rotateY(360deg)}}
+.a-sway{animation:swy 1.4s ease-in-out infinite alternate}@keyframes swy{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+.a-float{animation:flt 1.6s ease-in-out infinite alternate}@keyframes flt{from{transform:translateY(-6px)}to{transform:translateY(8px)}}
+.a-droop{transform:rotate(7deg) translateY(8px)}
+.a-walk{animation:wlk .5s ease-in-out infinite}.a-run{animation:wlk .25s ease-in-out infinite}
+@keyframes wlk{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.fxp{position:absolute;pointer-events:none;top:-10%}
+.fall{animation:fall 2.6s linear forwards}@keyframes fall{from{transform:translateY(-20px) rotate(0)}to{transform:translateY(320px) rotate(360deg);opacity:.8}}
+.rise{top:84%;animation:rise 2.2s ease-out forwards}@keyframes rise{to{transform:translateY(-200px);opacity:0}}
+.popfx{animation:popf 1.6s ease-out forwards}@keyframes popf{0%{transform:scale(0)}30%{transform:scale(1.5)}100%{transform:scale(1) translateY(-20px);opacity:0}}
+.twinkle{animation:twk 1.6s ease-in-out 2 forwards}@keyframes twk{0%,100%{opacity:.2;transform:scale(.6)}50%{opacity:1;transform:scale(1.3)}}
+.shoot{animation:sht 1.6s ease-in forwards}@keyframes sht{from{transform:translate(0,0)}to{transform:translate(-240px,130px);opacity:0}}
+.fxflash{position:absolute;inset:0;background:#fff;animation:fxf .6s forwards}@keyframes fxf{from{opacity:.95}to{opacity:0}}
+.rainfx{position:absolute;inset:0;background:repeating-linear-gradient(105deg,transparent 0 9px,rgba(210,230,255,.6) 9px 10px);background-size:44px 44px;animation:rainm .3s linear infinite;opacity:.85}@keyframes rainm{to{background-position:-22px 44px}}
+.spdlines{position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 60%,transparent 0 6deg,rgba(255,255,255,.65) 6deg 8deg);animation:fxf 1.3s forwards}
+.spotfx{position:absolute;inset:0;background:radial-gradient(circle at 50% 28%,rgba(255,255,255,.4),transparent 62%)}
+.numpop{position:absolute;top:30%;font-size:24px;color:#fff;text-shadow:0 2px 0 #2b2140,2px 0 0 #2b2140,-2px 0 0 #2b2140,0 -2px 0 #2b2140;animation:np 1.8s forwards;transform:translateX(-50%)}
+@keyframes np{from{transform:translate(-50%,10px);opacity:0}15%{opacity:1}to{transform:translate(-50%,-56px);opacity:0}}
+.scdlg{position:absolute;left:8px;right:8px;bottom:8px;background:#fffbf2f2;border:3px solid var(--ink);border-radius:12px;padding:6px 10px 8px;font-size:13.5px;line-height:1.5;min-height:58px;z-index:6;pointer-events:none}
+.scwho{background:var(--pink);color:#fff;border-radius:8px;padding:0 8px;font-size:12px;margin-bottom:2px}
+.scnxt{position:absolute;right:8px;bottom:2px;font-size:11px;animation:bl 1s infinite}
+.scskip{position:absolute;right:6px;top:6px;z-index:7;background:#fffc;border:2px solid var(--ink);border-radius:9px;font-size:11px;padding:2px 8px}
+#mbtn{position:fixed;right:max(8px,env(safe-area-inset-right));top:max(6px,env(safe-area-inset-top));z-index:15;width:38px;height:38px;border-radius:12px;border:3px solid var(--ink);background:#fffbf2;font-size:18px;line-height:1;box-shadow:0 3px 0 #0003;padding:0}
+#mn{position:fixed;inset:0;z-index:40;background:#2b214099;display:flex;align-items:center;justify-content:center;padding:14px}
+#mnb{width:100%;max-width:420px;max-height:100%;overflow:auto}
+.st2w{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:6px 0}.st2{background:#fff;border:2px solid var(--ink);border-radius:8px;text-align:center;font-size:11px;padding:2px}.st2 b{display:block;font-size:11px}.st2 span{font-size:16px;font-weight:800}
+.row.hdr{padding-right:42px}
+#cmt{right:54px}
+.sci{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:#fff;border:3px solid var(--ink);border-radius:12px;padding:8px 10px;margin-top:7px;box-shadow:0 3px 0 var(--ink);font-size:13px;line-height:1.45}
+.sci.on{background:var(--gold)}.sci.lock{opacity:.5;box-shadow:none;background:#e4e4ea}
+.sci .ic{font-size:30px;flex:none}
 </style>
 </head>
 <body>
@@ -85,6 +179,8 @@ ul.tips{padding-left:18px;margin:4px 0;font-size:12.5px;line-height:1.6}
 <div id="ui"></div>
 <div id="cmt"></div>
 <div id="toast"></div>
+<button id="mbtn" class="hide" data-k="menu">☰</button>
+<div id="mn" class="hide"><div id="mnb" class="panel"></div></div>
 <div id="sheet" class="hide"><div id="box" class="panel"></div></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -120,21 +216,86 @@ const STRAT={
 };
 const RAR={SSR:{tr:20,flat:3,bond:30,fr:35},SR:{tr:15,flat:2,bond:20,fr:28},R:{tr:10,flat:1,bond:10,fr:22}};
 const CARDS=[
- {id:"c1",n:"ハル",role:"広報担当",t:"voi",r:"SSR",e:"📣",line:"次の ポスター、 声を 活かす デザインに しましょう！"},
- {id:"c2",n:"ミナ",role:"アナウンサー",t:"voi",r:"SR",e:"🎙️",line:"腹式こきゅう、 おしえますよ。"},
- {id:"c3",n:"ケン",role:"合唱部",t:"voi",r:"R",e:"🎤",line:"あーあーあー！ いっしょに 発声！"},
- {id:"c4",n:"ゴウ",role:"元マラソン選手",t:"sta",r:"SSR",e:"🏃",line:"42キロも 最初の一歩から。 さあ 走ろう！"},
- {id:"c5",n:"リク",role:"水泳コーチ",t:"sta",r:"SR",e:"🏊",line:"全身を つかうと 疲れにくいよ。"},
- {id:"c6",n:"タク",role:"野球部",t:"sta",r:"R",e:"⚾",line:"ノックだ ノック！ 声だせー！"},
- {id:"c7",n:"サクラ",role:"後援会の会長",t:"pow",r:"SSR",e:"👵",line:"町内会、 ぜんぶ まわるわよ！ ついてらっしゃい。"},
- {id:"c8",n:"ダイ",role:"商店街の店主",t:"pow",r:"SR",e:"🏮",line:"うちの 店 から まわってくれ！"},
- {id:"c9",n:"ユイ",role:"タクシー運転手",t:"pow",r:"R",e:"🚕",line:"近道なら まかせて！"},
- {id:"c10",n:"ミコト",role:"町内会長",t:"tru",r:"SSR",e:"🏘️",line:"まじめに コツコツ。 それが 信頼だよ。"},
- {id:"c11",n:"アヤ",role:"保育士",t:"tru",r:"SR",e:"🧸",line:"こどもたち、 きみの こと 好きだって。"},
- {id:"c12",n:"ソラ",role:"ボランティア",t:"tru",r:"R",e:"🤝",line:"ごみ ひろい、 いっしょに しよ！"},
- {id:"c13",n:"レイ",role:"大学教授",t:"pol",r:"SSR",e:"🎓",line:"データを みれば、 まちの 課題が 見えてくる。"},
- {id:"c14",n:"ノア",role:"新聞記者",t:"pol",r:"SR",e:"📰",line:"その 公約、 ほんとうに できるの？"},
- {id:"c15",n:"ヒビキ",role:"図書館司書",t:"pol",r:"R",e:"📚",line:"この 本、 まちづくりの ヒントに なるよ。"}
+ {id:"c1",n:"ハル",role:"広報担当",t:"voi",r:"SSR",e:"📣",line:"次の ポスター、 声を 活かす デザインに しましょう！",
+  art:{sk:"#ffdcc0",h:"#8a4b2a",hs:1,cl:"#ff7fae",acc:[],tie:false},
+  eps:[["ハル「ポスターの 写真、 笑顔が かたいですよ。 いっしょに 練習 しましょう！」","鏡の 前で 何度も 笑顔の 練習。 ぎこちなかった 表情が 少し やわらかく なった。"],
+       ["ハル「じつは わたし、 人前で 話すのが すごく ニガテ だったんです。」","ハルは むかしの 自分と 重ねて 応援してくれる。『声は 気持ちを 運ぶ 道具』 その ことばが 胸に のこった。"],
+       ["ハル「キャッチコピー、 できました。 あなたの ことばで 作りましたよ！」","『この まちに もういちど 笑顔を』 ふたりで 作った コピーが 町じゅうに はられた！"]]},
+ {id:"c2",n:"ミナ",role:"アナウンサー",t:"voi",r:"SR",e:"🎙️",line:"腹式こきゅう、 おしえますよ。",
+  art:{sk:"#ffdcc0",h:"#2a2a3a",hs:1,cl:"#7a5cf5",acc:[],tie:true},
+  eps:[["ミナ「声の はりは おなかから。 ほら、 息を すって〜」","腹式呼吸を ならった。 声が ぐんと 通るように なった。"],
+       ["ミナ「原稿を 読むだけじゃ ダメ。 聞いてる 人の 目を 見て 話すの。」","聞き手の 目を 見る 大切さを 知った。"],
+       ["ミナ「あなたの 声、 地元ラジオで 町じゅうに とどけましょう！」","ラジオ生放送！ 町の 人たちが 耳を かたむけてくれた。"]]},
+ {id:"c3",n:"ケン",role:"合唱部",t:"voi",r:"R",e:"🎤",line:"あーあーあー！ いっしょに 発声！",
+  art:{sk:"#ffd6b8",h:"#3a2a20",hs:3,cl:"#3f8cff",acc:[],tie:false},
+  eps:[["ケン「いっしょに ハモろうぜ！ 声を あわせると 気持ちいいぞ。」","声を あわせる たのしさを 思い出した。"],
+       ["ケン「ぼく、 合唱コンクールで 大失敗した ことが あるんだ。」","『失敗しても また 歌えば いい』 勇気を もらった。"],
+       ["ケン「演説会の 前に、 みんなで 歌って 盛り上げるよ！」","会場が 一体に なった。 声援が 力に なる！"]]},
+ {id:"c4",n:"ゴウ",role:"元マラソン選手",t:"sta",r:"SSR",e:"🏃",line:"42キロも 最初の一歩から。 さあ 走ろう！",
+  art:{sk:"#e8b98f",h:"#2a2a2a",hs:0,cl:"#2fae6e",acc:[2],tie:false},
+  eps:[["ゴウ「朝5時、 走るぞ。 はじめは 5分でいい。」","短い 距離でも 毎日つづけるのが 大事だと 知った。"],
+       ["ゴウ「ケガで 引退した 俺を 町の みんなが 支えてくれた。 その 恩返しが したいんだ。」","ゴウの 思いを 背負い、 もう 一歩 前へ。"],
+       ["ゴウ「最後の 1キロが 勝負だ。 …選挙も おなじさ！」","『あきらめない 心』 ゴウから たすきを 受けとった。"]]},
+ {id:"c5",n:"リク",role:"水泳コーチ",t:"sta",r:"SR",e:"🏊",line:"全身を つかうと 疲れにくいよ。",
+  art:{sk:"#f0c8a0",h:"#1a1a2a",hs:3,cl:"#2fb0c8",acc:[],tie:false},
+  eps:[["リク「水の中なら 体に やさしいよ。 泳ごう！」","全身を つかって ぐんと 体力が ついた。"],
+       ["リク「子どもたちに 泳ぎを 教えて 20年。 みんな 町の 宝だよ。」","子どもたちの 未来を 考える 気持ちが 強くなった。"],
+       ["リク「25メートル 泳ぎきれた 子の 顔、 見てよ！ 君も ああなる。」","ゴールの 先の 景色を 想像して 気合が 入った。"]]},
+ {id:"c6",n:"タク",role:"野球部",t:"sta",r:"R",e:"⚾",line:"ノックだ ノック！ 声だせー！",
+  art:{sk:"#e8b98f",h:"#2a2a2a",hs:0,cl:"#e0442f",acc:[3],cap:"#e0442f",tie:false},
+  eps:[["タク「ノック 100本いくぞー！ 声だせー！」","泥だらけに なったけど 体力が ついた！"],
+       ["タク「補欠だった 俺が 最後の 試合で ヒットを 打てたんだ。」","『地道な 努力は うらぎらない』"],
+       ["タク「演説会の 準備、 野球部 総出で 手伝うぜ！」","会場設営は あっという間。 仲間の 力に 感謝。"]]},
+ {id:"c7",n:"サクラ",role:"後援会の会長",t:"pow",r:"SSR",e:"👵",line:"町内会、 ぜんぶ まわるわよ！ ついてらっしゃい。",
+  art:{sk:"#ffe0c8",h:"#d8d8e0",hs:2,cl:"#b07acb",acc:[],tie:false},
+  eps:[["サクラ「町内会の 皆さんには ごあいさつ、 欠かさないでね。」","まごころ こめた あいさつで 顔を 覚えてもらえた。"],
+       ["サクラ「この 町で 60年。 さびれていく 商店街を 見て、 悲しかったの。」","町を 想う 気持ちを 受けとった。 もう 負けられない。"],
+       ["サクラ「あなたを 後援会の みんなで 全力で 支えるわ！」","後援会の 輪が 町じゅうに ひろがった！"]]},
+ {id:"c8",n:"ダイ",role:"商店街の店主",t:"pow",r:"SR",e:"🏮",line:"うちの 店 から まわってくれ！",
+  art:{sk:"#e8b98f",h:"#3a2a20",hs:0,cl:"#f2a516",acc:[4,2],tie:false},
+  eps:[["ダイ「うちの コロッケ、 食ってけ！ …おっと、 お代は ちゃんと いただくよ。」","お金は きちんと はらった。 おいしくて 元気が 出た！"],
+       ["ダイ「シャッターが 増えて 寂しいんだ。 昔は 毎週 お祭りが あったのに。」","商店街の 課題を 肌で 感じた。 政策に 活かそう。"],
+       ["ダイ「商店街 みんなで 『応援のぼり』 たてたぞ！」","通りが 色とりどりの のぼりで うめつくされた！"]]},
+ {id:"c9",n:"ユイ",role:"タクシー運転手",t:"pow",r:"R",e:"🚕",line:"近道なら まかせて！",
+  art:{sk:"#ffdcc0",h:"#6b3a1a",hs:0,cl:"#f2c516",acc:[3],cap:"#222",tie:false},
+  eps:[["ユイ「町の 道なら 任せて。 近道 教えるよ！」","あいさつ回りが ぐっと はかどった。"],
+       ["ユイ「お客さん、 バスが 少なくて 困ってるって よく言うの。」","交通の 課題を 知った。"],
+       ["ユイ「今日は 貸切で 町じゅうを 案内するわ。」","ふだん 行かない 地区の 人とも 話せた。"]]},
+ {id:"c10",n:"ミコト",role:"町内会長",t:"tru",r:"SSR",e:"🏘️",line:"まじめに コツコツ。 それが 信頼だよ。",
+  art:{sk:"#f0c8a0",h:"#9a9a9a",hs:0,cl:"#4a7a5a",acc:[],tie:true},
+  eps:[["ミコト「おはよう。 ゴミ拾い、 毎朝 やってるんだ。」","いっしょに 掃除して 信頼が ふえた。"],
+       ["ミコト「地味な ことを つづける 人を、 町は ちゃんと 見ているよ。」","コツコツの 力を 学んだ。"],
+       ["ミコト「町内会として、 君を 推薦するよ。」","町内会の 推薦状！ 信頼の 証だ。"]]},
+ {id:"c11",n:"アヤ",role:"保育士",t:"tru",r:"SR",e:"🧸",line:"こどもたち、 きみの こと 好きだって。",
+  art:{sk:"#ffdcc0",h:"#b07a40",hs:5,cl:"#ffb0c8",acc:[4],tie:false},
+  eps:[["アヤ「子どもたちが あなたの ポスターを 指さして ニコニコ してたよ。」","子どもたちの 笑顔に 元気を もらった。"],
+       ["アヤ「待機児童の 問題、 現場は ほんとうに 大変なの。」","現場の 声を 聞く 大切さを 知った。"],
+       ["アヤ「園児たちから 手紙が とどいてるよ！」","『がんばってね』 の 大きな 文字に 胸が あつくなった。"]]},
+ {id:"c12",n:"ソラ",role:"ボランティア",t:"tru",r:"R",e:"🤝",line:"ごみ ひろい、 いっしょに しよ！",
+  art:{sk:"#ffd6b8",h:"#2a2a2a",hs:3,cl:"#5cc08a",acc:[3],cap:"#2fae6e",tie:false},
+  eps:[["ソラ「ごみ ひろい、 いっしょに しよ！」","汗を かいた あとの 達成感！"],
+       ["ソラ「最初は 人見知りだったんだ。 でも 町の 人が 話しかけてくれて。」","話しかける 勇気を もらった。"],
+       ["ソラ「ボランティア仲間が みんな 応援してくれるって！」","輪が ひろがって 心強い。"]]},
+ {id:"c13",n:"レイ",role:"大学教授",t:"pol",r:"SSR",e:"🎓",line:"データを みれば、 まちの 課題が 見えてくる。",
+  art:{sk:"#f0c8a0",h:"#bbbbbb",hs:4,cl:"#555a70",acc:[1],tie:true},
+  eps:[["レイ「まず データを 見よう。 人口の グラフだ。」","数字から 町の 姿が 見えた。"],
+       ["レイ「ただし 数字だけでは 人は 動かない。 物語も 必要だ。」","データと ことばの 両立を 学んだ。"],
+       ["レイ「君の 政策、 論文みたいに 完成度が 高いよ。」","政策が 力強く 磨かれた！"]]},
+ {id:"c14",n:"ノア",role:"新聞記者",t:"pol",r:"SR",e:"📰",line:"その 公約、 ほんとうに できるの？",
+  art:{sk:"#ffdcc0",h:"#4a3a2a",hs:0,cl:"#8a7a60",acc:[1],tie:true},
+  eps:[["ノア「その 公約、 財源は？ 取材させてくれ。」","するどい 質問に 鍛えられた。"],
+       ["ノア「記者は 中立。 だから 本音で 話してほしい。」","ごまかさず 答える 大切さを 知った。"],
+       ["ノア「記事に したよ。『この 町の 未来を 語る 人』ってね。」","新聞に のって 多くの 人に 知られた！"]]},
+ {id:"c15",n:"ヒビキ",role:"図書館司書",t:"pol",r:"R",e:"📚",line:"この 本、 まちづくりの ヒントに なるよ。",
+  art:{sk:"#ffe0c8",h:"#6b3a2a",hs:2,cl:"#9a7ad0",acc:[1],tie:false},
+  eps:[["ヒビキ「この 本、 町の 歴史が わかるよ。」","町の 歴史から ヒントを えた。"],
+       ["ヒビキ「図書館の 利用者が へってるの。 …何か できないかな。」","町の 課題が また ひとつ 見えた。"],
+       ["ヒビキ「読書会で 公約を 紹介して みない？」","読書会で 共感の 輪が ひろがった！"]]},
+ {id:"c16",n:"大山 兼人",role:"ベテラン議員",t:"tru",r:"SSR",e:"🏛️",vet:true,line:"…ふむ。 話は 町を 歩いて からだ。",
+  art:{sk:"#e8c0a0",h:"#9a9aa4",hs:4,cl:"#1c2440",acc:[1,5,6],tie:true},
+  eps:[["大山「ほう、 本気 みたいだな。 まずは 町の 声を 聞け。 話は それからだ。」","大山の 助言で 町歩きの 計画が 立った。"],
+       ["大山「選挙は 勝つ ためだけじゃない。 町の 声を 政治に とどける 場だ。」","『なんの ために 立候補するのか』 目的が はっきりした。"],
+       ["大山「…わしの 後は 君に ゆずる。 この町を 頼んだぞ。」","大山の 議員バッジが 手わたされた。 責任の 重さと 誇りを 胸に。"]]}
 ];
 const SKILLS=[
  {id:"s1",n:"好スタート",d:"序盤で 加速 +6%",cost:90,ph:0,spd:.06},
@@ -193,6 +354,144 @@ const SEV={ // サポートカードイベント
  b:{q:n=>`${n}「いい アイデア、 思いついたんだ！」`,c:[{l:"ぜひ 聞かせて",fx:(G,c)=>{addBond(c,10);G.sp+=22},r:"スキルポイント を ゲット！"},{l:"あとで 聞くね",fx:(G,c)=>{addBond(c,5);G.energy+=8},r:"ちょっと ひと休み。"}]}
 };
 
+/* ================= サポカ イラスト（SVG・ポーズ つき） ================= */
+const TCOL={voi:"#ff9ab8",sta:"#8cc8ff",pow:"#ffc57a",tru:"#9fe0a0",pol:"#c4a8ff"};
+const POSE={
+ stand:{L:[34,225,38,262],R:[166,225,162,262]},
+ peace:{L:[34,225,38,262],R:[178,176,152,128],prop:"peace"},
+ mic:{L:[34,225,38,262],R:[172,196,124,150],prop:"mic",mouth:"open"},
+ sing:{L:[16,170,8,118],R:[184,170,192,118],mouth:"open",head:-4},
+ run:{L:[18,196,44,152],R:[176,226,182,258],tilt:-13,sc:.95,ox:6,oy:6,mouth:"open"},
+ point:{L:[26,214,58,222],R:[190,170,184,112],prop:"point",head:5},
+ bat:{L:[40,200,70,168],R:[170,176,138,130],prop:"bat"},
+ wave:{L:[8,150,14,96],R:[166,225,162,262],mouth:"open"},
+ fold:{L:[78,222,128,208],R:[124,222,72,206]},
+ wheel:{L:[58,214,66,214],R:[142,214,134,214],prop:"wheel",tilt:3},
+ broom:{L:[44,214,150,236],R:[162,204,152,196],prop:"broom"},
+ hug:{L:[50,226,84,224],R:[150,226,116,224],prop:"teddy"},
+ thumbs:{L:[34,232,34,250],R:[178,190,172,156],prop:"thumb bag"},
+ chart:{L:[40,214,70,226],R:[172,190,180,142],prop:"pointer",head:-5},
+ note:{L:[58,218,78,212],R:[142,218,124,198],prop:"note"},
+ book:{L:[50,224,72,228],R:[150,224,128,228],prop:"book"},
+ lapel:{L:[40,232,52,262],R:[150,226,126,204],head:-4}
+};
+const CLOOK={
+ c1:{pose:"peace",bg:"stage",tilt:-3,mouth:"smile"},
+ c2:{pose:"mic",bg:"radio",tilt:2},
+ c3:{pose:"sing",bg:"music",zoom:1},
+ c4:{pose:"run",bg:"track"},
+ c5:{pose:"point",bg:"water",tilt:2},
+ c6:{pose:"bat",bg:"diamond",tilt:-3},
+ c7:{pose:"wave",bg:"petals",tilt:3},
+ c8:{pose:"fold",bg:"shop",tilt:0},
+ c9:{pose:"wheel",bg:"taxi"},
+ c10:{pose:"broom",bg:"sunrise",tilt:-2},
+ c11:{pose:"hug",bg:"balloon",tilt:3},
+ c12:{pose:"thumbs",bg:"leaves",tilt:-3,mouth:"open"},
+ c13:{pose:"chart",bg:"chalk"},
+ c14:{pose:"note",bg:"news",tilt:2},
+ c15:{pose:"book",bg:"shelf"},
+ c16:{pose:"lapel",bg:"gov"},
+ stand:{pose:"stand"}
+};
+const NPCART={
+ rival:{sk:"#f0c8a0",h:"#4a4a52",hs:0,cl:"#2a4a3a",acc:[5],tie:true},
+ kid:{sk:"#ffe0c8",h:"#3a2a20",hs:3,cl:"#ffd23f",acc:[3],cap:"#e0442f",tie:false},
+ youth:{sk:"#ffdcc0",h:"#3a3a5a",hs:3,cl:"#6a6a7a",acc:[],tie:false},
+ mc:{sk:"#ffdcc0",h:"#2a2a3a",hs:1,cl:"#e0442f",acc:[],tie:true}
+};
+function cbg(id,ink){
+ let s="";const rr=(a,b)=>a+((Math.sin(a*12.9+b*7.1)+1)/2)*(b-a);
+ switch(id){
+ case"stage":s+=`<polygon points="40,0 10,260 80,260" fill="#fff" opacity=".28"/><polygon points="100,0 60,260 140,260" fill="#fff" opacity=".24"/><polygon points="160,0 120,260 190,260" fill="#fff" opacity=".28"/><rect y="236" width="200" height="30" fill="#6a3a8a" opacity=".5"/>`;break;
+ case"radio":[44,70,98,128].forEach(r=>s+=`<circle cx="100" cy="116" r="${r}" fill="none" stroke="#fff" stroke-width="5" opacity=".42"/>`);s+=`<rect x="124" y="12" width="60" height="22" rx="6" fill="#e0442f"/><text x="154" y="28" font-size="13" text-anchor="middle" fill="#fff" font-weight="bold">ON AIR</text>`;break;
+ case"music":[[24,60,36],[160,50,30],[40,170,26],[168,150,34],[110,28,24]].forEach(([x,y,f],i)=>s+=`<text x="${x}" y="${y}" font-size="${f}" fill="#fff" opacity=".6">${i%2?"♪":"♫"}</text>`);break;
+ case"track":for(let i=-4;i<=4;i++)s+=`<line x1="100" y1="120" x2="${100+i*60}" y2="262" stroke="#fff" stroke-width="3" opacity=".55"/>`;for(let i=0;i<7;i++)s+=`<line x1="${150+i%3*12}" y1="${50+i*24}" x2="${196}" y2="${50+i*24}" stroke="#fff" stroke-width="3" opacity=".5"/>`;break;
+ case"water":for(let i=0;i<7;i++)s+=`<path d="M0 ${40+i*32} Q25 ${28+i*32} 50 ${40+i*32} T100 ${40+i*32} T150 ${40+i*32} T200 ${40+i*32}" stroke="#fff" stroke-width="3" fill="none" opacity=".5"/>`;[[30,60],[170,90],[150,40],[26,150]].forEach(([x,y])=>s+=`<circle cx="${x}" cy="${y}" r="7" fill="#fff" opacity=".5"/>`);break;
+ case"diamond":s+=`<rect x="0" y="150" width="200" height="110" fill="#6bbf5a" opacity=".6"/><polygon points="100,150 170,210 100,262 30,210" fill="#c8935a" opacity=".6"/><polygon points="100,166 154,210 100,250 46,210" fill="#6bbf5a" opacity=".7"/><text x="160" y="56" font-size="34">⚾</text>`;break;
+ case"petals":for(let i=0;i<16;i++)s+=`<ellipse cx="${(i*47)%200}" cy="${(i*61)%250}" rx="7" ry="4" fill="#ff9ec7" opacity=".7" transform="rotate(${i*37} ${(i*47)%200} ${(i*61)%250})"/>`;break;
+ case"shop":for(let i=0;i<8;i++)s+=`<rect x="${i*25}" y="0" width="25" height="40" fill="${i%2?"#fff":"#e0442f"}" opacity=".85"/>`;s+=`<path d="M0 40 Q12 52 25 40 Q37 52 50 40 Q62 52 75 40 Q87 52 100 40 Q112 52 125 40 Q137 52 150 40 Q162 52 175 40 Q187 52 200 40" fill="none" stroke="#c33" stroke-width="3"/><text x="28" y="86" font-size="26">🏮</text><text x="150" y="86" font-size="26">🏮</text>`;break;
+ case"taxi":for(let i=0;i<10;i++)s+=`<rect x="${i*20}" y="${i%2?196:210}" width="20" height="14" fill="#222" opacity=".7"/><rect x="${i*20}" y="${i%2?210:196}" width="20" height="14" fill="#fff" opacity=".7"/>`;s+=`<rect y="224" width="200" height="40" fill="#555" opacity=".5"/><text x="150" y="60" font-size="30">🚕</text>`;break;
+ case"sunrise":s+=`<circle cx="152" cy="86" r="34" fill="#ffb347" opacity=".85"/><rect x="0" y="206" width="200" height="60" fill="#7a9a6a" opacity=".5"/><rect x="14" y="170" width="30" height="40" fill="#e8d8c0" opacity=".8"/><polygon points="10,170 29,150 48,170" fill="#c2603a" opacity=".8"/><rect x="52" y="184" width="24" height="26" fill="#e8d8c0" opacity=".8"/><polygon points="48,184 64,168 80,184" fill="#4f8a5b" opacity=".8"/>`;break;
+ case"balloon":[[30,50,"#ff6fa5"],[70,30,"#ffcf3a"],[150,56,"#3f8cff"],[176,110,"#3bb36b"],[24,130,"#8a5cf5"]].forEach(([x,y,c])=>s+=`<ellipse cx="${x}" cy="${y}" rx="14" ry="18" fill="${c}" opacity=".8"/><path d="M${x} ${y+18} q-4 30 4 60" stroke="#fff" stroke-width="2" fill="none" opacity=".7"/>`);s+=`<text x="100" y="40" font-size="20" text-anchor="middle">⭐</text>`;break;
+ case"leaves":for(let i=0;i<14;i++)s+=`<ellipse cx="${(i*53)%200}" cy="${(i*67)%250}" rx="16" ry="7" fill="#3bb36b" opacity=".6" transform="rotate(${i*41} ${(i*53)%200} ${(i*67)%250})"/>`;break;
+ case"chalk":s+=`<rect x="14" y="26" width="172" height="118" rx="6" fill="#2f5a46" stroke="#8a6a3a" stroke-width="6" opacity=".92"/><polyline points="30,120 62,96 92,106 126,64 166,50" fill="none" stroke="#fff" stroke-width="3.5"/><line x1="30" y1="124" x2="168" y2="124" stroke="#fff" stroke-width="2.5"/><text x="30" y="52" font-size="15" fill="#fff" font-weight="bold">データ</text>`;break;
+ case"news":for(let i=0;i<9;i++)s+=`<rect x="14" y="${22+i*22}" width="${i%3===0?172:150}" height="8" rx="3" fill="#fff" opacity=".5"/>`;s+=`<rect x="14" y="14" width="80" height="26" fill="#2b2140" opacity=".35"/>`;break;
+ case"shelf":for(let r=0;r<4;r++){s+=`<rect x="0" y="${50+r*52}" width="200" height="5" fill="#8a6a3a" opacity=".8"/>`;for(let i=0;i<14;i++)s+=`<rect x="${i*14+2}" y="${20+r*52+((i*7)%9)}" width="11" height="${30-((i*7)%9)}" fill="${["#e0442f","#3f8cff","#f2a516","#3bb36b","#8a5cf5","#ff6fa5"][(i+r)%6]}" opacity=".65"/>`}break;
+ case"assembly":for(let r=0;r<3;r++)for(let i=0;i<9;i++){const a=Math.PI*(.1+i/8*.8),R=60+r*28;s+=`<circle cx="${100-Math.cos(a)*R*1.15}" cy="${150-Math.sin(a)*R*.7+r*10}" r="${7+r}" fill="#7a2a3a" opacity=".6"/>`}s+=`<rect x="70" y="40" width="60" height="26" rx="4" fill="#5a3a22" opacity=".5"/>`;break;
+ case"cityhall":s+=`<rect x="30" y="80" width="140" height="130" fill="#e8e0d0" opacity=".75"/><rect x="84" y="36" width="32" height="48" fill="#d8d0c0" opacity=".8"/><circle cx="100" cy="52" r="10" fill="#fff" stroke="#555" stroke-width="2"/>`+[0,1,2].map(i=>`<rect x="${44+i*38}" y="104" width="18" height="24" fill="#9fc8e8" opacity=".8"/><rect x="${44+i*38}" y="146" width="18" height="24" fill="#9fc8e8" opacity=".8"/>`).join("");break;
+ case"farm":s+=`<circle cx="160" cy="48" r="22" fill="#ffe27a" opacity=".85"/><rect y="150" width="200" height="110" fill="#8fd27a" opacity=".65"/>`;for(let i=0;i<6;i++)s+=`<polygon points="100,150 ${-120+i*70},262 ${-80+i*70},262" fill="${i%2?"#6ab04a":"#9ad27a"}" opacity=".7"/>`;break;
+ case"gov":s+=`<polygon points="10,90 100,40 190,90" fill="#e8e0d0" opacity=".85"/>`;for(let i=0;i<5;i++)s+=`<rect x="${22+i*36}" y="92" width="14" height="120" fill="#f4eee0" opacity=".85"/>`;s+=`<rect x="6" y="210" width="188" height="14" fill="#d8d0c0" opacity=".85"/><line x1="160" y1="40" x2="160" y2="6" stroke="#555" stroke-width="3"/><rect x="160" y="6" width="26" height="16" fill="#e0442f"/>`;break;
+ }
+ return s;
+}
+function figure(a,look){
+ const L=look||CLOOK.stand,P=POSE[L.pose]||POSE.stand;
+ const ink="#2b2140",sk=a.sk,h=a.h,cl=a.cl,hs=a.hs,acc=a.acc||[];
+ const tilt=L.tilt!==undefined?L.tilt:(P.tilt||0),sc=P.sc||1,ox=P.ox||0,oy=P.oy||0,hd=L.head!==undefined?L.head:(P.head||0);
+ let s=`<g transform="translate(${ox} ${oy}) translate(100 262) rotate(${tilt}) scale(${sc}) translate(-100 -262)">`;
+ if(hs===1)s+=`<path d="M58 92 Q52 44 100 42 Q148 44 142 92 L150 168 Q100 188 50 168Z" fill="${h}"/>`;
+ if(hs===5)s+=`<ellipse cx="50" cy="128" rx="14" ry="38" fill="${h}" transform="rotate(12 50 128)"/><ellipse cx="150" cy="128" rx="14" ry="38" fill="${h}" transform="rotate(-12 150 128)"/>`;
+ if(hs===2)s+=`<circle cx="100" cy="38" r="17" fill="${h}"/>`;
+ s+=`<path d="M18 262 Q24 176 100 164 Q176 176 182 262Z" fill="${cl}" stroke="${ink}" stroke-width="2.5"/>`;
+ if(acc.includes(4))s+=`<path d="M62 176 L138 176 L134 262 L66 262Z" fill="#fff" opacity=".92"/><rect x="88" y="212" width="24" height="18" rx="4" fill="#ffd9e8" stroke="${ink}" stroke-width="1.5"/>`;
+ else{s+=`<path d="M82 166 L100 198 L118 166Z" fill="#fff"/>`;if(a.tie)s+=`<path d="M95 182 L105 182 L107 218 L100 226 L93 218Z" fill="#c8323f"/>`}
+ if(acc.includes(6))s+=`<circle cx="62" cy="196" r="9" fill="#ffcf3a" stroke="${ink}" stroke-width="2"/><text x="62" y="200" font-size="10" text-anchor="middle" fill="${ink}" font-weight="bold">議</text>`;
+ s+=`<rect x="87" y="136" width="26" height="34" rx="9" fill="${sk}"/>`;
+ // うで
+ const arm=(sh,e)=>{const d=`M${sh[0]} ${sh[1]} Q${e[0]} ${e[1]} ${e[2]} ${e[3]}`;return `<path d="${d}" stroke="${ink}" stroke-width="30" fill="none" stroke-linecap="round"/><path d="${d}" stroke="${cl}" stroke-width="23" fill="none" stroke-linecap="round"/>`};
+ const hand=e=>`<circle cx="${e[2]}" cy="${e[3]}" r="12" fill="${sk}" stroke="${ink}" stroke-width="2.5"/>`;
+ // かさなる 小物(うでの うしろ)
+ const pr=P.prop||"";
+ if(pr.includes("wheel"))s+=`<ellipse cx="100" cy="226" rx="44" ry="17" fill="none" stroke="${ink}" stroke-width="8"/><ellipse cx="100" cy="226" rx="44" ry="17" fill="none" stroke="#777" stroke-width="4"/>`;
+ if(pr.includes("book"))s+=`<path d="M100 214 L56 204 L56 246 L100 256Z" fill="#fff" stroke="${ink}" stroke-width="2.5"/><path d="M100 214 L144 204 L144 246 L100 256Z" fill="#f4ecd8" stroke="${ink}" stroke-width="2.5"/>`;
+ if(pr.includes("note"))s+=`<rect x="68" y="194" width="62" height="46" rx="3" fill="#fff" stroke="${ink}" stroke-width="2.5" transform="rotate(-6 100 217)"/><line x1="76" y1="206" x2="122" y2="204" stroke="#99a" stroke-width="2"/><line x1="76" y1="216" x2="122" y2="214" stroke="#99a" stroke-width="2"/><line x1="76" y1="226" x2="112" y2="224" stroke="#99a" stroke-width="2"/>`;
+ if(pr.includes("teddy"))s+=`<text x="100" y="244" font-size="58" text-anchor="middle">🧸</text>`;
+ if(pr.includes("broom"))s+=`<line x1="152" y1="44" x2="150" y2="256" stroke="${ink}" stroke-width="10" stroke-linecap="round"/><line x1="152" y1="44" x2="150" y2="256" stroke="#c8935a" stroke-width="6" stroke-linecap="round"/><polygon points="134,236 168,236 178,264 126,264" fill="#e8c860" stroke="${ink}" stroke-width="2.5"/>`;
+ if(pr.includes("bat"))s+=`<line x1="138" y1="130" x2="196" y2="44" stroke="${ink}" stroke-width="15" stroke-linecap="round"/><line x1="138" y1="130" x2="196" y2="44" stroke="#c8935a" stroke-width="10" stroke-linecap="round"/>`;
+ if(pr.includes("pointer"))s+=`<line x1="180" y1="142" x2="96" y2="40" stroke="${ink}" stroke-width="7" stroke-linecap="round"/><line x1="180" y1="142" x2="96" y2="40" stroke="#e8c860" stroke-width="3.5" stroke-linecap="round"/>`;
+ s+=arm([54,194],P.L)+arm([146,194],P.R)+hand(P.L)+hand(P.R);
+ if(pr.includes("mic")){const e=P.R;s+=`<g transform="translate(${e[2]} ${e[3]}) rotate(-38)"><rect x="-6" y="-34" width="12" height="34" rx="5" fill="#444" stroke="${ink}" stroke-width="2"/><circle cx="0" cy="-40" r="11" fill="#cfd4dc" stroke="${ink}" stroke-width="2.5"/></g>`}
+ if(pr.includes("peace")){const e=P.R;s+=`<g stroke-linecap="round"><path d="M${e[2]-4} ${e[3]-8} L${e[2]-12} ${e[3]-32}" stroke="${ink}" stroke-width="12"/><path d="M${e[2]+6} ${e[3]-8} L${e[2]+12} ${e[3]-32}" stroke="${ink}" stroke-width="12"/><path d="M${e[2]-4} ${e[3]-8} L${e[2]-12} ${e[3]-32}" stroke="${sk}" stroke-width="7"/><path d="M${e[2]+6} ${e[3]-8} L${e[2]+12} ${e[3]-32}" stroke="${sk}" stroke-width="7"/></g>`}
+ if(pr.includes("point")){const e=P.R;s+=`<path d="M${e[2]} ${e[3]-6} L${e[2]-4} ${e[3]-38}" stroke="${ink}" stroke-width="11" stroke-linecap="round"/><path d="M${e[2]} ${e[3]-6} L${e[2]-4} ${e[3]-38}" stroke="${sk}" stroke-width="6" stroke-linecap="round"/>`}
+ if(pr.includes("thumb")){const e=P.R;s+=`<path d="M${e[2]} ${e[3]-6} L${e[2]} ${e[3]-30}" stroke="${ink}" stroke-width="12" stroke-linecap="round"/><path d="M${e[2]} ${e[3]-6} L${e[2]} ${e[3]-30}" stroke="${sk}" stroke-width="7" stroke-linecap="round"/>`}
+ if(pr.includes("bag")){const e=P.L;s+=`<ellipse cx="${e[2]}" cy="${e[3]+12}" rx="18" ry="22" fill="#5aa0e8" stroke="${ink}" stroke-width="2.5"/>`}
+ if(pr.includes("note")){const e=P.R;s+=`<line x1="${e[2]}" y1="${e[3]+4}" x2="${e[2]+12}" y2="${e[3]-22}" stroke="${ink}" stroke-width="4" stroke-linecap="round"/>`}
+ // あたま
+ s+=`<g transform="rotate(${hd} 100 150)">`;
+ s+=`<ellipse cx="100" cy="98" rx="38" ry="44" fill="${sk}" stroke="${ink}" stroke-width="2.5"/>`;
+ if(hs===0||hs===5||hs===2)s+=`<path d="M60 94 Q56 46 100 44 Q144 46 140 94 Q128 70 100 68 Q72 70 60 94Z" fill="${h}"/>`;
+ if(hs===1)s+=`<path d="M60 94 Q56 46 100 44 Q144 46 140 94 Q128 70 100 68 Q72 70 60 94Z" fill="${h}"/><path d="M60 94 Q62 124 58 150 L68 150 Q72 120 72 96Z" fill="${h}"/><path d="M140 94 Q138 124 142 150 L132 150 Q128 120 128 96Z" fill="${h}"/>`;
+ if(hs===3)s+=`<polygon points="58,94 54,58 72,70 76,40 90,64 100,34 112,64 126,40 130,70 146,58 142,94 128,74 100,66 72,74" fill="${h}"/>`;
+ if(hs===4)s+=`<path d="M63 96 Q58 68 72 58 Q66 80 70 104Z" fill="${h}"/><path d="M137 96 Q142 68 128 58 Q134 80 130 104Z" fill="${h}"/><path d="M78 56 Q100 44 122 56 Q100 50 78 56Z" fill="${h}"/>`;
+ [86,114].forEach(x=>{s+=`<ellipse cx="${x}" cy="102" rx="5.5" ry="8" fill="${ink}"/><circle cx="${x+2}" cy="98.5" r="2.2" fill="#fff"/><path d="M${x-9} 89 Q${x} ${85+(hs===4?-2:0)} ${x+9} 89" stroke="${hs===4?"#777":h}" stroke-width="3" fill="none" stroke-linecap="round"/>`});
+ s+=`<circle cx="76" cy="115" r="6" fill="#ff8aa8" opacity=".38"/><circle cx="124" cy="115" r="6" fill="#ff8aa8" opacity=".38"/>`;
+ const mo=L.mouth||P.mouth;
+ if(mo==="open")s+=`<ellipse cx="100" cy="124" rx="10" ry="9" fill="#7a2030" stroke="${ink}" stroke-width="2.5"/><ellipse cx="100" cy="129" rx="6" ry="3.5" fill="#ff8aa8"/>`;
+ else s+=hs===4?`<path d="M91 122 Q100 128 109 122" stroke="#9a4050" stroke-width="3" fill="none" stroke-linecap="round"/>`:`<path d="M90 120 Q100 131 110 120 Z" fill="#fff" stroke="#b04050" stroke-width="2.5" stroke-linejoin="round"/>`;
+ if(acc.includes(5))s+=`<path d="M84 116 Q100 108 116 116 Q108 124 100 119 Q92 124 84 116Z" fill="${h}"/>`;
+ if(acc.includes(1))s+=`<g stroke="#333" stroke-width="2.6" fill="rgba(255,255,255,.28)"><circle cx="86" cy="102" r="12"/><circle cx="114" cy="102" r="12"/><path d="M98 102h4"/></g>`;
+ if(acc.includes(2))s+=`<rect x="61" y="72" width="78" height="10" fill="#e0442f"/><path d="M139 76 l14 -6 l-4 14z" fill="#e0442f"/>`;
+ if(acc.includes(3))s+=`<path d="M58 82 Q60 42 100 40 Q140 42 142 82Z" fill="${a.cap||"#2f7bd9"}" stroke="${ink}" stroke-width="2"/><path d="M96 82 h58 q6 0 6 7 h-64z" fill="${a.cap||"#2f7bd9"}" stroke="${ink}" stroke-width="2"/>`;
+ s+=`</g></g>`;
+ return s;
+}
+function cardArt(c,vb){
+ const a=c.art,R=c.r,id="g"+c.id,ink="#2b2140",T=TCOL[c.t],look=CLOOK[c.id]||CLOOK.stand;
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb||"0 0 200 260"}" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${T}"/><stop offset="1" stop-color="#fffbf2"/></linearGradient></defs><rect width="200" height="260" fill="url(#${id})"/>`;
+ if(R==="SSR"){for(let i=0;i<14;i++){const a1=i/14*Math.PI*2,a2=a1+.14;s+=`<polygon points="100,120 ${100+300*Math.cos(a1)},${120+300*Math.sin(a1)} ${100+300*Math.cos(a2)},${120+300*Math.sin(a2)}" fill="#fff" opacity=".32"/>`}}
+ else if(R==="SR"){for(let i=0;i<8;i++)s+=`<circle cx="${20+i*24}" cy="${30+(i%3)*28}" r="${3+i%3}" fill="#fff" opacity=".5"/>`}
+ s+=cbg(look.bg,ink);
+ s+=figure(a,look);
+ s+=`<circle cx="164" cy="30" r="22" fill="#fff" stroke="${ink}" stroke-width="3"/><text x="164" y="40" font-size="26" text-anchor="middle">${c.e}</text>`;
+ const fc=R==="SSR"?"#ffcf3a":R==="SR"?"#e8a21a":"#aab4c4";
+ s+=`<rect x="3" y="3" width="194" height="254" rx="10" fill="none" stroke="${fc}" stroke-width="${R==="SSR"?6:4}"/>`;
+ s+=`<rect x="8" y="232" width="42" height="20" rx="6" fill="${ink}"/><text x="29" y="247" font-size="14" text-anchor="middle" fill="${fc}" font-weight="bold">${R}</text>`;
+ return s+`</svg>`;
+}
+const cardThumb=c=>cardArt(c,"54 36 100 100");
+const bust=(a,look)=>`<svg viewBox="0 36 200 226" class="bust" xmlns="http://www.w3.org/2000/svg">${figure(a,look||CLOOK.stand)}</svg>`;
+
 /* ================= 保存 ================= */
 let SV={gems:1500,cards:{c3:0,c6:0,c9:0,c12:0,c15:0},deck:["c3","c6","c9","c12","c15"],legacy:[],hist:[],login:"",pulls:0};
 try{const x=JSON.parse(localStorage.getItem("gaito_uma")||"null");if(x)SV=Object.assign(SV,x)}catch(e){}
@@ -201,9 +500,10 @@ const todayS=()=>{const d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)
 let loginMsg="";
 if(SV.login!==todayS()){SV.login=todayS();SV.gems+=150;loginMsg="📅 ログインボーナス ジェム +150！";save()}
 
+let soundOn=true,paused=false;
 /* ================= 音 ================= */
 let actx=null;
-function beep(f,t,type,v){try{if(!actx)actx=new (window.AudioContext||window.webkitAudioContext)();if(actx.state==="suspended")actx.resume();
+function beep(f,t,type,v){if(!soundOn)return;try{if(!actx)actx=new (window.AudioContext||window.webkitAudioContext)();if(actx.state==="suspended")actx.resume();
  const o=actx.createOscillator(),g=actx.createGain();o.type=type||"square";o.frequency.value=f;g.gain.value=v||.05;o.connect(g);g.connect(actx.destination);o.start();
  g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+t);o.stop(actx.currentTime+t)}catch(e){}}
 const sfx={ok:()=>{beep(660,.08);setTimeout(()=>beep(990,.12),70)},sel:()=>beep(800,.04),bad:()=>beep(160,.25,"sawtooth"),
@@ -326,16 +626,16 @@ function camHome(){cam.position.set(0,2.8,8.4);cam.lookAt(0,2.0,0)}
 let G=null;
 const lbOf=id=>SV.cards[id]||0;
 const card=id=>CARDS.find(c=>c.id===id);
-const cbonus=c=>{const b=RAR[c.r],lb=lbOf(c.id);return{tr:b.tr+2*lb,flat:b.flat+(lb>=2?1:0),bond:b.bond+3*lb,fr:b.fr+2*lb}};
+const cbonus=c=>{const b=RAR[c.r],lb=lbOf(c.id);let o={tr:b.tr+2*lb,flat:b.flat+(lb>=2?1:0),bond:b.bond+3*lb,fr:b.fr+2*lb};if(typeof G!=="undefined"&&G&&c.sc&&G.scId===c.sc){o.tr=Math.round(o.tr*1.5);o.fr+=8;o.bond+=10;o.flat+=1}return o};
 function addBond(c,v){G.bond[c.id]=clamp((G.bond[c.id]||0)+v,0,100)}
-function newGame(cand,N,leg,deck){
- const NORM=40+N*7;
- G={cand,N,t:1,NORM,st:Object.assign({},cand.start),energy:100,mood:0,sp:50,skills:[],hints:{},
+function newGame(cand,N,leg,deck,scId){
+ const sc=SCEN[scId||"town"];const NORM=Math.round((40+N*7)*sc.mul);
+ G={cand,N,t:1,NORM,sc,scId:sc.id,st:Object.assign({},cand.start),energy:100,mood:0,sp:50,skills:[],hints:{},
   deck:deck.map(card),bond:{},tcount:{voi:0,sta:0,pow:0,tru:0,pol:0},place:{},sel:null,
-  goals:[Math.round(N*.25),Math.round(N*.5),Math.round(N*.75)],evtUsed:{},seen:[],refused:false,failed:0,friend:0,disc:null,strat:cand.strat,log:[]};
+  goals:[Math.round(N*.25),Math.round(N*.5),Math.round(N*.75)],evtUsed:{},ep:{},then:null,seen:[],refused:false,failed:0,friend:0,disc:null,strat:cand.strat,log:[]};
  G.deck.forEach(c=>G.bond[c.id]=cbonus(c).bond);
  if(leg){SK.forEach(k=>G.st[k]+=leg.stars*3+(k===leg.main?leg.stars*4:0));if(leg.skill&&!G.skills.includes(leg.skill))G.skills.push(leg.skill);G.legName=leg.name}
- const pool=shuffle(Object.keys(EVT));G.evtOrder=pool;
+ const pool=shuffle(SHARED_EV.concat(sc.pool));G.evtOrder=pool;
  SK.forEach(k=>G.st[k]=Math.round(G.st[k]));
 }
 const avg=()=>SK.reduce((a,k)=>a+G.st[k],0)/5;
@@ -389,10 +689,12 @@ function howto(){
  <p><b>② サポートカード：</b>仲間が 集まる 練習は 効果アップ！ きずな80で 🌟友情トレーニング。</p>
  <p><b>③ 目標：</b>途中の 目標を クリアしないと 立候補できないよ。討論会も あるよ。</p>
  <p><b>④ 本番：</b>投票日の 3D 選挙レース！ 作戦を えらび、ラストスパートは れんだで 応援しよう。</p>
- <p><b>⑤ ガチャ：</b>ジェムで 新しい サポートカードを 手に入れて 次の 育成に 活かそう。</p>
+ <p><b>⑤ ものがたり：</b>サポートカードの きずなが ふかまると 物語が 進むよ。ベテラン議員 大山も 見守っているぞ。レースは 倍速・スキップも できるよ。</p>
+ <p><b>⑥ ガチャ：</b>ジェムで 新しい サポートカードを 手に入れて 次の 育成に 活かそう。</p>
  <button class="btn" data-k="closeS">とじる</button>`);
 }
 function home(){
+ setMenuBtn(false);G=null;
  mode="home";buildHome();setHero(CAND[selCand]);camHome();setBg(0xffd6e7);spin=true;$("cmt").innerHTML="";
  ui(`<div style="text-align:center;margin-top:6px"><h1>🌟 せんきょ<br>プロデュース！</h1></div>
  <div class="sp"></div>
@@ -411,13 +713,14 @@ function setup(){
  ui(`<div class="sp" style="max-height:20%"></div>
  <div class="panel" style="overflow:auto;max-height:78%">
  <h2>🎓 育成の じゅんび</h2>
+ <div class="memo" style="margin:4px 0">${SCEN[selSc].icon} <b>${SCEN[selSc].n}</b>（${SCEN[selSc].place}）　<button class="mini" style="flex:none;width:auto;padding:2px 10px;display:inline-block" data-k="setup">かえる</button></div>
  <p style="margin:0"><b>育成ターン数</b></p>
  <div class="row">${[[12,"短い(約5分)"],[24,"ふつう(約10分)"],[48,"長い(約20分)"]].map(([n,l])=>`<button class="mini" style="${selTurns===n?"background:var(--gold)":""}" data-k="turns" data-v="${n}">${n}<br><small>${l}</small></button>`).join("")}</div>
  <p style="margin:6px 0 0"><b>継承</b>（まえの 育成の 力を ひきつぐ）</p>
  <div class="wrap"><button class="mini" style="min-width:90px;${selLeg===-1?"background:var(--gold)":""}" data-k="leg" data-v="-1">なし</button>
  ${SV.legacy.map((l,i)=>`<button class="mini" style="min-width:110px;${selLeg===i?"background:var(--gold)":""}" data-k="leg" data-v="${i}">${l.name}<br><small>${"★".repeat(l.stars)} ${SN[l.main]}${l.skill?" +"+SKILLS.find(s=>s.id===l.skill).n:""}</small></button>`).join("")}</div>
  <p style="margin:6px 0 0"><b>サポートカード（最大5まい）</b> ${selDeck.length}/5</p>
- <div class="grid3">${owned.map(c=>`<div class="crd ${c.r} ${selDeck.includes(c.id)?"on":""}" data-k="deck" data-v="${c.id}"><div class="em">${c.e}</div><span class="rar">${c.r}</span> ${c.n}<br><small>${SN[c.t]} / 限界突破 ${lbOf(c.id)}</small></div>`).join("")}</div>
+ <div class="grid3">${owned.map(c=>`<div class="crd ${c.r} ${selDeck.includes(c.id)?"on":""}" data-k="deck" data-v="${c.id}"><div class="art">${cardArt(c)}</div><span class="rar">${c.r}</span> ${c.n}<br><small>${SN[c.t]} / 突破 ${lbOf(c.id)}${c.sc===selSc?" 🌟特攻":""}</small></div>`).join("")}</div>
  <button class="btn pk" data-k="start" ${selDeck.length?"":"disabled"}>この せっていで 立候補！</button><button class="btn sub" data-k="home">もどる</button></div>`);
 }
 
@@ -427,7 +730,7 @@ function turnInfo(){
  const idx=G.goals.indexOf(nextGoal);
  let gt;
  if(nextGoal===undefined)gt=`投票日（選挙レース）まで あと ${G.N-G.t+1}ターン`;
- else if(idx===1)gt=`第${nextGoal}ターン：公開討論会 まで あと ${nextGoal-G.t+1}ターン`;
+ else if(idx===1)gt=`第${nextGoal}ターン：${G.sc.debName} まで あと ${nextGoal-G.t+1}ターン`;
  else gt=`第${nextGoal}ターン：目標 平均 ${thr(idx===0?.25:.75)} まで あと ${nextGoal-G.t+1}ターン`;
  return gt;
 }
@@ -438,14 +741,14 @@ function train(sel){
  setBg(T?T.bg:0xcfeaff);
  const phase=G.t<=G.goals[0]?"準備期":G.t<=G.goals[2]?"活動期":"追い込み期";
  ui(`<div class="panel">
-  <div class="row" style="justify-content:space-between"><span class="pill">第${G.t}/${G.N}ターン ${phase}</span>${moodChip()}<span class="pill p">SP ${G.sp}</span></div>
+  <div class="row hdr" style="justify-content:space-between"><span class="pill">第${G.t}/${G.N}ターン ${phase}</span>${moodChip()}<span class="pill p">SP ${G.sp}</span></div>
   <div class="row" style="margin-top:5px"><span style="font-size:12px">元気</span><div class="bar" style="flex:1"><i style="width:${G.energy}%;background:${G.energy<30?"var(--red)":"var(--green)"}"></i></div><b style="font-size:12px;width:26px;text-align:right">${G.energy}</b></div>
   <div style="font-size:12px;margin-top:4px">🎯 ${turnInfo()}</div>
   <div id="stats">${SK.map(k=>`<div class="stc">${SN[k]}<b>${G.st[k]}</b><em>${pv&&pv.g[k]?"+"+pv.g[k]:""}</em></div>`).join("")}</div></div>
   <div class="sp"></div>
   ${T?`<div class="panel" id="pmsg" style="margin-bottom:8px;font-size:12.5px;text-align:center"><b>${T.e} ${T.n}</b> Lv${pv.L}　元気 ${T.en>0?"+":""}${T.en}　SP +${pv.sp}　${pv.fr.length?"🌟友情トレーニング！":""}<br>失敗率 <b style="color:${pv.fail?"var(--red)":"var(--green)"}">${pv.fail}%</b> ／ もういちど タップで けってい</div>`:`<div class="panel" id="pmsg" style="margin-bottom:8px;font-size:12.5px;text-align:center">練習を えらぼう（タップで 見る → もういちどで けってい）</div>`}
   <div id="tr" style="margin-top:8px">${TR.map(t=>{const p=preview(t.k);return `<button class="tb ${G.sel===t.k?"sel":""}" data-k="tr" data-v="${t.k}">
-   <div class="cards">${G.place[t.k].map(c=>`<span class="cd ${isFr(c,t.k)?"fr":""}">${c.e}</span>`).join("")}</div>
+   <div class="cards">${G.place[t.k].map(c=>`<span class="cd ${isFr(c,t.k)?"fr":""}">${cardThumb(c)}</span>`).join("")}</div>
    <span class="ic">${t.e}</span>${t.n}<small>Lv${p.L}</small><span class="fail ${p.fail?"":"ok"}">${p.fail}%</span></button>`}).join("")}</div>
   <div class="row" style="margin-top:12px"><button class="mini" data-k="rest">🛌 休む</button><button class="mini" data-k="out">🎈 おでかけ</button><button class="mini" data-k="skills">✨ スキル</button><button class="mini" data-k="sheetS">📊 じょうほう</button></div>`,true);
  // hero pose
@@ -469,7 +772,7 @@ function doTrain(k){
  }else{
   addSt(pv.g);G.energy+=T.en;G.sp+=pv.sp;G.tcount[k]++;
   G.place[k].forEach(c=>{addBond(c,7+(isFr(c,k)?3:0))});
-  if(pv.fr.length)G.friend++;
+  if(pv.fr.length)G.friend++;if(pv.fr.some(c=>c.vet)){G.sp+=10;toast("🏛️ ベテランの 助言！ SP+10")}
   const parts=Object.entries(pv.g).map(([s,v])=>`${SN[s]}+${v}`).join(" ");
   txt=`${pv.fr.length?"🌟友情トレーニング！ ":"✅ "}${T.n} せいこう！ ${parts}`;
   sfx.ok();
@@ -496,24 +799,91 @@ function doOut(){
  stage(`🎈 ${c?c.n+"と ":""}おでかけ！ 気分が 上がった！`);toast("🎈 気分 UP！");setTimeout(turnEvent,900);
 }
 /* ---- イベント ---- */
+/* ---- ものがたり ---- */
+const VET="大山 兼人";
+const vetCard=()=>CARDS.find(c=>c.vet);
+function storyBox(title,paras,card){
+ return `<h2>${title}</h2>${card?`<div class="fl">${cardArt(card)}</div>`:""}${paras.map(p=>p.startsWith("<div")?p:`<p>${p}</p>`).join("")}<div style="clear:both"></div>`;
+}
+function chapter(title,paras,then,card){G.then=then;sheet(storyBox(title,paras,card)+`<button class="btn" data-k="chapNext">つづける ▶</button>`)}
+const STORY={
+ prologue:()=>{const n=G.cand.n;return[
+  "【ひだまり町】 むかしは 笑い声で あふれていた この町。 いまは 商店街の シャッターが 目立ち、 若い人は 少しずつ 町を はなれていく…。",
+  `${n}「…このままじゃ いやだ。 わたしが この町を、 もういちど にぎやかに する！」`,
+  `${n}は 町長選挙への 立候補を 決意した。 そこへ、 ひとりの 老議員が 声を かけてきた。`,
+  `${VET}「ほう、 出る気か。 …ならば まず 町を 歩き、 人の 声を 聞け。 話は それからだ。」`,
+  `<div class="memo"><b>📝 ことばメモ</b><br>${TIPS.a}<br>${TIPS.b}</div>`,
+  `${n}の ${G.N}ターンに わたる 選挙戦が、 いま はじまる！`]},
+ ch1:()=>{const n=G.cand.n;return[
+  `街頭演説会は 大きな 拍手に つつまれた。 その 帰り道、 ${n}の 前に 現職の 星野 まもる 町長が あらわれた。`,
+  "星野「若い のが 出てきたと 聞いてね。 …まあ、 好きに やりなさい。 町は そんなに かんたんには 変わらんよ。」",
+  `その 目は ぜんぜん 笑っていなかった。 ${n}は こぶしを にぎりしめる。`,
+  `${VET}「相手が 手ごわい ほど、 町の 声が 力に なる。 しっかり やれ。」`]},
+ ch2:()=>{const n=G.cand.n;return[
+  "公開討論会の 日。 ステージの 向こうでは、 星野町長が 余裕の 笑みを うかべている。",
+  "司会「それでは 討論会を はじめます。 相手の 主張を よく 聞いて、 答えてください。」",
+  `${n}は ふかく 息を すい、 マイクの 前に 立った。`]},
+ ch3:()=>{const n=G.cand.n;return[
+  "町の ようすが、 少しずつ 変わってきた。 閉まっていた 商店街の シャッターが ひとつ、 またひとつ…あいていく。",
+  `通学路では 子どもたちが ${n}の ことを 話している。 『あの人の ポスター、 見た？』`,
+  `${VET}「…風が 変わったな。 だが 気を ぬくな。 最後まで 走りきれ。」`]},
+ eve:()=>{const n=G.cand.n;return[
+  `投票日の 前の 夜。 ${n}は 町が 見わたせる 丘に 立っていた。`,
+  `${VET}「選挙運動は きょうで おしまいだ。 やれる ことは すべて やった。 あとは 町の みんなを 信じろ。」`,
+  `${n}「…はい！」`,
+  "あしたは いよいよ 投票日。 開票が はじまる——。"]},
+ epi:(rank,over)=>{const n=G.cand.n;
+  if(over)return `立候補を あきらめた ${n}。 しかし ${VET}は 静かに 言った。「…一度の つまずきで 終わる 者では あるまい。 もう一度、 町を 歩いて みなさい。」`;
+  if(rank===1)return `夕方、 開票結果が 発表された。 ${n}の 名前が 呼ばれると、 会場に 大きな 拍手が わきおこった。 ${VET}「…見事だ。 この町を 頼んだぞ。」 ひだまり町の 新しい 物語が、 いま はじまる。`;
+  if(rank<=3)return `わずかに とどかなかった。 ${n}「くやしい…！」 ${VET}「負けを 知る 者は 強くなる。 次こそは…だろう？」 町の 人たちが かけ寄ってくる。『また 立ってね！』 ${n}の 挑戦は、 まだ つづく。`;
+  return `結果は きびしかった。 けれど 町を 歩いて 聞いた 声は、 ${n}の 中に のこっている。 ${VET}「選挙は 終わりじゃない。 町づくりは つづくぞ。」`;}
+};
+/* ---- カードの ものがたり ---- */
+function epSheet(c,n){
+ G.curCard=c;G.curEp=n;
+ sheet(`<h2>${c.e} ${c.n}の ものがたり ${"★".repeat(n+1)}${"☆".repeat(2-n)}</h2><div class="fl">${cardArt(c)}</div><p><b>${c.eps[n][0]}</b></p><p style="font-size:12px;opacity:.7">（${c.role}）</p><div style="clear:both"></div>`+
+  `<button class="opt" data-k="ep" data-v="0">じっくり 話を 聞く</button><button class="opt" data-k="ep" data-v="1">いっしょに やってみる（元気-10）</button>`);
+}
+function resolveEp(v){
+ const c=G.curCard,n=G.curEp;G.ep[c.id]=n+1;
+ if(+v===0){addBond(c,10);G.st[c.t]+=8+n*2}else{addBond(c,8);G.energy-=10;G.st[c.t]+=14+n*3;G.st.tru+=2}
+ let extra="";
+ if(n===2){
+  const sp=c.vet?40:25;G.sp+=sp;
+  const un=SKILLS.filter(s=>!G.skills.includes(s.id));
+  let hint="";if(un.length){const s=pick(un);G.hints[s.id]=Math.max(G.hints[s.id]||0,c.vet?.5:.3);hint=`🔖 スキル「${s.n}」の ヒント！ `}
+  extra=`<div class="memo"><b>📖 きずなの 物語 かんけつ！</b><br>${hint}SP +${sp}</div>`;
+ }
+ normS();sfx.ok();
+ sheet(`<h2>${c.e} ${c.n}</h2><p>${c.eps[n][1]}</p>${extra}<button class="btn" data-k="next">つぎへ</button>`);
+}
 function turnEvent(){
- // 教育イベント／サポートイベント
+ if(!G)return;
+ const present=G.deck.filter(c=>Object.values(G.place).some(a=>a.includes(c)));
+ const TH=[30,55,80];
+ for(const c of shuffle(present)){const n=G.ep[c.id]||0;if(n<3&&(G.bond[c.id]||0)>=TH[n]&&Math.random()<.85)return epSheet(c,n)}
  const r=Math.random();
  const used=Object.keys(G.evtUsed).length;
  if(r<.2&&used<G.evtOrder.length){
   const key=G.evtOrder[used];G.evtUsed[key]=true;
   const e=EVT[key];
-  return sheet(`<h2>📣 イベント</h2><div style="font-size:42px;text-align:center">${e.icon}</div><p><b>${e.q}</b></p>`+e.c.map((c,i)=>`<button class="opt" data-k="ev" data-v="${key}:${i}">${c.l}</button>`).join(""));
+  return sheet(`<h2>📣 ひだまり町 日記</h2><div style="font-size:42px;text-align:center">${e.icon}</div><p><b>${e.q}</b></p>`+e.c.map((c,i)=>`<button class="opt" data-k="ev" data-v="${key}:${i}">${c.l}</button>`).join(""));
  }
- if(r<.5&&G.deck.length){
-  const present=G.deck.filter(c=>Object.values(G.place).some(a=>a.includes(c)));
-  if(present.length){
-   const c=pick(present),se=pick([SEV.a,SEV.b]);
-   G.curCard=c;G.curSev=se;
-   return sheet(`<h2>${c.e} ${c.n}（${c.role}）</h2><p><b>${se.q(c.n)}</b></p><p style="font-size:12px">${c.line}</p>`+se.c.map((x,i)=>`<button class="opt" data-k="sev" data-v="${i}">${x.l}</button>`).join(""));
-  }
+ const vc=G.deck.find(c=>c.vet);
+ if(vc&&r>.9){
+  return sheet(`<h2>🏛️ ${VET}</h2><div class="fl">${cardArt(vc)}</div><p><b>${VET}「…ひとつ、 助言を やろう。 人の 話は 最後まで 聞け。 答えは 町の 中に ある。」</b></p><div style="clear:both"></div><button class="btn" data-k="vet">ありがとうございます！</button>`);
+ }
+ if(r<.5&&G.deck.length&&present.length){
+  const c=pick(present),se=pick([SEV.a,SEV.b]);
+  G.curCard=c;G.curSev=se;
+  return sheet(`<h2>${c.e} ${c.n}（${c.role}）</h2><p><b>${se.q(c.n)}</b></p><p style="font-size:12px">${c.line}</p>`+se.c.map((x,i)=>`<button class="opt" data-k="sev" data-v="${i}">${x.l}</button>`).join(""));
  }
  nextTurn();
+}
+function vetAdvice(){
+ G.sp+=15;const un=SKILLS.filter(s=>!G.skills.includes(s.id));let t="";
+ if(un.length){const s=pick(un);G.hints[s.id]=Math.max(G.hints[s.id]||0,.2);t=`スキル「${s.n}」の ヒントも もらった！`}
+ sfx.ok();sheet(`<h2>🏛️ ${VET}</h2><p>SP +15！ ${t}</p><button class="btn" data-k="next">つぎへ</button>`);
 }
 function resolveEvt(v){
  const[key,i]=v.split(":"),e=EVT[key],c=e.c[+i];
@@ -528,15 +898,18 @@ function resolveSev(i){
 }
 /* ---- ターン進行／目標 ---- */
 function nextTurn(){
+ if(!G)return;
  closeSheet();stage("");
  const done=G.t;
  const gi=G.goals.indexOf(done);
  G.t++;
- if(gi===0||gi===2)return goalCheck(gi);
- if(gi===1)return debate();
+ if(gi===0)return chapter(G.sc.ttl[0],"ch1",()=>goalCheck(0));
+ if(gi===1)return chapter(G.sc.ttl[1],"ch2",debate);
+ if(gi===2)return chapter(G.sc.ttl[2],"ch3",()=>goalCheck(2));
  afterGoal();
 }
 function afterGoal(){
+ if(!G)return;
  closeSheet();
  if(G.t>G.N)return finalPrep();
  G.energy+=(G.t%6===0?0:0);normS();
@@ -558,7 +931,7 @@ function goalCheck(gi){
 function debate(){
  const tip="選挙の 前には <b>公開討論会</b>などで 候補者の 考えを くらべられる。 相手の 主張を よく 聞いて 自分の 考えを 伝えよう。";
  if(!G.seen.includes(tip))G.seen.push(tip);
- G.deb={r:0,w:0,rv:pick(RIVALS)[0]};debRound();
+ G.deb={r:0,w:0,rv:G.sc.rivalN};debRound();
 }
 const ARG=[["数字","📊 データで 攻めてくる"],["体験談","🗣️ 体験談で 訴えてくる"],["理想","🌈 ビジョンを かたってくる"]];
 // 数字←体験談, 体験談←理想, 理想←数字
@@ -572,7 +945,7 @@ function debRound(){
 function debPick(i){
  const d=G.deb,good=COUNTER[d.type]===i;
  const stat=[G.st.pol,G.st.tru,G.st.voi][i===0?0:i===1?1:2]; // 参考
- const p=(good?.78:.28)+clamp((avg()/G.NORM-.5)*.2,-.1,.12);
+ const p=(good?.78:.28)+clamp((avg()/G.NORM-.5)*.2,-.1,.12)-(G.sc.mul-1)*.5;
  const win=Math.random()<p;if(win)d.w++;d.r++;
  sfx[win?"ok":"bad"]();
  toast(win?"✅ 論破！":"❌ 押し返された…");
@@ -604,10 +977,11 @@ function infoSheet(){
 
 /* ================= 本番前 ================= */
 function finalPrep(){
+ if(!G)return;
  mode="train";stage("");
  const tip=TIPS.g;if(!G.seen.includes(tip))G.seen.push(tip);
  const tip2="投票日の 当日は 選挙運動が できない。 だから 前日までの 積み重ねが 大切なんだ。";if(!G.seen.includes(tip2))G.seen.push(tip2);
- prep();
+ chapter(G.sc.ttl[3],"eve",prep);
 }
 function prep(){
  closeSheet();
@@ -632,27 +1006,27 @@ const SPG={body:new THREE.CylinderGeometry(.3,.36,1.1,10),head:new THREE.SphereG
 const SPM={};[0xe0442f,0x3f8cff,0xf2a516,0x2fae6e,0xd96aa0,0x8a5cf5,0xffffff,0x555a68,0xffdcc0,0xe8bd98,0xc99772].forEach(c=>SPM[c]=mat(c,{roughness:.8}));
 function buildRace(){
  while(raceG.children.length)raceG.remove(raceG.children[0]);crowdArr=[];
- const L=140;
+ const L=140,nRun=(G&&G.sc?G.sc.runners:6),zc=(nRun-1)*1.3,zf=(nRun-1)*2.6+2.6,W2=nRun*2.6+.4;
  const ground=new THREE.Mesh(new THREE.PlaneGeometry(L+240,110),mat(0xffffff,{map:grassTex(60,10)}));ground.rotation.x=-Math.PI/2;ground.position.set(L/2,-.02,6);ground.receiveShadow=true;raceG.add(ground);
- const track=new THREE.Mesh(new THREE.PlaneGeometry(L+30,16.6),mat(0xffffff,{map:trackTex(34,2),roughness:.95}));track.rotation.x=-Math.PI/2;track.position.set(L/2,.01,6.5);track.receiveShadow=true;raceG.add(track);
- for(let i=0;i<=6;i++){const ln=new THREE.Mesh(new THREE.PlaneGeometry(L+30,.1),new THREE.MeshBasicMaterial({color:0xffffff}));ln.rotation.x=-Math.PI/2;ln.position.set(L/2,.02,i*2.6-1.3);raceG.add(ln)}
+ const track=new THREE.Mesh(new THREE.PlaneGeometry(L+30,W2),mat(0xffffff,{map:trackTex(34,2),roughness:.95}));track.rotation.x=-Math.PI/2;track.position.set(L/2,.01,zc);track.receiveShadow=true;raceG.add(track);
+ for(let i=0;i<=nRun;i++){const ln=new THREE.Mesh(new THREE.PlaneGeometry(L+30,.1),new THREE.MeshBasicMaterial({color:0xffffff}));ln.rotation.x=-Math.PI/2;ln.position.set(L/2,.02,i*2.6-1.3);raceG.add(ln)}
  // スタート／ゴール
- const sl=new THREE.Mesh(new THREE.PlaneGeometry(.35,16),new THREE.MeshBasicMaterial({color:0xffe36b}));sl.rotation.x=-Math.PI/2;sl.position.set(0,.025,6.5);raceG.add(sl);
+ const sl=new THREE.Mesh(new THREE.PlaneGeometry(.35,W2-.4),new THREE.MeshBasicMaterial({color:0xffe36b}));sl.rotation.x=-Math.PI/2;sl.position.set(0,.025,zc);raceG.add(sl);
  const chk=canvasTex(64,64,(g)=>{for(let y=0;y<8;y++)for(let x=0;x<2;x++){g.fillStyle=(x+y)%2?"#111":"#fff";g.fillRect(x*32,y*8,32,8)}},1,1);
- const fl=new THREE.Mesh(new THREE.PlaneGeometry(.8,16),new THREE.MeshBasicMaterial({map:chk}));fl.rotation.x=-Math.PI/2;fl.position.set(L,.03,6.5);raceG.add(fl);
- [-2.6,15.6].forEach(z=>{const p=box(.5,8,.5,0xff6fa5);p.position.set(L,4,z);p.castShadow=true;raceG.add(p)});
- const beam=box(.6,1.4,19,0xff6fa5);beam.position.set(L,8.2,6.5);beam.castShadow=true;raceG.add(beam);
- const gl=label("🏁 開票所  ゴール",9,"rgba(224,68,47,.95)");gl.rotation.y=0;gl.position.set(L-.35,8.2,6.5);gl.rotation.y=-Math.PI/2;raceG.add(gl);
+ const fl=new THREE.Mesh(new THREE.PlaneGeometry(.8,W2-.4),new THREE.MeshBasicMaterial({map:chk}));fl.rotation.x=-Math.PI/2;fl.position.set(L,.03,zc);raceG.add(fl);
+ [-2.6,zf].forEach(z=>{const p=box(.5,8,.5,0xff6fa5);p.position.set(L,4,z);p.castShadow=true;raceG.add(p)});
+ const beam=box(.6,1.4,zf+3.2,0xff6fa5);beam.position.set(L,8.2,zc);beam.castShadow=true;raceG.add(beam);
+ const gl=label("🏁 開票所  ゴール",9,"rgba(224,68,47,.95)");gl.rotation.y=0;gl.position.set(L-.35,8.2,zc);gl.rotation.y=-Math.PI/2;raceG.add(gl);
  const sg=label("スタート",6,"rgba(59,179,107,.95)");sg.position.set(0,5.5,-2.6);raceG.add(sg);
- [-2.6,15.6].forEach(z=>{const p=box(.35,5.5,.35,0x3bb36b);p.position.set(0,2.75,z);raceG.add(p)});
+ [-2.6,zf].forEach(z=>{const p=box(.35,5.5,.35,0x3bb36b);p.position.set(0,2.75,z);raceG.add(p)});
  // さく
- [-2.4,15.4].forEach(z=>{const r=box(L+30,.12,.12,0xffffff);r.position.set(L/2,1,z);raceG.add(r);const r2=r.clone();r2.position.y=.55;raceG.add(r2);
+ [-2.4,zf-.2].forEach(z=>{const r=box(L+30,.12,.12,0xffffff);r.position.set(L/2,1,z);raceG.add(r);const r2=r.clone();r2.position.y=.55;raceG.add(r2);
   for(let x=-14;x<=L+14;x+=7){const p=box(.14,1.2,.14,0xdddddd);p.position.set(x,.6,z);raceG.add(p)}});
  // ふえ
  const cols=[0xe0442f,0x3f8cff,0xf2a516,0x2fae6e,0xd96aa0,0x8a5cf5];
  for(let x=7;x<L;x+=14){const p=box(.1,3.2,.1,0x666666);p.position.set(x,1.6,-2.4);p.castShadow=true;raceG.add(p);const f=box(1.6,.9,.04,pick(cols));f.position.set(x+.85,2.7,-2.4);raceG.add(f)}
  // きょりの かんばん
- ["序盤","中盤","終盤","スパート"].forEach((n,i)=>{const x=i===0?6:PH[i-1]*L;const s=label(n,4.2);s.position.set(x,3.4,15.4);s.rotation.y=Math.PI;raceG.add(s);const p=box(.12,3.2,.12,0x666666);p.position.set(x,1.6,15.4);raceG.add(p)});
+ ["序盤","中盤","終盤","スパート"].forEach((n,i)=>{const x=i===0?6:PH[i-1]*L;const s=label(n,4.2);s.position.set(x,3.4,zf-.2);s.rotation.y=Math.PI;raceG.add(s);const p=box(.12,3.2,.12,0x666666);p.position.set(x,1.6,zf-.2);raceG.add(p)});
  // かんらん席（だんだん）
  const skins=[0xffdcc0,0xe8bd98,0xc99772];
  for(let k=0;k<4;k++){
@@ -668,19 +1042,23 @@ function buildRace(){
  return L;
 }
 function makeRunners(){
- const L=buildRace();RC={L,t:0,state:"ready",finished:[],tapBoost:0,tapTimer:0,sparkAt:0,msgT:0,ranking:[]};
+ const L=buildRace();RC={L,zc:(G.sc.runners-1)*1.3,t:0,state:"ready",sp:1,finished:[],tapBoost:0,tapTimer:0,sparkAt:0,msgT:0,ranking:[]};
  const N=G.NORM,x=s=>clamp(G.st[s]/N,.25,2.2);
  const pl={name:G.cand.n,color:G.cand.col,hair:G.cand.hair,pl:true,
   x:{voi:x("voi"),sta:x("sta"),pow:x("pow"),tru:x("tru"),pol:x("pol")},strat:G.strat,skills:G.skills.slice()};
  if(G.strat===G.cand.strat)pl.apt=.015;
- const rv=shuffle(RIVALS).slice(0,5).map(([n,c],i)=>{
-  const base=rnd(.8,1.04)*(i===0?1.04:1);
+ const nRun=G.sc.runners;
+ const names=shuffle(RIVALPOOL.filter(r=>r[0]!==G.sc.rivalN&&r[0]!==G.sc.rival2&&(G.sc.id==="town"||r[0]!=="星野 まもる")));
+ const head=[[G.sc.rivalN,0xe0442f]];if(G.sc.rival2)head.push([G.sc.rival2,0x3f8cff]);
+ const rvl=head.concat(names).slice(0,nRun-1);
+ const rv=rvl.map(([n,c],i)=>{
+  const base=rnd(.8,1.04)*(G.sc.rmul[i]||.95);
   const r=()=>clamp(base*rnd(.85,1.15),.3,2);
   const st=pick(Object.keys(STRAT));
   return{name:n,color:c,hair:pick([0x2a2a2a,0x6b4a2a,0xb08040,0x888888]),x:{voi:r(),sta:r(),pow:r(),tru:r(),pol:r()},strat:st,skills:shuffle(SKILLS.filter(s=>s.ph!==-1)).slice(0,1+Math.floor(Math.random()*2)).map(s=>s.id)};
  });
  runners=[pl,...rv];
- const lanes=shuffle([0,1,2,3,4,5]);
+ const lanes=shuffle(Array.from({length:nRun},(_,i)=>i));
  runners.forEach((r,i)=>{
   r.lane=lanes[i];r.pos=0;r.hp=100*clamp(.55+.45*r.x.sta,.4,1.5);r.hp0=r.hp;r.noise=[0,0,0,0];r.phase=-1;r.act=[];r.fin=null;r.sdone={};r.deb=0;
   r.m=makeHero(r.color,r.hair,r.pl?G.cand.style:Math.floor(Math.random()*3));r.m.scale.setScalar(.8);r.m.rotation.y=Math.PI/2;r.m.position.set(0,0,r.lane*2.6);raceG.add(r.m);
@@ -692,9 +1070,9 @@ function startRace(){
  closeSheet();mode="race";setBg(0xa8dcff);$("cmt").innerHTML="";
  if(hero)hero.parent&&hero.parent.remove(hero);
  makeRunners();
- RC.state="count";RC.cd=3.2;cam.position.set(2003,13,21);
+ RC.state="count";RC.cd=3.2;cam.position.set(2003,13,21+(G.sc.runners-6)*3);
  const p=runners[0];RC.cam=new THREE.Vector3();
- ui(`<div class="sp"></div><div id="rk"></div><div style="height:8px"></div><button id="tap" data-k="tap">応援 れんだ！！</button>`,true);
+ ui(`<div class="sp"></div><div class="row" id="spd" style="margin-bottom:6px;justify-content:flex-end"><button class="mini" data-k="spd" data-v="1" style="flex:none;width:62px;background:var(--gold)">▶ x1</button><button class="mini" data-k="spd" data-v="2" style="flex:none;width:62px">⏩ x2</button><button class="mini" data-k="spd" data-v="4" style="flex:none;width:62px">⏩ x4</button><button class="mini" data-k="skip" style="flex:none;width:104px">⏭ スキップ</button></div><div id="rk"></div><div style="height:8px"></div><button id="tap" data-k="tap">応援 れんだ！！</button>`,true);
  $("tap").style.visibility="hidden";
  cmt("🏁 まもなく 開票レース スタート！");
 }
@@ -770,9 +1148,9 @@ function updateRace(dt){
  }
  // かめら
  const tgt=p0.m.position;
- const cx=2000+tgt.x+3,cy=13,cz=21;
+ const cx=2000+tgt.x+3,cy=13,cz=21+(runners.length-6)*3;
  if(Math.abs(cx-cam.position.x)>15)cam.position.x=cx;cam.position.x+=(cx-cam.position.x)*Math.min(1,dt*5);cam.position.y=cy;cam.position.z=cz;
- cam.lookAt(cam.position.x,0,5);
+ cam.lookAt(cam.position.x,0,RC.zc-1.5);
  RC.mk.position.set(p0.m.position.x,4.6+Math.sin(performance.now()/200)*.2,p0.m.position.z);RC.mk.rotation.y+=dt*3;
  // ランキング
  if(!RC.acc)RC.acc=0;RC.acc+=dt;
@@ -781,6 +1159,8 @@ function updateRace(dt){
   $("rk").innerHTML=rk.map((r,i)=>`<div class="rk"><b style="width:18px">${i+1}</b><span style="width:70px;${r.pl?"color:#ffe36b":""}">${r.name}</span><div class="bar"><i style="width:${Math.min(100,r.pos*100)}%;${r.pl?"background:var(--gold)":""}"></i></div><span style="width:62px;text-align:right">${Math.round(Math.min(1,r.pos)*(r.pl?1:1)*(8000+Math.round(r.x.pol*1000)))}票</span></div>`).join("");
  }
 }
+function setSpd(v){if(!RC)return;RC.sp=v;document.querySelectorAll("#spd [data-v]").forEach(b=>b.style.background=+b.dataset.v===v?"var(--gold)":"#fff")}
+function skipRace(){if(!RC||mode!=="race")return;let n=0;while(mode==="race"&&RC.state!=="done"&&n++<9000)updateRace(.05)}
 function tapRace(){
  if(!RC||RC.state!=="run")return;
  if(runners[0].pos<.76)return;
@@ -790,7 +1170,7 @@ function raceEnd(){
  const order=RC.finished.slice();
  runners.forEach(r=>{if(!order.includes(r))order.push(r)});
  const rank=order.indexOf(runners[0])+1;
- const W=[34,23,17,12,8,6],T=30000;
+ const W=G.sc.W,T=30000;
  const votes=order.map((r,i)=>Math.round(T*W[i]/100*rnd(.97,1.03)));
  raceResult(rank,order,votes);
 }
@@ -804,26 +1184,26 @@ function evalStats(){
 }
 function raceResult(rank,order,votes,over){
  const e=evalStats();
- const gem=over?40:[400,250,150,100,80,60][rank-1];
+ const gem=over?40:(G.sc.reward[rank-1]||40);
  SV.gems+=gem;
  const mainK=SK.slice().sort((a,b)=>G.st[b]-G.st[a])[0];
- const stars=over?1:rank===1?3:rank<=3?2:1;
+ const stars=over?1:rank<=G.sc.seats?3:rank<=G.sc.seats+2?2:1;
  const skill=G.skills.length?pick(G.skills):null;
- const entry={cand:G.cand.n,rank:over?0:rank,eval:e.pts,grade:e.grade,turns:G.N,date:todayS()};
+ const entry={sc:G.sc.short,cand:G.cand.n,rank:over?0:rank,eval:e.pts,grade:e.grade,turns:G.N,date:todayS()};
  SV.hist.unshift(entry);SV.hist=SV.hist.slice(0,10);
  SV.legacy.unshift({name:G.cand.n,main:mainK,stars,skill});SV.legacy=SV.legacy.slice(0,5);
  save();
- sfx[rank===1&&!over?"win":"bad"]();
+ sfx[rank<=G.sc.seats&&!over?"win":"bad"]();
  mode="done";
  $("cmt").innerHTML="";
- const win=!over&&rank===1;
+ const win=!over&&rank<=G.sc.seats;
  if(!over){setBg(win?0xfff2b0:0xcfd8e8)}
  ui(`<div class="sp"></div>`,true);
- sheet(over?`<h2>🏁 育成 しゅうりょう</h2><div class="big">😢</div><p style="text-align:center">立候補に 届かなかった…。 でも 経験は むだじゃない！</p>
-  <p style="text-align:center">評価 <b>${e.grade}</b>（${e.pts}てん）　ジェム +${gem}</p>`:
-  `<h2>📺 開票結果</h2><div class="big">${win?"🎊 当選！！":rank<=3?"😢 おしくも 落選":"🌧️ 落選…"}</div>
-  ${order.map((r,i)=>`<div class="row" style="font-size:13px;margin:2px 0;${r.pl?"background:#fff3b0;border-radius:8px;padding:2px 4px":""}"><b style="width:22px">${i+1}</b><span style="flex:1">${r.name}</span><span>${votes[i].toLocaleString()}票</span></div>`).join("")}
-  <p style="text-align:center;margin-top:8px">育成 評価 <b style="font-size:22px">${e.grade}</b>（${e.pts}てん）　ジェム +${gem}${G.refused?"　🕊️ クリーン選挙！":""}</p>`
+ sheet(`<div class="memo" style="background:#fff7e0;border-color:#e0a030"><b style="color:#a06000">📖 エピローグ</b><br>${epiText(rank,over)}</div>`+(over?`<h2>🏁 育成 しゅうりょう</h2><div class="big">😢</div><p style="text-align:center">立候補に 届かなかった…。 でも 経験は むだじゃない！</p>
+  <p style="text-align:center">評価 <b>${e.grade}</b>（${e.pts}てん）　ジェム +${gem}</p><button class="btn pk" data-k="home">ホームへ</button>`:
+  `<h2>📺 開票結果</h2><div class="big">${win?"🎊 当選！！":rank<=G.sc.seats+2?"😢 おしくも 落選":"🌧️ 落選…"}</div>
+  ${order.map((r,i)=>(i===G.sc.seats&&G.sc.seats>1?`<div style="border-top:3px dashed var(--red);font-size:11px;color:var(--red);text-align:center;margin:3px 0">━ 当選ライン（定数${G.sc.seats}）━</div>`:"")+`<div class="row" style="font-size:13px;margin:2px 0;${r.pl?"background:#fff3b0;border-radius:8px;padding:2px 4px":""}"><b style="width:22px">${i+1}</b><span style="flex:1">${r.name}</span><span>${votes[i].toLocaleString()}票</span></div>`).join("")}
+  <p style="text-align:center;margin-top:8px">育成 評価 <b style="font-size:22px">${e.grade}</b>（${e.pts}てん）　ジェム +${gem}${G.refused?"　🕊️ クリーン選挙！":""}</p>`)
   +`<div class="memo"><b>📝 今回 まなんだこと</b><ul class="tips">${G.seen.map(t=>`<li>${t}</li>`).join("")}<li><b>開票</b>：票を 数えて いちばん 多い 人が 当選。 たった 1票でも 結果が かわることが あるよ。</li></ul></div>
   <p style="font-size:12px">継承：次の 育成で ${"★".repeat(stars)} の 力を ひきつげるよ（${SN[mainK]}${skill?" ／ スキル「"+SKILLS.find(s=>s.id===skill).n+"」":""}）</p>
   <button class="btn pk" data-k="home">ホームへ</button>`);
@@ -839,50 +1219,129 @@ function gacha(){
  mode="home";
  ui(`<div style="text-align:center;margin-top:6px"><h1>🎰 サポートカード<br>ガチャ</h1></div><div class="sp"></div>
  <div class="panel"><div class="row" style="justify-content:space-between"><span class="pill">💎 ${SV.gems}</span><span class="pill g">${SV.pulls}回 ひいた</span></div>
- <p style="margin:6px 0 0;font-size:12.5px">排出：SSR 3% ／ SR 18% ／ R 79%（10れんは SR いじょう 1まい かくてい）<br>おなじ カードが でると <b>限界突破</b>（効果アップ・最大4）！</p></div>
+ <p style="margin:6px 0 0;font-size:12.5px">排出：SSR 3% ／ SR 18% ／ R 79%（10れんは SR いじょう 1まい かくてい）<br>おなじ カードが でると <b>限界突破</b>（効果アップ・最大4）！<br>SSRには <b>ベテラン議員 大山</b> も いるよ…！</p></div>
  <button class="btn" data-k="p1" ${SV.gems<150?"disabled":""}>1回 ひく（💎150）</button>
  <button class="btn pk" data-k="p10" ${SV.gems<1500?"disabled":""}>10れん（💎1500）</button>
  <button class="btn sub" data-k="home">もどる</button>`);
 }
+let lastPull=null;
 function doPulls(n){
  const cost=n===1?150:1500;if(SV.gems<cost)return;
- SV.gems-=cost;const res=[];
- for(let i=0;i<n;i++){let c=pull();if(n===10&&i===9&&!res.some(x=>x.r!=="R"))c=pick(CARDS.filter(q=>q.r==="SR"));
+ SV.gems-=cost;const res=[],flags=[];
+ for(let i=0;i<n;i++){
+  let c=pull();
+  if(n===10&&i===9&&!res.some(x=>x.r!=="R"))c=pick(CARDS.filter(q=>q.r==="SR"));
+  const before=SV.cards[c.id];
   res.push(c);SV.pulls++;
-  if(SV.cards[c.id]==null)SV.cards[c.id]=0;else SV.cards[c.id]=Math.min(4,SV.cards[c.id]+1)}
- save();sfx.gacha();
- const best=res.some(c=>c.r==="SSR");
- if(best)setTimeout(sfx.win,500);
- sheet(`<h2>${best?"🌈 SSR 登場！！":"🎰 けっか"}</h2><div class="grid3">${res.map(c=>`<div class="crd ${c.r}"><div class="em">${c.e}</div><span class="rar">${c.r}</span> ${c.n}<br><small>${c.role}</small><br><small>${SN[c.t]} ／ 突破 ${lbOf(c.id)}</small></div>`).join("")}</div>
+  if(before==null)SV.cards[c.id]=0;else SV.cards[c.id]=Math.min(4,before+1);
+  flags.push({isNew:before==null,lb:SV.cards[c.id],dupMax:before!=null&&before>=4});
+ }
+ save();closeSheet();
+ lastPull=res;
+ playGacha(res,flags);
+}
+function gachaSummary(){
+ const res=lastPull||[];const best=res.some(c=>c.r==="SSR");
+ sheet(`<h2>${best?"🌈 SSR 登場！！":"🎰 けっか"}</h2><div class="grid3">${res.map(c=>`<div class="crd ${c.r}"><div class="art">${cardArt(c)}</div><span class="rar">${c.r}</span> ${c.n}<br><small>${SN[c.t]} ／ 突破 ${lbOf(c.id)}</small></div>`).join("")}</div>
  <button class="btn" data-k="gacha">もどる</button>`);
+}
+/* ---- ガチャ えんしゅつ ---- */
+let GC=null;
+const GCOL={R:"#7fb6ff",SR:"#ffcf3a",SSR:"#ff6fe0"};
+function playGacha(res,flags){
+ const ov=document.createElement("div");ov.id="gc";ov.setAttribute("data-k","gtap");
+ ov.innerHTML=`<canvas id="gcv"></canvas><div id="grays" class="rays hide"></div><div id="gst"></div><div id="gflash"></div><button class="gskip" data-k="gskip">スキップ ⏭</button><div id="gcnt"></div>`;
+ document.body.appendChild(ov);
+ const cvs=$("gcv");cvs.width=innerWidth;cvs.height=innerHeight;
+ GC={res,flags,i:-1,ph:"idle",ov,parts:[],tm:[],raf:0,ctx:cvs.getContext("2d"),last:performance.now(),confetti:false};
+ gcLoop();gcNext();
+}
+function gcT(f,ms){if(GC)GC.tm.push(setTimeout(f,ms))}
+function setOrb(c){const o=$("orb");if(o)o.style.setProperty("--oc",c)}
+function gcNext(){
+ if(!GC)return;
+ GC.i++;GC.confetti=false;
+ if(GC.i>=GC.res.length)return gcEnd(true);
+ const c=GC.res[GC.i],r=c.r;
+ GC.ph="orb";$("grays").classList.add("hide");$("gcnt").textContent=GC.res.length>1?`${GC.i+1} / ${GC.res.length}`:"";
+ $("gst").innerHTML=`<div class="orbwrap"><div class="orb" id="orb" style="--oc:#8fc4ff"></div><div class="orbtxt">…</div></div>`;
+ const d=r==="SSR"?3200:r==="SR"?2000:1300;
+ if(r!=="R")gcT(()=>setOrb("#ffcf3a"),d*.4);
+ if(r==="SSR")gcT(()=>{setOrb("#ff6fe0");$("gc")&&$("gc").classList.add("shake");$("orb")&&$("orb").classList.add("rb")},d*.7);
+ const steps=r==="SSR"?9:r==="SR"?5:3;
+ for(let k=0;k<steps;k++)gcT(()=>beep(300+k*(r==="SSR"?130:80),.13,"triangle",.07),k*d/steps);
+ gcT(()=>gcBurst(c),d);
+}
+function gcBurst(c){
+ if(!GC)return;const r=c.r;GC.ph="burst";
+ const g=$("gc");if(g)g.classList.remove("shake");
+ const f=$("gflash");if(f){f.classList.remove("go");void f.offsetWidth;f.classList.add("go")}
+ partsBurst(GCOL[r],r==="SSR"?200:r==="SR"?110:55);
+ if(r==="SSR"){sfx.win();setTimeout(sfx.gacha,350)}else if(r==="SR")sfx.ok();else beep(720,.14);
+ gcT(()=>gcReveal(c),r==="SSR"?750:480);
+}
+function gcReveal(c){
+ if(!GC)return;GC.ph="card";const fl=GC.flags[GC.i];
+ const ry=$("grays");ry.classList.remove("hide");ry.style.opacity=c.r==="R"?.22:c.r==="SR"?.55:.95;
+ const stars={SSR:"★★★",SR:"★★",R:"★"}[c.r];
+ $("gst").innerHTML=`<div class="gcardwrap ${c.r}"><div class="gcard ${c.r}">${cardArt(c)}</div></div>
+  <div class="gname">${c.r==="SSR"?"✨ ":""}${c.n}${c.r==="SSR"?" ✨":""}</div>
+  <div class="grole">${c.role}　<span style="color:${GCOL[c.r]}">${stars}</span></div>
+  <div class="gbadge">${fl.isNew?"🆕 NEW！":fl.dupMax?"限界突破 MAX":"🔼 限界突破 "+fl.lb+"/4"}</div>
+  ${c.sc?`<div class="gbadge" style="background:#3f8cff">${SCEN[c.sc].n} 特攻！</div>`:""}${c.vet?`<div class="gbadge" style="background:#8a5cf5">🏛️ ベテラン議員！ 友情で SP ボーナス</div>`:""}
+  <div class="ghint">タップで つぎへ</div>`;
+ GC.confetti=c.r==="SSR";if(c.r==="SR")partsBurst("#ffe27a",50);
+}
+function partsBurst(col,n){
+ const W=innerWidth,H=innerHeight;
+ for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,sp=rnd(180,720);
+  GC.parts.push({x:W/2,y:H*.42,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:rnd(.7,1.4),c:Math.random()<.35?"#fff":col,s:rnd(3,8),g:420,rect:false})}
+}
+function gcLoop(){
+ if(!GC)return;
+ const now=performance.now(),dt=Math.min(.05,(now-GC.last)/1000);GC.last=now;
+ const ctx=GC.ctx,W=ctx.canvas.width,H=ctx.canvas.height;ctx.clearRect(0,0,W,H);
+ if(GC.confetti)for(let k=0;k<3;k++)GC.parts.push({x:rnd(0,W),y:-10,vx:rnd(-40,40),vy:rnd(120,300),life:rnd(2,3.5),c:pick(["#ff6fa5","#ffcf3a","#3f8cff","#3bb36b","#fff","#c8a0ff"]),s:rnd(5,10),g:30,rect:true,rot:rnd(0,6)});
+ GC.parts=GC.parts.filter(p=>{p.life-=dt;if(p.life<=0)return false;p.vy+=p.g*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;
+  ctx.globalAlpha=Math.min(1,p.life*1.5);ctx.fillStyle=p.c;
+  if(p.rect){p.rot+=dt*6;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillRect(-p.s/2,-p.s/3,p.s,p.s*.6);ctx.restore()}
+  else{ctx.beginPath();ctx.arc(p.x,p.y,p.s,0,6.283);ctx.fill()}
+  return true});
+ ctx.globalAlpha=1;GC.raf=requestAnimationFrame(gcLoop);
+}
+function gcEnd(show){
+ if(!GC)return;
+ GC.tm.forEach(clearTimeout);cancelAnimationFrame(GC.raf);GC.ov.remove();GC=null;
+ if(show)gachaSummary();
 }
 function cards(){
  mode="home";
  ui(`<div class="panel" style="margin-top:6px;overflow:auto;max-height:92%"><h2>🃏 サポートカード</h2>
  <p style="font-size:12.5px;margin:0">${Object.keys(SV.cards).length}/${CARDS.length}まい もっているよ（ガチャで ふやそう）</p>
- <div class="grid3">${CARDS.map(c=>{const own=SV.cards[c.id]!=null,b=cbonus(c);return `<div class="crd ${c.r} ${own?"":"lock"}"><div class="em">${own?c.e:"❓"}</div><span class="rar">${c.r}</span> ${own?c.n:"???"}<br><small>${own?c.role+"<br>"+SN[c.t]+" 練習 +"+b.tr+"% ／ 友情 +"+b.fr+"%<br>突破 "+lbOf(c.id)+"/4":"みつけて ないよ"}</small></div>`}).join("")}</div>
+ <div class="grid3">${CARDS.map(c=>{const own=SV.cards[c.id]!=null,b=cbonus(c);return `<div class="crd ${c.r} ${own?"":"lock"}"><div class="art">${own?cardArt(c):"<div class='lockart'>❓</div>"}</div><span class="rar">${c.r}</span> ${own?c.n:"???"}${own&&c.sc?` <span class="rar" style="background:var(--pink)">${SCEN[c.sc].short}</span>`:""}<br><small>${own?c.role+"<br>"+SN[c.t]+" 練習 +"+b.tr+"% ／ 友情 +"+b.fr+"%<br>突破 "+lbOf(c.id)+"/4":"みつけて ないよ"}</small></div>`}).join("")}</div>
  <button class="btn sub" data-k="home">もどる</button></div>`);
 }
 function hist(){
  mode="home";
- ui(`<div class="panel" style="margin-top:6px"><h2>📜 きろく</h2>${SV.hist.length?SV.hist.map(h=>`<div class="row" style="font-size:13px;margin:3px 0"><span class="pill">${h.date}</span><span style="flex:1">${h.cand}（${h.turns}T）</span><b>${h.rank?h.rank+"位":"未出馬"}</b><span class="pill g">評価 ${h.grade}</span></div>`).join(""):"<p>まだ きろくが ないよ</p>"}
+ ui(`<div class="panel" style="margin-top:6px"><h2>📜 きろく</h2>${SV.hist.length?SV.hist.map(h=>`<div class="row" style="font-size:13px;margin:3px 0"><span class="pill">${h.date}</span><span style="flex:1">${h.sc||"町長選"}・${h.cand}（${h.turns}T）</span><b>${h.rank?h.rank+"位":"未出馬"}</b><span class="pill g">評価 ${h.grade}</span></div>`).join(""):"<p>まだ きろくが ないよ</p>"}
  <button class="btn sub" data-k="home">もどる</button></div>`);
 }
 
 /* ================= イベント処理 ================= */
 const H={
  cand:v=>{selCand=+v;home()},
- setup:()=>{selDeck=null;setup()},
+ setup:()=>scenarioSelect(),pickSc:v=>{selSc=v;selDeck=null;setup()},
  turns:v=>{selTurns=+v;setup()},
  leg:v=>{selLeg=+v;setup()},
  deck:v=>{const i=selDeck.indexOf(v);if(i>=0)selDeck.splice(i,1);else if(selDeck.length<5)selDeck.push(v);setup()},
  start:()=>{
-  const cand=CAND[selCand];newGame(cand,selTurns,selLeg>=0?SV.legacy[selLeg]:null,selDeck.slice());
+  const cand=CAND[selCand];newGame(cand,selTurns,selLeg>=0?SV.legacy[selLeg]:null,selDeck.slice(),selSc);
   SV.deck=selDeck.slice();save();
   mode="train";hero.parent&&homeG.add(hero);
   assign();
-  sheet(`<h2>📅 告示日！</h2><div class="big">${cand.n}</div><p style="text-align:center">${selTurns}ターンの 選挙戦が はじまる！<br>練習で 力を つけ、 目標を クリアして、 投票日の 選挙レースに 勝とう！</p><div class="memo"><b>📝 ことばメモ</b><br>${TIPS.a}<br>${TIPS.b}</div><button class="btn" data-k="go">がんばる！</button>`);
-  G.seen.push(TIPS.a,TIPS.b);
+  G.seen.push(...G.sc.tips.map(k=>TIPS[k]));setMenuBtn(true);
+  chapter(G.sc.ttl[4],"prologue",()=>{closeSheet();train(null);stage(`${G.cand.n}「よろしくお願いします！」`)},scMemo());
+  
  },
  go:()=>{closeSheet();train(null);stage(`${G.cand.n}「よろしくお願いします！」`)},
  tr:v=>pickTrain(v),
@@ -899,7 +1358,7 @@ const H={
  strat:v=>{G.strat=v;prep()},
  race:()=>startRace(),
  tap:()=>tapRace(),
- home:()=>{closeSheet();home()},toHome:()=>{sfx.ok();home()},howto:()=>howto(),
+ home:()=>{closeSheet();home()},menu:()=>{$("mn").classList.contains("hide")?openMenu():closeMenu()},menuClose:()=>closeMenu(),menuSound:()=>{soundOn=!soundOn;openMenu()},menuQuit:()=>menuQuitAsk(),menuQuitGo:()=>quitRun(),sctap:()=>scTap(),scskip:()=>scSkip(),ep:v=>resolveEp(v),vet:()=>vetAdvice(),chapNext:()=>{const f=G.then;G.then=null;f&&f()},spd:v=>setSpd(+v),skip:()=>skipRace(),gtap:()=>{if(GC&&GC.ph==="card")gcNext()},gskip:()=>gcEnd(true),toHome:()=>{sfx.ok();home()},howto:()=>howto(),
  gacha:()=>{closeSheet();gacha()},p1:()=>doPulls(1),p10:()=>doPulls(10),
  cards:()=>cards(),hist:()=>hist()
 };
@@ -914,7 +1373,7 @@ const clock=new THREE.Clock();
 function frame(){
  const dt=Math.min(clock.getDelta(),.05),t=performance.now()/1000;
  let fx=0,fz=0;
- if(mode==="race"&&RC){updateRace(dt);fx=2000+runners[0].m.position.x;fz=6;
+ if(mode==="race"&&RC){if(!paused)for(let k=0;k<(RC.sp||1)&&mode==="race"&&RC.state!=="done";k++)updateRace(dt);fx=2000+runners[0].m.position.x;fz=6;
   crowdArr.forEach(c=>{const run=RC.state==="run";c.ph+=dt*(run?7:3);const j=Math.max(0,Math.sin(c.ph));c.g.position.y=c.y+(run?j*.12:0);c.a1.rotation.z=run?.4+j*1.8:.1;c.a2.rotation.z=run?-.4-j*1.8:-.1})}
  else if(mode==="title"){
   cam.position.set(Math.sin(t*.25)*2.4,3.0,10.8);cam.lookAt(0,2.1,0);
@@ -930,6 +1389,557 @@ function frame(){
  sun.position.set(fx+10,25,fz+14);sun.target.position.set(fx,0,fz);sun.target.updateMatrixWorld();
  renderer.render(scene,cam);requestAnimationFrame(frame);
 }
+/* ================= モーション シーン エンジン ================= */
+function chibi(col,hair,style){
+ const ink="#2b2140",su="#25325c",sk="#ffdcc0";
+ let hb="";
+ if(style===0)hb=`<ellipse cx="84" cy="56" rx="9" ry="21" fill="${hair}" transform="rotate(-20 84 56)"/>`;
+ if(style===1)hb=`<path d="M18 48 Q18 12 50 10 Q82 12 82 48 L85 68 Q50 78 15 68Z" fill="${hair}"/>`;
+ if(style===2)hb=`<ellipse cx="13" cy="64" rx="9" ry="20" fill="${hair}"/><ellipse cx="87" cy="64" rx="9" ry="20" fill="${hair}"/>`;
+ const arm=(x,c)=>`<g class="ch-arm${c}"><rect x="${x}" y="74" width="11" height="34" rx="5.5" fill="${su}" stroke="${ink}" stroke-width="2"/><circle cx="${x+5.5}" cy="110" r="6" fill="${sk}" stroke="${ink}" stroke-width="2"/></g>`;
+ const leg=(x,c)=>`<g class="ch-leg${c}"><rect x="${x}" y="106" width="12" height="32" rx="5" fill="${su}" stroke="${ink}" stroke-width="2"/><rect x="${x-3}" y="134" width="18" height="9" rx="4" fill="#1a1a22"/></g>`;
+ return `<svg viewBox="0 0 100 150" class="chibi" xmlns="http://www.w3.org/2000/svg">${hb}${leg(36,"L")}${leg(52,"R")}
+ <rect x="29" y="72" width="42" height="42" rx="13" fill="${su}" stroke="${ink}" stroke-width="2"/><path d="M31 78 L66 110" stroke="${col}" stroke-width="7" stroke-linecap="round"/><path d="M44 72 L50 86 L56 72Z" fill="#fff"/>
+ ${arm(18,"L")}${arm(71,"R")}
+ <circle cx="50" cy="44" r="29" fill="${sk}" stroke="${ink}" stroke-width="2.5"/>
+ <path d="M19 44 Q17 12 50 10 Q83 12 81 44 Q70 26 50 26 Q30 26 19 44Z" fill="${hair}"/>
+ <ellipse cx="40" cy="48" rx="3.4" ry="5" fill="${ink}"/><ellipse cx="60" cy="48" rx="3.4" ry="5" fill="${ink}"/><circle cx="41.2" cy="46" r="1.2" fill="#fff"/><circle cx="61.2" cy="46" r="1.2" fill="#fff"/>
+ <path d="M42 59 Q50 66 58 59" stroke="#b04050" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="32" cy="56" r="4" fill="#ff8aa8" opacity=".4"/><circle cx="68" cy="56" r="4" fill="#ff8aa8" opacity=".4"/></svg>`;
+}
+function bgSVG(id){
+ const sk=(a,b)=>`<defs><linearGradient id="sk${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="400" height="230" fill="url(#sk${id})"/>`;
+ const gnd=(y,c)=>`<rect y="${y}" width="400" height="${230-y}" fill="${c}"/>`;
+ const house=(x,w,h,wall,roof)=>`<rect x="${x}" y="${190-h}" width="${w}" height="${h}" fill="${wall}"/><polygon points="${x-4},${190-h} ${x+w/2},${190-h-26} ${x+w+4},${190-h}" fill="${roof}"/><rect x="${x+w/2-7}" y="${190-24}" width="14" height="24" fill="#8a5a3a"/>`;
+ const tree=(x,y)=>`<rect x="${x-3}" y="${y}" width="6" height="22" fill="#7a5230"/><circle cx="${x}" cy="${y-6}" r="17" fill="#3f9d52"/>`;
+ let s=`<svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">`;
+ switch(id){
+ case"townsad":s+=sk("#b9c3cf","#dfe3e8")+gnd(190,"#9aa3a0");for(let i=0;i<6;i++)s+=house(10+i*66,52,40+(i%3)*14,"#c9ccd0","#8a8f98")+`<rect x="${10+i*66+8}" y="${190-24}" width="36" height="24" fill="#7a808a"/>`;s+=`<text x="200" y="40" font-size="14" text-anchor="middle" fill="#6a7078">…しーん…</text>`;break;
+ case"town":s+=sk("#8fd0ff","#e8f6ff")+`<circle cx="330" cy="46" r="22" fill="#ffe27a"/>`+gnd(190,"#9ad27a")+house(10,56,50,"#fff4e0","#e0603a")+house(86,52,66,"#ffe8d0","#3f8cff")+house(158,60,46,"#e8f4e0","#e0442f")+house(236,54,62,"#fff0f0","#3bb36b")+house(310,60,52,"#f4ecff","#8a5cf5")+tree(380,168)+tree(70,170)+`<rect y="188" width="400" height="6" fill="#c8b890"/>`;break;
+ case"street":s+=sk("#9fd8ff","#fff4dd")+gnd(188,"#d9c8a0");for(let i=0;i<5;i++){const x=i*80;s+=`<rect x="${x+4}" y="70" width="72" height="118" fill="${["#ffe8d0","#e8f4ff","#fff0e0","#f4e8ff","#e8ffe8"][i]}"/><path d="M${x} 78 h80 l-6 24 h-68z" fill="${["#e0442f","#3f8cff","#f2a516","#3bb36b","#d96aa0"][i]}"/><rect x="${x+14}" y="112" width="52" height="40" fill="#fff" stroke="#8a6a3a" stroke-width="3"/><text x="${x+40}" y="140" font-size="22" text-anchor="middle">${["🍞","👕","🍱","💐","🧁"][i]}</text>`}break;
+ case"stage":s+=sk("#2a1a5a","#6a3a8a")+gnd(170,"#8a4a6a")+`<polygon points="120,0 60,200 180,200" fill="#fff" opacity=".18"/><polygon points="280,0 220,200 340,200" fill="#fff" opacity=".18"/><rect x="60" y="40" width="280" height="90" rx="8" fill="#e0442f" opacity=".85"/>`;break;
+ case"hall":s+=sk("#6a4a3a","#a07858")+gnd(176,"#b88a5a")+`<rect x="0" y="0" width="60" height="176" fill="#a02a3a"/><rect x="340" y="0" width="60" height="176" fill="#a02a3a"/><rect x="90" y="150" width="70" height="44" fill="#5a3a22"/><rect x="240" y="150" width="70" height="44" fill="#5a3a22"/><polygon points="200,0 160,176 240,176" fill="#fff" opacity=".12"/>`;break;
+ case"night":s+=sk("#0b1030","#33407a");for(let i=0;i<40;i++)s+=`<circle cx="${(i*97)%400}" cy="${(i*53)%120}" r="${i%4===0?1.8:1}" fill="#fff" class="tw${i%3}"/>`;s+=`<path d="M0 190 Q100 150 200 176 T400 160 L400 230 L0 230Z" fill="#141a38"/>`;for(let i=0;i<24;i++)s+=`<rect x="${(i*61)%380+6}" y="${196+(i%3)*8}" width="5" height="4" fill="#ffd36a" opacity=".85"/>`;s+=`<circle cx="330" cy="38" r="18" fill="#fffbe0"/>`;break;
+ case"field":s+=sk("#9ad4ff","#e8f6ff")+gnd(120,"#7ac05a")+`<polygon points="200,120 0,230 400,230" fill="#d88a5a"/>`;for(let i=-3;i<=3;i++)s+=`<line x1="200" y1="120" x2="${200+i*90}" y2="230" stroke="#fff" stroke-width="3"/>`;break;
+ case"pool":s+=sk("#bfe8ff","#e8fbff")+gnd(80,"#3fb0e8");for(let i=0;i<6;i++)s+=`<path d="M0 ${96+i*24} Q25 ${86+i*24} 50 ${96+i*24} T100 ${96+i*24} T150 ${96+i*24} T200 ${96+i*24} T250 ${96+i*24} T300 ${96+i*24} T350 ${96+i*24} T400 ${96+i*24}" stroke="#fff" stroke-width="3" fill="none" opacity=".6"/>`;break;
+ case"diamond":s+=sk("#9ad4ff","#e8f6ff")+gnd(110,"#6bbf5a")+`<polygon points="200,130 300,190 200,230 100,190" fill="#c8935a"/><rect x="0" y="100" width="400" height="12" fill="#2f6a42"/>`;break;
+ case"park":s+=sk("#9fd8ff","#e8f8ff")+gnd(186,"#8fd27a")+tree(40,150)+tree(150,160)+tree(310,150)+`<rect x="220" y="170" width="60" height="8" fill="#a8703a"/><rect x="224" y="178" width="6" height="12" fill="#6a4a2a"/><rect x="270" y="178" width="6" height="12" fill="#6a4a2a"/>`+[40,120,230,350].map((x,i)=>`<circle cx="${x}" cy="${204}" r="5" fill="${["#ff6fa5","#ffcf3a","#fff","#c88aff"][i]}"/>`).join("");break;
+ case"library":s+=sk("#e8d8b8","#c8a878");for(let r=0;r<3;r++){s+=`<rect x="0" y="${52+r*58}" width="400" height="6" fill="#7a5a32"/>`;for(let i=0;i<30;i++)s+=`<rect x="${i*13.5+2}" y="${24+r*58+((i*7)%9)}" width="11" height="${34-((i*7)%9)}" fill="${["#e0442f","#3f8cff","#f2a516","#3bb36b","#8a5cf5","#ff6fa5"][(i+r)%6]}"/>`}s+=gnd(200,"#a07040");break;
+ case"gov":s+=sk("#8fd0ff","#e8f6ff")+gnd(196,"#c8c0b0")+`<polygon points="60,100 200,34 340,100" fill="#efe8d8"/>`+[0,1,2,3,4].map(i=>`<rect x="${86+i*50}" y="100" width="20" height="96" fill="#f8f2e4"/>`).join("")+`<rect x="40" y="190" width="320" height="10" fill="#d8d0c0"/><line x1="200" y1="34" x2="200" y2="6" stroke="#555" stroke-width="3"/><rect x="200" y="6" width="30" height="18" fill="#e0442f"/>`;break;
+ case"station":s+=sk("#a8d8ff","#e8f6ff")+gnd(170,"#b8b8c0")+`<rect x="40" y="70" width="320" height="96" rx="6" fill="#e8e8f0"/><rect x="40" y="110" width="320" height="20" fill="#3f8cff"/>`+[0,1,2,3,4].map(i=>`<rect x="${64+i*60}" y="80" width="36" height="26" fill="#bfe3ff"/>`).join("")+`<rect x="0" y="180" width="400" height="8" fill="#ffcf3a"/>`;break;
+ case"rain":s+=sk("#7a8798","#a8b2c0")+gnd(190,"#7c8a86")+house(30,56,50,"#d8d8e0","#6a7080")+house(120,52,66,"#e0e0e8","#506080")+house(220,60,46,"#d8e0d8","#6a6a78")+house(310,56,62,"#e0d8e0","#707088");break;
+ case"sunset":s+=sk("#ff9a6a","#ffe0a8")+`<circle cx="200" cy="170" r="50" fill="#fff0a0" opacity=".85"/>`+gnd(190,"#7a6a5a")+house(20,56,50,"#e8d0b8","#b0503a")+house(300,60,58,"#e8d8c8","#8a4a6a");break;
+ case"assembly":s+=sk("#c8a070","#a07848")+gnd(176,"#8a5a3a");for(let r=0;r<4;r++)for(let i=0;i<13;i++){const a=Math.PI*(.12+i/12*.76),R=70+r*30;s+=`<circle cx="${200-Math.cos(a)*R*1.9}" cy="${232-Math.sin(a)*R*.95}" r="${6+r}" fill="${r%2?"#7a2a3a":"#9a3a4a"}"/>`}s+=`<rect x="170" y="196" width="60" height="30" fill="#5a3a22"/>`;break;
+ case"cityhall":s+=sk("#9fd8ff","#e8f6ff")+gnd(190,"#c8c0b0")+`<rect x="90" y="70" width="220" height="122" fill="#e8e0d0"/><rect x="170" y="30" width="60" height="50" fill="#d8d0c0"/><circle cx="200" cy="54" r="16" fill="#fff" stroke="#555" stroke-width="3"/><line x1="200" y1="54" x2="200" y2="44" stroke="#333" stroke-width="3"/><line x1="200" y1="54" x2="208" y2="58" stroke="#333" stroke-width="3"/>`+[0,1,2,3,4,5].map(i=>`<rect x="${106+i*32}" y="96" width="18" height="26" fill="#9fc8e8"/><rect x="${106+i*32}" y="140" width="18" height="26" fill="#9fc8e8"/>`).join("")+`<rect x="170" y="152" width="60" height="40" fill="#8a6a4a"/>`;break;
+ case"farm":s+=sk("#9fd8ff","#fff8dd")+`<circle cx="330" cy="46" r="24" fill="#ffe27a"/>`+gnd(120,"#8fd27a");for(let i=0;i<7;i++)s+=`<polygon points="200,120 ${-300+i*130},230 ${-240+i*130},230" fill="${i%2?"#7ac05a":"#9ad27a"}"/>`;s+=`<rect x="30" y="86" width="60" height="44" fill="#c0392b"/><polygon points="24,86 60,60 96,86" fill="#8a2a1a"/>`;break;
+ default:s+=sk("#cfeaff","#fff");
+ }
+ return s+`</svg>`;
+}
+let SC=null;
+const ANIMS="bounce jump shake nod spin sway float droop walk run wave cheer pop";
+function playScene(o){
+ const box=$("scn");if(!box)return;
+ SC={o,def:o.actors||{},beats:o.beats||[],i:0,typing:null,wait:"",timer:0,tm:[],ended:false,bg:o.bg};
+ box.setAttribute("data-k","sctap");
+ box.innerHTML=`<div class="scbg" id="scbg">${bgSVG(o.bg)}</div><div id="scact"></div><div id="scfx"></div><div class="scdlg hide" id="scdlg"><span class="scwho" id="scwho"></span><div id="sctxt"></div><span class="scnxt">▼</span></div><button class="scskip" data-k="scskip">スキップ ⏭</button>`;
+ Object.keys(SC.def).forEach(k=>{if(SC.def[k].at)scPlace(k,SC.def[k].at[0],SC.def[k].at[1]||0,SC.def[k].anim)});
+ if(o.fx)o.fx.split(" ").forEach(scFx);
+ setTimeout(scBeat,350);
+}
+function scEl(k){
+ let el=$("act_"+k);if(el)return el;
+ const d=SC.def[k];el=document.createElement("div");el.id="act_"+k;el.className="act";
+ el.style.setProperty("--w",(d.w||(d.html.includes("chibi")?78:d.html.includes("bust")?96:56))+"px");
+ el.innerHTML=`<div class="ain">${d.html}</div>`;if(d.flip)el.classList.add("flip");
+ $("scact").appendChild(el);return el;
+}
+function scPlace(k,x,y,anim){const el=scEl(k);el.style.left=x+"%";el.style.bottom=(30+(y||0))+"%";if(anim)scAnim(k,anim);return el}
+function scAnim(k,an){const el=$("act_"+k);if(!el)return;const a=el.querySelector(".ain");a.className="ain "+(an&&an!=="none"?"a-"+an:"")}
+function scAct(a){
+ if(!SC)return;const k=a.a;if(!SC.def[k])return;
+ let el=$("act_"+k);
+ if(!el){
+  el=scEl(k);
+  const side=a.enter;
+  if(side==="left"){el.style.left="-25%";el.style.bottom=(30+(a.y||0))+"%"}
+  else if(side==="right"){el.style.left="125%";el.style.bottom=(30+(a.y||0))+"%"}
+  else if(side==="top"){el.style.left=a.x+"%";el.style.bottom="130%"}
+  else{el.style.left=(a.x!==undefined?a.x:50)+"%";el.style.bottom=(30+(a.y||0))+"%";el.classList.add("popin");setTimeout(()=>el.classList.remove("popin"),500)}
+  void el.offsetWidth;
+ }
+ if(a.x!==undefined)el.style.left=a.x+"%";
+ if(a.y!==undefined||a.enter)el.style.bottom=(30+(a.y||0))+"%";
+ if(a.flip!==undefined)el.classList.toggle("flip",!!a.flip);
+ if(a.s)el.style.setProperty("--s",a.s);
+ if(a.z)el.style.zIndex=a.z;
+ if(a.anim)scAnim(k,a.anim);
+ if(a.exit){el.style.left=a.exit==="left"?"-30%":"130%";SC.tm.push(setTimeout(()=>el.remove(),900))}
+ if(a.hide)el.style.opacity=0;
+}
+function scBeat(){
+ if(!SC||SC.ended)return;if(!$("scn")){SC=null;return}
+ const b=SC.beats[SC.i++];
+ if(!b)return scEnd();
+ if(b.bg&&b.bg!==SC.bg){SC.bg=b.bg;const bg=$("scbg");const n=document.createElement("div");n.className="scbg2";n.innerHTML=bgSVG(b.bg);bg.appendChild(n);setTimeout(()=>{bg.innerHTML=n.innerHTML;},700)}
+ (b.acts||[]).forEach(scAct);
+ if(b.fx)b.fx.split(" ").forEach(scFx);
+ if(b.pop)scPop(b.pop);
+ const dlg=$("scdlg");
+ if(b.say){
+  dlg.classList.remove("hide");$("scwho").textContent=b.who||"";$("scwho").style.display=b.who?"inline-block":"none";
+  const t=b.say;let n=0;const el=$("sctxt");el.textContent="";SC.wait="type";
+  clearInterval(SC.typing);
+  SC.typing=setInterval(()=>{n++;el.textContent=t.slice(0,n);if(n%3===0)beep(620+(n%5)*30,.02,"square",.015);if(n>=t.length){clearInterval(SC.typing);SC.typing=null;SC.wait="tap";if(SC.i>=SC.beats.length&&SC.o.keepDlg)scEnd()}},34);
+  SC.full=t;
+ }else{
+  SC.wait="auto";if(b.hide!==false&&!b.keep)dlg.classList.add("hide");
+  SC.timer=setTimeout(scBeat,b.wait||1000);
+ }
+}
+function scTap(){
+ if(!SC||SC.ended)return;
+ if(SC.wait==="type"){clearInterval(SC.typing);SC.typing=null;$("sctxt").textContent=SC.full;SC.wait="tap";return}
+ if(SC.wait==="tap"){SC.wait="";scBeat()}
+}
+function scSkip(){
+ if(!SC||SC.ended)return;
+ clearInterval(SC.typing);clearTimeout(SC.timer);
+ // さいごまで 状態を てきよう
+ while(SC.i<SC.beats.length){const b=SC.beats[SC.i++];(b.acts||[]).forEach(a=>{if(a.exit)return;scAct(Object.assign({},a,{anim:a.anim}))});if(b.bg)SC.bg=b.bg}
+ scEnd();
+}
+function scEnd(){
+ if(!SC||SC.ended)return;SC.ended=true;clearInterval(SC.typing);clearTimeout(SC.timer);
+ const f=SC.o.onEnd;const sk=document.querySelector(".scskip");if(sk)sk.remove();
+ const box=$("scn");if(box)box.removeAttribute("data-k");
+ const dlg=$("scdlg");if(dlg&&SC.o.hideEnd!==false&&SC.o.keepDlg!==true)dlg.classList.add("hide");
+ SC.tm.forEach(clearTimeout);
+ f&&setTimeout(()=>{if(G)f()},SC.o.endWait||250);
+}
+function scPop(p){const f=$("scfx");if(!f)return;const e=document.createElement("div");e.className="numpop";e.textContent=p.t;e.style.left=(p.x||50)+"%";f.appendChild(e);setTimeout(()=>e.remove(),1800)}
+function scFx(n){
+ const f=$("scfx"),box=$("scn");if(!f||!box)return;
+ const B=(em,cnt,mode)=>{for(let i=0;i<cnt;i++){const e=document.createElement("span");e.className="fxp "+mode;e.textContent=em[Math.floor(Math.random()*em.length)];e.style.left=rnd(4,94)+"%";e.style.animationDelay=rnd(0,.8)+"s";e.style.fontSize=rnd(16,30)+"px";if(/popfx|twinkle|shoot/.test(mode))e.style.top=rnd(6,60)+"%";f.appendChild(e);setTimeout(()=>e.remove(),3200)}};
+ const flash=()=>{const e=document.createElement("div");e.className="fxflash";f.appendChild(e);setTimeout(()=>e.remove(),700)};
+ switch(n){
+  case"confetti":B(["🎉","✨","🎊","⭐","💖"],26,"fall");sfx.ok();break;
+  case"sparkle":B(["✨","⭐"],14,"rise");beep(1100,.08,"triangle",.04);break;
+  case"hearts":B(["💕","💖"],10,"rise");break;
+  case"notes":B(["🎵","🎶"],12,"rise");break;
+  case"petals":B(["🌸"],20,"fall");break;
+  case"sweat":B(["💦"],6,"rise");sfx.bad();break;
+  case"anger":B(["💢"],4,"popfx");break;
+  case"stars":B(["⭐","✨","🌠"],18,"twinkle");break;
+  case"question":B(["❓","❗"],3,"popfx");break;
+  case"idea":B(["💡"],2,"popfx");beep(1300,.1,"triangle",.05);break;
+  case"flash":flash();break;
+  case"camera":flash();B(["📸"],3,"popfx");setTimeout(flash,350);break;
+  case"lightning":flash();B(["⚡"],3,"popfx");sfx.bad();box.classList.add("shk");setTimeout(()=>box.classList.remove("shk"),500);break;
+  case"shake":box.classList.add("shk");setTimeout(()=>box.classList.remove("shk"),500);break;
+  case"rain":if(!f.querySelector(".rainfx")){const r=document.createElement("div");r.className="rainfx";f.appendChild(r)}break;
+  case"norain":{const r=f.querySelector(".rainfx");r&&r.remove()}break;
+  case"dark":box.classList.add("dark");break;
+  case"light":box.classList.remove("dark");break;
+  case"lines":{const e=document.createElement("div");e.className="spdlines";f.appendChild(e);setTimeout(()=>e.remove(),1400)}break;
+  case"spot":{const e=document.createElement("div");e.className="spotfx";f.appendChild(e)}break;
+  case"shoot":B(["🌠"],2,"shoot");break;
+ }
+}
+const sceneBox=(extra)=>`<div class="scn" id="scn"></div><div id="scopts">${extra||""}</div>`;
+function hAct(){return{html:chibi(G.cand.col?"#"+G.cand.col.toString(16).padStart(6,"0"):"#e0442f","#"+G.cand.hair.toString(16).padStart(6,"0"),G.cand.style),w:78}}
+const BGMAP={c1:"stage",c2:"stage",c3:"hall",c4:"field",c5:"pool",c6:"diamond",c7:"park",c8:"street",c9:"street",c10:"town",c11:"park",c12:"park",c13:"library",c14:"library",c15:"library",c16:"gov"};
+const TANIM={voi:{h:"cheer",c:"bounce",fx:"notes",prop:"📣"},sta:{h:"run",c:"run",fx:"lines",prop:"👟"},pow:{h:"walk",c:"nod",fx:"hearts",prop:"🤝"},tru:{h:"sway",c:"sway",fx:"sparkle",prop:"🧹"},pol:{h:"nod",c:"nod",fx:"idea",prop:"📖"}};
+const cardAct=c=>({html:bust(c.art,CLOOK[c.id]),w:100});
+const npcAct=(k,look)=>({html:bust(NPCART[k],look||CLOOK.stand),w:96});
+const emoAct=(e,w)=>({html:`<span class="emo">${e}</span>`,w:w||52});
+function scoreNow(){return SK.reduce((a,k)=>a+G.st[k],0)+G.energy*.3+G.sp*.1}
+
+/* ---- メインストーリー シーン ---- */
+const SCN={
+ prologue:()=>{const n=G.cand.n,v=vetCard(),T=G.sc.txt,B=G.sc.bgs;return{bg:B.pro,actors:{h:hAct(),v:cardAct(v)},beats:[
+  {say:tx(T.p1),fx:"rain"},
+  {acts:[{a:"h",enter:"left",x:30,anim:"walk"}],wait:1300,fx:"norain"},
+  {acts:[{a:"h",anim:"droop"}],say:tx(T.p2),who:n},
+  {acts:[{a:"h",anim:"jump"}],fx:"sparkle",say:tx(T.p2b),who:n},
+  {acts:[{a:"v",enter:"right",x:72,anim:"walk"}],fx:"question",say:tx(T.p3)},
+  {acts:[{a:"v",anim:"nod"}],say:tx(T.p4),who:VET},
+  {bg:B.pro2,acts:[{a:"h",anim:"cheer"},{a:"v",anim:"bounce"}],fx:"confetti",say:tx(T.p5)}]}},
+ ch1:()=>{const n=G.cand.n,v=vetCard(),T=G.sc.txt,B=G.sc.bgs,S=G.sc;
+  const actors={h:hAct(),r:npcAct(S.rivalArt),v:cardAct(v)};if(S.rival2)actors.r2=npcAct(S.rival2Art);
+  return{bg:B.ch1,actors,beats:[
+  {acts:[{a:"h",enter:"left",x:30,anim:"cheer"}],fx:"sparkle",say:tx(T.c1a)},
+  {acts:[{a:"h",anim:"walk"},{a:"r",enter:"right",x:72,anim:"walk"}],fx:"dark",say:tx(T.c1b)},
+  {acts:[{a:"r",anim:"nod"},{a:"h",anim:"none"}],fx:"lines",say:tx(T.c1c),who:S.rivalN},
+  {acts:S.rival2?[{a:"h",anim:"shake"},{a:"r2",enter:"right",x:88,anim:"sway"}]:[{a:"h",anim:"shake"}],fx:"sweat anger",say:tx(T.c1d)},
+  {acts:[{a:"r",exit:"right"}].concat(S.rival2?[{a:"r2",exit:"right"}]:[],[{a:"v",enter:"left",x:60,anim:"nod"}]),fx:"light",say:tx(T.c1e),who:VET}]}},
+ ch2:()=>{const n=G.cand.n,T=G.sc.txt,B=G.sc.bgs,S=G.sc;
+  const actors={h:hAct(),r:npcAct(S.rivalArt),m:emoAct("🎙️",48)};if(S.rival2)actors.r2=npcAct(S.rival2Art);
+  return{bg:B.ch2,actors,beats:[
+  {acts:[{a:"h",enter:"left",x:26,anim:"walk"},{a:"r",enter:"right",x:74,anim:"walk"}].concat(S.rival2?[{a:"r2",enter:"right",x:56,anim:"walk"}]:[]),fx:"spot",say:tx(T.c2a)},
+  {acts:[{a:"m",enter:"top",x:50,y:42,anim:"float"}],say:tx(T.c2b),who:"司会"},
+  {acts:[{a:"r",anim:"sway"}],fx:"flash",wait:700},
+  {acts:[{a:"h",anim:"nod"}],fx:"sparkle",say:tx(T.c2c)}]}},
+ ch3:()=>{const n=G.cand.n,v=vetCard(),T=G.sc.txt,B=G.sc.bgs;return{bg:B.ch3a,actors:{h:hAct(),k:npcAct("kid"),v:cardAct(v),b:emoAct("🎈",50)},beats:[
+  {acts:[{a:"h",enter:"left",x:34,anim:"walk"}],say:tx(T.c3a)},
+  {bg:B.ch3b,fx:"petals sparkle",acts:[{a:"h",anim:"cheer"}],say:tx(T.c3b)},
+  {acts:[{a:"k",enter:"left",x:62,anim:"run"},{a:"b",enter:"left",x:50,y:24,anim:"float"}],fx:"hearts",say:tx(T.c3c),who:"みんな"},
+  {acts:[{a:"k",anim:"jump"},{a:"v",enter:"right",x:84,anim:"nod"},{a:"h",anim:"jump"}],say:tx(T.c3d),who:VET}]}},
+ eve:()=>{const n=G.cand.n,v=vetCard(),T=G.sc.txt,B=G.sc.bgs;return{bg:B.eve,actors:{h:hAct(),v:cardAct(v)},beats:[
+  {acts:[{a:"h",enter:"left",x:34,anim:"walk"}],fx:"stars",say:tx(T.e1)},
+  {acts:[{a:"v",enter:"right",x:68,anim:"walk"}],fx:"shoot",wait:1200},
+  {acts:[{a:"v",anim:"nod"}],say:tx(T.e2),who:VET},
+  {acts:[{a:"h",anim:"jump"}],fx:"sparkle",say:tx(T.e3),who:n},
+  {fx:"stars shoot",say:tx(T.e4)}]}},
+ epi:(rank,over)=>{const n=G.cand.n,v=vetCard(),T=G.sc.txt,seats=G.sc.seats;
+  if(over)return{bg:"rain",fx:"rain",actors:{h:hAct(),v:cardAct(v)},beats:[
+   {acts:[{a:"h",enter:"left",x:34,anim:"droop"}],say:tx(T.o1)},
+   {acts:[{a:"v",enter:"right",x:68,anim:"nod"}],say:tx(T.o2),who:VET},
+   {acts:[{a:"h",anim:"nod"}],fx:"sparkle norain",say:tx(T.o3),who:n}]};
+  if(rank<=seats)return{bg:"sunset",actors:{h:hAct(),v:cardAct(v),k:npcAct("kid"),c:emoAct("👏",50)},beats:[
+   {acts:[{a:"h",enter:"left",x:40,anim:"walk"}],say:tx(T.w1)},
+   {acts:[{a:"h",anim:"cheer"},{a:"k",enter:"right",x:78,anim:"jump"},{a:"c",enter:"pop",x:24,y:22,anim:"bounce"}],fx:"confetti",say:tx(T.w2)},
+   {acts:[{a:"v",enter:"right",x:60,anim:"nod"}],fx:"sparkle",say:tx(T.w3),who:VET}]};
+  if(rank<=seats+2)return{bg:"sunset",actors:{h:hAct(),v:cardAct(v),k:npcAct("kid")},beats:[
+   {acts:[{a:"h",enter:"left",x:40,anim:"droop"}],say:tx(T.l1),who:n},
+   {acts:[{a:"v",enter:"right",x:70,anim:"nod"}],say:tx(T.l2),who:VET},
+   {acts:[{a:"k",enter:"left",x:20,anim:"run"},{a:"h",anim:"jump"}],fx:"hearts",say:tx(T.l3)}]};
+  return{bg:"rain",fx:"rain",actors:{h:hAct(),v:cardAct(v)},beats:[
+   {acts:[{a:"h",enter:"left",x:36,anim:"droop"}],say:tx(T.b1)},
+   {acts:[{a:"v",enter:"right",x:68,anim:"nod"}],fx:"norain sparkle",say:tx(T.b2),who:VET},
+   {acts:[{a:"h",anim:"cheer"}],say:tx(T.b3)}]};
+ }
+};
+function chapter(title,key,then,extra){
+ G.then=then;
+ sheet(`<h2>${title}</h2>`+sceneBox());
+ const sc=SCN[key]();
+ sc.keepDlg=true;sc.hideEnd=false;sc.onEnd=()=>{$("scopts").innerHTML=(extra||"")+`<button class="btn" data-k="chapNext">つづける ▶</button>`};
+ playScene(sc);
+}
+/* ---- イベント シーン ---- */
+const EVSC={
+ bribe:{bg:"street",npc:()=>cardAct(CARDS.find(c=>c.id==="c8")),who:"店主",prop:"🍱",fx:"question"},
+ net:{bg:"town",npc:()=>emoAct("📱",64),who:"",prop:"💬",fx:"anger"},
+ kid:{bg:"park",npc:()=>npcAct("kid"),who:"小学生",prop:"❓",fx:"question"},
+ youth:{bg:"station",npc:()=>npcAct("youth"),who:"若者",prop:"💭",fx:"question"},
+ dog:{bg:"park",npc:()=>emoAct("🐕",64),who:"",prop:"❤️",fx:"hearts"},
+ rain:{bg:"rain",npc:()=>emoAct("☔",60),who:"",prop:"💧",fx:"rain"},
+ poster:{bg:"street",npc:()=>emoAct("🪧",64),who:"",prop:"📄",fx:"question"}
+};
+function evActors(key){const sc=EVSC[key];return{h:hAct(),n:sc.npc(),p:emoAct(sc.prop,44)}}
+function evtStart(key){
+ const e=EVT[key],sc=EVSC[key];
+ sheet(`<h2>📣 ひだまり町 日記</h2>`+sceneBox());
+ playScene({bg:sc.bg,actors:evActors(key),beats:[
+  {acts:[{a:"h",enter:"left",x:26,anim:"walk"},{a:"n",enter:"right",x:74,anim:key==="dog"?"run":"walk"}],fx:sc.fx==="rain"?"rain":"",wait:1000},
+  {acts:[{a:"n",anim:key==="dog"?"jump":"bounce"},{a:"p",enter:"pop",x:50,y:46,anim:"float"}],fx:sc.fx==="rain"?"":sc.fx,say:e.q,who:sc.who},
+  ],onEnd:()=>{$("scopts").innerHTML=e.c.map((c,i)=>`<button class="opt" data-k="ev" data-v="${key}:${i}">${c.l}</button>`).join("")},keepDlg:true,hideEnd:false});
+}
+function resolveEvt(v){
+ const[key,i]=v.split(":"),e=EVT[key],c=e.c[+i],sc=EVSC[key];
+ const b=scoreNow();c.fx(G);normS();const good=scoreNow()>=b;hud0();
+ const tip=c.tip?TIPS[c.tip]:e.tip2;
+ if(tip&&!G.seen.includes(tip))G.seen.push(tip);
+ sheet(`<h2>けっか</h2>`+sceneBox());
+ const act=evActors(key);Object.keys(act).forEach(k=>act[k].at=k==="h"?[26,0]:k==="n"?[74,0]:[50,46]);
+ playScene({bg:sc.bg,actors:act,fx:sc.fx==="rain"?"rain":"",beats:[
+  {acts:[{a:"h",anim:good?"jump":"droop"},{a:"n",anim:good?"nod":"shake"},{a:"p",anim:good?"bounce":"shake"}],fx:good?"sparkle confetti":(key==="bribe"?"camera sweat dark":"sweat dark"),say:c.r,keep:true}],
+  keepDlg:true,hideEnd:false,onEnd:()=>{$("scopts").innerHTML=(tip?`<div class="memo"><b>📝 ことばメモ</b><br>${tip}</div>`:"")+`<button class="btn" data-k="next">つぎへ</button>`}});
+}
+function hud0(){}
+/* ---- サポカ ものがたり シーン ---- */
+function epActors(c){return{h:hAct(),c:cardAct(c),p:emoAct(TANIM[c.t].prop,46)}}
+function epSheet(c,n){
+ G.curCard=c;G.curEp=n;const T=TANIM[c.t],bg=BGMAP[c.id]||"town";
+ sheet(`<h2>${c.e} ${c.n}の ものがたり ${"★".repeat(n+1)}${"☆".repeat(2-n)}</h2>`+sceneBox());
+ const beats=[{acts:[{a:"c",enter:"right",x:72,anim:"walk"},{a:"h",enter:"left",x:28,anim:"walk"}],wait:1000}];
+ if(n===0)beats.push({acts:[{a:"h",anim:T.h},{a:"c",anim:T.c},{a:"p",enter:"pop",x:50,y:48,anim:"float"}],fx:T.fx,say:c.eps[0][0],who:c.n});
+ if(n===1)beats.push({acts:[{a:"h",anim:"droop"},{a:"c",x:64,anim:"nod"},{a:"p",enter:"pop",x:48,y:50,anim:"float"}],fx:"dark",say:c.eps[1][0],who:c.n},{acts:[{a:"h",anim:"nod"}],fx:"light sparkle",wait:600});
+ if(n===2)beats.push({acts:[{a:"h",anim:"cheer"},{a:"c",anim:"bounce"},{a:"p",enter:"pop",x:50,y:50,anim:"spin"}],fx:"confetti "+T.fx,say:c.eps[2][0],who:c.n});
+ playScene({bg,actors:epActors(c),beats,keepDlg:true,hideEnd:false,onEnd:()=>{$("scopts").innerHTML=`<button class="opt" data-k="ep" data-v="0">じっくり 話を 聞く</button><button class="opt" data-k="ep" data-v="1">いっしょに やってみる（元気-10）</button>`}});
+}
+function resolveEp(v){
+ const c=G.curCard,n=G.curEp;G.ep[c.id]=n+1;
+ let gain;
+ if(+v===0){addBond(c,10);gain=8+n*2;G.st[c.t]+=gain}else{addBond(c,8);G.energy-=10;gain=14+n*3;G.st[c.t]+=gain;G.st.tru+=2}
+ let extra="";
+ if(n===2){
+  const sp=c.vet?40:25;G.sp+=sp;
+  const un=SKILLS.filter(s=>!G.skills.includes(s.id));
+  let hint="";if(un.length){const s=pick(un);G.hints[s.id]=Math.max(G.hints[s.id]||0,c.vet?.5:.3);hint=`🔖 スキル「${s.n}」の ヒント！ `}
+  extra=`<div class="memo"><b>📖 きずなの 物語 かんけつ！</b><br>${hint}SP +${sp}</div>`;
+ }
+ normS();sfx.ok();
+ const T=TANIM[c.t],bg=BGMAP[c.id]||"town";
+ sheet(`<h2>${c.e} ${c.n}</h2>`+sceneBox());
+ const act=epActors(c);act.h.at=[+v===0?30:34,0];act.c.at=[68,0];act.p.at=[50,50];
+ playScene({bg,actors:act,beats:[{acts:[{a:"h",anim:"jump"},{a:"c",anim:"bounce"},{a:"p",anim:"spin"}],fx:n===2?"confetti sparkle":"sparkle",pop:{t:`${SN[c.t]} +${gain}`,x:30},say:c.eps[n][1],keep:true}],
+  keepDlg:true,hideEnd:false,onEnd:()=>{$("scopts").innerHTML=extra+`<button class="btn" data-k="next">つぎへ</button>`}});
+}
+/* ---- ひとこと イベント／ベテラン ---- */
+function cardScene(c,line,opts,after){
+ const bg=BGMAP[c.id]||"town",T=TANIM[c.t];
+ sheet(`<h2>${c.e} ${c.n}（${c.role}）</h2>`+sceneBox());
+ playScene({bg,actors:{h:hAct(),c:cardAct(c)},beats:[{acts:[{a:"c",enter:"right",x:72,anim:"walk"},{a:"h",enter:"left",x:28,anim:"walk"}],wait:900},{acts:[{a:"c",anim:"bounce"},{a:"h",anim:"nod"}],fx:T.fx,say:line,who:c.n}],keepDlg:true,hideEnd:false,onEnd:()=>{$("scopts").innerHTML=opts}});
+}
+function resolveSev(i){
+ const x=G.curSev.c[+i],c=G.curCard;x.fx(G,c);normS();sfx.ok();
+ sheet(`<h2>${c.e} ${c.n}</h2>`+sceneBox());
+ playScene({bg:BGMAP[c.id]||"town",actors:{h:Object.assign(hAct(),{at:[28,0]}),c:Object.assign(cardAct(c),{at:[72,0]})},beats:[{acts:[{a:"h",anim:"jump"},{a:"c",anim:"bounce"}],fx:"sparkle hearts",say:x.r,keep:true}],keepDlg:true,hideEnd:false,onEnd:()=>{$("scopts").innerHTML=`<button class="btn" data-k="next">つぎへ</button>`}});
+}
+function vetAdvice(){
+ G.sp+=15;const un=SKILLS.filter(s=>!G.skills.includes(s.id));let t="";
+ if(un.length){const s=pick(un);G.hints[s.id]=Math.max(G.hints[s.id]||0,.2);t=`スキル「${s.n}」の ヒントも もらった！`}
+ sfx.ok();const v=vetCard();
+ sheet(`<h2>🏛️ ${VET}</h2>`+sceneBox());
+ playScene({bg:"gov",actors:{h:Object.assign(hAct(),{at:[28,0]}),v:Object.assign(cardAct(v),{at:[72,0]})},beats:[{acts:[{a:"v",anim:"nod"},{a:"h",anim:"nod"}],fx:"idea",pop:{t:"SP +15",x:30},say:`${VET}「…ひとつ 助言を やろう。 人の 話は 最後まで 聞け。 答えは 町の 中に ある。」 ${t}`,who:VET,keep:true}],keepDlg:true,hideEnd:false,onEnd:()=>{$("scopts").innerHTML=`<button class="btn" data-k="next">つぎへ</button>`}});
+}
+function turnEvent(){
+ if(!G)return;
+ const present=G.deck.filter(c=>Object.values(G.place).some(a=>a.includes(c)));
+ const TH=[30,55,80];
+ for(const c of shuffle(present)){const n=G.ep[c.id]||0;if(n<3&&(G.bond[c.id]||0)>=TH[n]&&Math.random()<.85)return epSheet(c,n)}
+ const r=Math.random();
+ const used=Object.keys(G.evtUsed).length;
+ if(r<.2&&used<G.evtOrder.length){const key=G.evtOrder[used];G.evtUsed[key]=true;return evtStart(key)}
+ const vc=G.deck.find(c=>c.vet);
+ if(vc&&r>.9){
+  const v=vc;sheet(`<h2>🏛️ ${VET}</h2>`+sceneBox());
+  return playScene({bg:"gov",actors:{h:hAct(),v:cardAct(v)},beats:[{acts:[{a:"h",enter:"left",x:28,anim:"walk"},{a:"v",enter:"right",x:72,anim:"walk"}],wait:900},{acts:[{a:"v",anim:"nod"}],fx:"question",say:`${VET}「…ひとつ、 助言を やろう。」`,who:VET}],keepDlg:true,hideEnd:false,onEnd:()=>{$("scopts").innerHTML=`<button class="btn" data-k="vet">ありがとうございます！</button>`}});
+ }
+ if(r<.5&&G.deck.length&&present.length){
+  const c=pick(present),se=pick([SEV.a,SEV.b]);G.curCard=c;G.curSev=se;
+  return cardScene(c,se.q(c.n),se.c.map((x,i)=>`<button class="opt" data-k="sev" data-v="${i}">${x.l}</button>`).join(""));
+ }
+ nextTurn();
+}
+/* ---- 討論会／目標／エピローグ ---- */
+function debRound(){
+ const d=G.deb;if(d.r>=3)return debEnd();
+ d.type=Math.floor(Math.random()*3);
+ const em=["📊","🗣️","🌈"][d.type];
+ sheet(`<h2>🎤 公開討論会 ${d.r+1}/3</h2>`+sceneBox());
+ playScene({bg:"hall",actors:{h:Object.assign(hAct(),{at:[26,0]}),r:Object.assign(npcAct("rival"),{at:[74,0]}),e:emoAct(em,56)},beats:[
+  {acts:[{a:"r",anim:"sway"},{a:"e",enter:"pop",x:66,y:56,anim:"float"}],fx:"spot",say:`${d.rv}「${ARG[d.type][1]}…！」`,who:d.rv}],keepDlg:true,hideEnd:false,
+  onEnd:()=>{$("scopts").innerHTML=`<p style="font-size:12.5px;margin:6px 0">こちらは どう こたえる？（${d.w}勝）</p>`+[["体験談で 心に 訴える",1],["理想の ビジョンを かたる",2],["データで 反論する",0]].map(([l,i])=>`<button class="opt" data-k="deb" data-v="${i}">${l}</button>`).join("")}});
+}
+function debPick(i){
+ const d=G.deb,good=COUNTER[d.type]===i;
+ const p=(good?.78:.28)+clamp((avg()/G.NORM-.5)*.2,-.1,.12);
+ const win=Math.random()<p;if(win)d.w++;d.r++;
+ sfx[win?"ok":"bad"]();
+ const em=["📊","🗣️","🌈"][i===0?1:i===1?2:0];
+ sheet(`<h2>🎤 公開討論会 ${d.r}/3</h2>`+sceneBox());
+ playScene({bg:"hall",actors:{h:Object.assign(hAct(),{at:[26,0]}),r:Object.assign(npcAct("rival"),{at:[74,0]}),e:emoAct(em,56)},beats:[
+  {acts:[{a:"h",anim:"cheer"},{a:"e",enter:"pop",x:30,y:56,anim:"float"}],wait:500},
+  {acts:[{a:"e",x:70,y:56},{a:"r",anim:win?"shake":"jump"},{a:"h",anim:win?"jump":"droop"}],fx:win?"flash confetti":"sweat anger",say:win?"✅ 論破！ 会場が ざわめく！":"❌ 押し返された…！",keep:true}],
+  keepDlg:true,hideEnd:false,endWait:900,onEnd:()=>debRound()});
+}
+const _goalCheck=goalCheck;
+goalCheck=function(gi){
+ const f=gi===0?.25:.75,ok=Math.round(avg())>=thr(f);
+ sheet(`<h2>🎯 目標 かくにん</h2>`+sceneBox());
+ const n=G.cand.n;
+ playScene({bg:ok?"street":"rain",actors:{h:hAct()},fx:ok?"":"rain",beats:[{acts:[{a:"h",enter:"left",x:50,anim:"walk"}],wait:900},
+  ok?{acts:[{a:"h",anim:"cheer"}],fx:"confetti",say:`${n}「やった… 目標 クリア！」`,who:n}:{acts:[{a:"h",anim:"droop"}],fx:"sweat dark",say:`${n}「…とどかなかった…。」`,who:n}],
+  keepDlg:true,hideEnd:false,endWait:1500,onEnd:()=>{_goalCheck(gi)}});
+};
+const _raceResult=raceResult;
+raceResult=function(rank,order,votes,over){
+ sheet(`<h2>📖 エピローグ</h2>`+sceneBox());
+ G.then=null;
+ const sc=SCN.epi(rank,over);sc.keepDlg=true;sc.hideEnd=false;sc.endWait=2600;sc.onEnd=()=>{_raceResult(rank,order,votes,over)};
+ playScene(sc);
+};
+
+/* ================= シナリオ ================= */
+const RIVALPOOL=RIVALS.concat([["北条 さとし",0x7a4a9a],["白石 みなと",0x2a8a9a],["桜井 けんた",0xc0603a],["氷室 しずか",0x4a6a9a],["黒川 りょう",0x555a68]]);
+const SHARED_EV=["bribe","net","kid","rain"];
+Object.assign(TIPS,{
+ h:"立候補できる 年れい（<b>被選挙権</b>）は、 市長や 県議会議員は <b>25さい以上</b>。 投票は 18さいから できるよ。",
+ i:"立候補の ときは <b>供託金</b>（きょうたくきん）という お金を あずける。 得票が 少なすぎると 返ってこない しくみだよ。",
+ j:"県議会議員選挙は <b>定数</b>（ていすう）が 複数の 選挙区が 多く、 得票が 多い 順に 当選する。",
+ k:"<b>マニフェスト</b>は、 数字や 期限を 入れた 具体的な 政策の 約束。 あとから 守れたか たしかめられるよ。",
+ l:"<b>選挙公報</b>は 候補者の 政策などを 載せて、 選挙の 前に 有権者へ 配られる 文書だよ。",
+ m:"市長は 市民の 投票で えらばれる <b>首長</b>（しゅちょう）。 市議会とは 別に 選ばれ、 たがいに チェックし あう しくみだよ。",
+ n:"県議会は 県の <b>予算</b>や <b>条例</b>を 決める 場所。 住民の 代表として 話し合うよ。"
+});
+Object.assign(NPCART,{
+ citizen:{sk:"#f0c8a0",h:"#bbbbbb",hs:4,cl:"#8a6a4a",acc:[],tie:false},
+ suit:{sk:"#f0c8a0",h:"#222222",hs:0,cl:"#3a3a3a",acc:[1],tie:true},
+ rival2:{sk:"#e0b088",h:"#2a2a2a",hs:0,cl:"#5a2a2a",acc:[5],tie:true},
+ rival3:{sk:"#f0c8a0",h:"#555555",hs:0,cl:"#2a3a6a",acc:[1],tie:true},
+ rival4:{sk:"#f0c8a0",h:"#8a8a8a",hs:4,cl:"#4a4a4a",acc:[1,5],tie:true}
+});
+const SCEN={
+ town:{id:"town",n:"町長選挙編",short:"町長選",place:"ひだまり町",icon:"🏘️",diff:"★☆☆ 入門",desc:"さびれた 町を 立て直す！ 当選は たった ひとり。",cardsTxt:"（基本のカード）",
+  seats:1,runners:6,mul:1,rivalN:"星野 まもる",rivalArt:"rival",W:[34,23,17,12,8,6],reward:[400,250,150,100,80,60],rmul:[1.04,1,1,1,1],
+  pool:["youth","dog","poster"],debName:"公開討論会",tips:["a","b"],
+  ttl:["第1章 現職の 影","第2章 公開討論会","第3章 町が 動きはじめる","最終章 前夜","序章 ひだまり町"],
+  bgs:{pro:"townsad",pro2:"town",ch1:"street",ch2:"hall",ch3a:"townsad",ch3b:"town",eve:"night"},
+  txt:{
+   p1:"【ひだまり町】 むかしは 笑い声で あふれていた この町。 いまは シャッターが 目立ち、 若い人も はなれていく…。",
+   p2:"{n}「…このままじゃ いやだ。」",p2b:"{n}「わたしが この町を、 もういちど にぎやかに する！」",
+   p3:"ひとりの 老議員が 声を かけてきた。",p4:"{v}「ほう、 出る気か。 …ならば まず 町を 歩き、 人の 声を 聞け。 話は それからだ。」",
+   p5:"{n}の {N}ターンに わたる 選挙戦が、 いま はじまる！",
+   c1a:"街頭演説会は 大きな 拍手に つつまれた！",c1b:"その 帰り道、 {n}の 前に 現職の 星野 まもる 町長が あらわれた。",
+   c1c:"星野「若いのが 出てきたと 聞いてね。 …まあ、 好きに やりなさい。 町は そんなに かんたんには 変わらんよ。」",
+   c1d:"その 目は ぜんぜん 笑っていなかった。 {n}は こぶしを にぎりしめる。",c1e:"{v}「相手が 手ごわい ほど、 町の 声が 力に なる。 しっかり やれ。」",
+   c2a:"公開討論会の 日。 ステージの 向こうでは、 星野町長が 余裕の 笑みを うかべている。",c2b:"司会「それでは 討論会を はじめます。 相手の 主張を よく 聞いて、 答えてください。」",c2c:"{n}は ふかく 息を すい、 マイクの 前に 立った。",
+   c3a:"町の ようすが、 少しずつ 変わってきた…。",c3b:"閉まっていた シャッターが ひとつ、 またひとつ…あいていく！",c3c:"子どもたち「あの人の ポスター、 見た？ {n}さんだ！」",c3d:"{v}「…風が 変わったな。 だが 気を ぬくな。 最後まで 走りきれ。」",
+   e1:"投票日の 前の 夜。 {n}は 町が 見わたせる 丘に 立っていた。",e2:"{v}「選挙運動は きょうで おしまいだ。 やれる ことは すべて やった。 あとは 町の みんなを 信じろ。」",e3:"{n}「…はい！」",e4:"あしたは いよいよ 投票日。 開票が はじまる——。",
+   w1:"夕方、 開票結果が 発表された。 {n}の 名前が 呼ばれると…！",w2:"会場に 大きな 拍手が わきおこった！",w3:"{v}「…見事だ。 この町を 頼んだぞ。」 ひだまり町の 新しい 物語が、 いま はじまる。",
+   l1:"わずかに とどかなかった。 {n}「くやしい…！」",l2:"{v}「負けを 知る 者は 強くなる。 次こそは…だろう？」",l3:"町の 人たち「また 立ってね！」 {n}の 挑戦は、 まだ つづく。",
+   b1:"結果は きびしかった。 けれど…",b2:"{v}「選挙は 終わりじゃない。 町づくりは つづくぞ。」",b3:"町を 歩いて 聞いた 声は、 {n}の 中に のこっている。",
+   o1:"立候補を あきらめた {n}。 雨が しとしと ふっていた。",o2:"{v}「…一度の つまずきで 終わる 者では あるまい。 もう一度、 町を 歩いて みなさい。」",o3:"{n}「…はい。 また 歩きます。」"}},
+ pref:{id:"pref",n:"県議会議員選挙編",short:"県議選",place:"みどり県",icon:"🏛️",diff:"★★☆ ふつう",desc:"定数3！ 上位3人が 当選。 ライバルが 多い 乱戦だ。",cardsTxt:"県庁職員・農協青年部長・高校教師・FM DJ・消防団（県議選 特攻）",
+  seats:3,runners:8,mul:1.05,rivalN:"鷹野 ごう",rivalArt:"rival2",W:[19,17,15,12,11,9,9,8],reward:[450,350,250,120,90,70,60,50],rmul:[1.08,.98,.98,.95,.95,.92,.9],
+  pool:["assembly","request","speech","district"],debName:"合同演説会",tips:["a","n","j","i","h"],
+  ttl:["第1章 ベテラン県議 鷹野","第2章 合同演説会","第3章 県内に 風が ふく","最終章 前夜","序章 みどり県"],
+  bgs:{pro:"farm",pro2:"town",ch1:"assembly",ch2:"hall",ch3a:"farm",ch3b:"town",eve:"night"},
+  txt:{
+   p1:"【みどり県】 豊かな 自然が ひろがる 県。 けれど 山あいの 村では 人が へり、 バスも 学校も 少しずつ きえていく…。",
+   p2:"{n}「県の はしっこの 声は、 県議会に とどいているの…？」",p2b:"{n}「わたしが 県議会に 声を とどける！ 県議会議員選挙に 立候補します！」",
+   p3:"そこへ 県政を よく 知る 老議員が あらわれた。",p4:"{v}「ほう、 県議か。 県議会は 県の 予算や 条例を 決める 場所だ。 まずは 県内を 歩き、 地域の 声を 集めなさい。」",
+   p5:"{n}の {N}ターンに わたる 県議選が、 いま はじまる！ 今回は 定数3。 上位3人が 当選だ！",
+   c1a:"県内の 集会所で 開いた 演説会は 立ち見が 出るほど！",c1b:"その 帰り道、 ベテラン県議の 鷹野 ごうが 声を かけてきた。",
+   c1c:"鷹野「新顔か。 この 選挙区は 定数3。 空きは 少ないぞ。 …だが 若い 力も 悪くない。」",
+   c1d:"鷹野の 後ろには 大きな 後援会の のぼりが 並んでいる。 {n}は 気を 引きしめた。",c1e:"{v}「鷹野は 地盤が 固い。 だが 地盤は 人の 心で 決まる。 自分の 足で 勝負しろ。」",
+   c2a:"県内 各地区の 候補者が あつまる 合同演説会。 ライバルたちの 顔ぶれが そろった。",c2b:"司会「それでは 候補者の みなさん、 順番に 主張を おねがいします。」",c2c:"{n}は 緊張しながらも 前に 一歩 ふみだした。",
+   c3a:"県内の 村々を まわる うちに、 ひとの 声が 少しずつ 変わってきた…。",c3b:"「バスの 路線、 考えて くれるの？」 「学校を まもって ほしい！」 声が あちこちで 上がる！",c3c:"高校生たち「県議選、 はじめて 投票するんです！ 応援してます！」",c3d:"{v}「…風が 吹いてきたな。 だが 鷹野も 本気を 出してくる。 最後まで 走りきれ。」",
+   e1:"投票日の 前の 夜。 {n}は 県の 夜景を 見おろす 高台に 立っていた。",e2:"{v}「選挙運動は 終わりだ。 定数3。 たった 3つの いす。 …だが 数字より 大切なのは、 声を とどけた 人の 数だ。」",e3:"{n}「…はい！ 最後まで 信じます。」",e4:"あしたは いよいよ 投票日。 県議会への 道が ひらくか——。",
+   w1:"夜、 開票結果が 発表された。 {n}の 名前が 当選者として 呼ばれた——！",w2:"県議会議員として、 {n}の 新しい 日々が はじまる。 会場は 拍手と 歓声で いっぱい！",w3:"{v}「…県議会へ ようこそ。 地域の 声を、 県政へ とどけてくれ。」",
+   l1:"当選ラインに わずかに とどかなかった。 {n}「あと 少しだったのに…！」",l2:"{v}「定数の かべは 厚い。 だが 積み上げた 票は 次の 力に なる。」",l3:"地域の 人たち「次は きっと 当選だよ！」 {n}の 挑戦は つづく。",
+   b1:"結果は きびしかった。 けれど…",b2:"{v}「選挙は 終わりじゃない。 地域の 声を 聞く 仕事は だれにでも できる。」",b3:"県内を 歩いて 聞いた 声は、 {n}の 中に のこっている。",
+   o1:"立候補を あきらめた {n}。 雨が しとしと ふっていた。",o2:"{v}「…一度の つまずきで 終わる 者では あるまい。 もう一度、 県内を 歩いて みなさい。」",o3:"{n}「…はい。 また 歩きます。」"}},
+ city:{id:"city",n:"市長選挙編",short:"市長選",place:"さくら市",icon:"🏙️",diff:"★★★ むずかしい",desc:"現職と 元副市長、 強敵 ふたりと の 三つ巴！ 当選は ひとり。",cardsTxt:"市役所係長・商工会議所会頭・保育園長・新聞編集長・バス運転手（市長選 特攻）",
+  seats:1,runners:6,mul:1.15,rivalN:"朝倉 れいじ",rival2:"久世 みつる",rivalArt:"rival3",rival2Art:"rival4",W:[36,31,12,9,7,5],reward:[600,350,180,120,90,60],rmul:[1.14,1.08,.9,.9,.88],
+  pool:["manifesto","budget","endorse","bulletin"],debName:"公開討論会",tips:["a","m","i","h"],
+  ttl:["第1章 三つ巴の 戦い","第2章 公開討論会 生中継","第3章 手ごたえ","最終章 前夜","序章 さくら市"],
+  bgs:{pro:"townsad",pro2:"cityhall",ch1:"cityhall",ch2:"hall",ch3a:"street",ch3b:"town",eve:"night"},
+  txt:{
+   p1:"【さくら市】 人口 30万人。 市役所の 前には 長い 行列、 バスは 赤字、 保育園は 空きなし…。 市政への 不満が たまっていた。",
+   p2:"{n}「文句を 言うだけじゃ 変わらない。」",p2b:"{n}「わたしが 市長に なって、 変える！」",
+   p3:"そこへ、 市政を 長く 見てきた 老議員が あらわれた。",p4:"{v}「市長は 市の トップ。 責任は 重いぞ。 …だが 現職の 朝倉は 強敵だ。 覚悟は あるか？」",
+   p5:"{n}の {N}ターンに わたる 市長選が、 いま はじまる！ 勝てるのは たった ひとり！",
+   c1a:"駅前での 演説に 多くの 市民が 足を 止めた！",c1b:"そこへ、 現職の 朝倉 れいじ 市長の 選挙カーが 通りかかった。",
+   c1c:"朝倉「若い 挑戦者か。 市政は きれいごとじゃ 回らないぞ。」",c1d:"もう ひとり、 元副市長の 久世 みつるも 立候補を 表明していた。 三つ巴の 戦いだ…。",c1e:"{v}「相手は 二人。 どちらも 手ごわい。 だが 市民は 変化を 求めている。 そこを 見失うな。」",
+   c2a:"市長選の 公開討論会。 会場は 満席、 生中継の カメラも まわっている。",c2b:"司会「市政の 課題について、 三人の 候補者に おうかがいします。」",c2c:"朝倉と 久世の するどい 視線の 中、 {n}は マイクを にぎった。",
+   c3a:"市内を 歩く うちに、 ふしぎな 手ごたえを おぼえてきた。",c3b:"『市政を 変えたい』 そう 思う 市民が 少しずつ ふえている。 駅前の 人だかりも 大きくなった！",c3c:"保育園の 保護者たち「待機児童の こと、 本気で 考えてくれて ありがとう！」",c3d:"{v}「朝倉も 久世も 本気で 動き出した。 …ここからが 本当の 勝負だ。」",
+   e1:"投票日の 前の 夜。 {n}は 市役所の 屋上から 市の 灯りを 見つめていた。",e2:"{v}「市長は たった ひとり。 勝てば 市の 未来、 負ければ また 挑戦だ。 …どちらでも 君は 市民の 声を 聞いた。 それが 財産だ。」",e3:"{n}「…はい。 悔いは ありません！」",e4:"あしたは いよいよ 投票日。 市の 未来が 決まる——。",
+   w1:"夜、 開票結果が 発表された。 {n}が 市長に 当選したのだ！",w2:"歓声の 中、 {n}は 深く 一礼した。 朝倉も 久世も 静かに 拍手を おくった。",w3:"{v}「…市長か。 責任は 重いぞ。 だが 君なら できる。 さくら市を 頼んだ。」",
+   l1:"僅差で 届かなかった。 {n}「…くやしい。」",l2:"{v}「市長は ひとり。 負けた 者の 声も 市の 財産だ。 次の 機会を 待て。」",l3:"市民たち「また 挑戦してね！」 {n}の 戦いは まだ つづく。",
+   b1:"結果は きびしかった。 けれど…",b2:"{v}「市政は 選挙の あとも つづく。 市民として 関わる ことも できる。」",b3:"市内を 歩いて 聞いた 声は、 {n}の 中に のこっている。",
+   o1:"立候補を あきらめた {n}。 雨が しとしと ふっていた。",o2:"{v}「…一度の つまずきで 終わる 者では あるまい。 もう一度、 市内を 歩いて みなさい。」",o3:"{n}「…はい。 また 歩きます。」"}},
+ lower:{id:"lower",n:"衆議院議員選挙編",icon:"🏢",locked:true},
+ upper:{id:"upper",n:"参議院議員選挙編",icon:"🏛️",locked:true}
+};
+let selSc="town";
+const tx=s=>String(s).replace(/\{n\}/g,G.cand.n).replace(/\{v\}/g,VET).replace(/\{N\}/g,G.N).replace(/\{r\}/g,G.sc.rivalN);
+const scMemo=()=>`<div class="memo"><b>📝 ことばメモ</b><br>${G.sc.tips.map(k=>TIPS[k]).join("<br>")}</div>`;
+function epiText(rank,over){const T=G.sc.txt,n=G.cand.n;const k=over?["o1","o2","o3"]:rank<=G.sc.seats?["w1","w2","w3"]:rank<=G.sc.seats+2?["l1","l2","l3"]:["b1","b2","b3"];return k.map(x=>tx(T[x])).join(" ")}
+/* ---- シナリオ えらび ---- */
+function scenarioSelect(){
+ mode="home";
+ ui(`<div class="sp" style="max-height:12%"></div><div class="panel" style="overflow:auto;max-height:86%"><h2>🗺️ シナリオを えらぼう</h2>`+
+  Object.values(SCEN).map(s=>s.locked?`<div class="sci lock"><span class="ic">${s.icon}</span><div><b>${s.n}</b><br><small>🔒 準備中（ちかく 公開！）</small></div></div>`:
+  `<button class="sci ${selSc===s.id?"on":""}" data-k="pickSc" data-v="${s.id}"><span class="ic">${s.icon}</span><div><b>${s.n}</b> <span class="pill g">${s.diff}</span><br><small>${s.desc}</small><br><small>🌟 とくべつな カード：${s.cardsTxt}</small></div></button>`).join("")+
+  `<button class="btn sub" data-k="home">もどる</button></div>`);
+}
+/* ---- イベント ついか ---- */
+Object.assign(EVT,{
+ assembly:{icon:"🏛️",q:"県議会の 傍聴席に すわる ことが できるそうだ。 行ってみる？",
+  c:[{l:"傍聴して 議論を 学ぶ",fx:G=>{G.st.pol+=14;G.st.tru+=4},r:"予算や 条例が どう 話し合われるのか 肌で 感じた。(政策+14 / 信頼+4)"},
+     {l:"きょうは 地元回りを 優先する",fx:G=>{G.st.pow+=9;G.energy-=8},r:"地元の 人たちと たくさん 話せた。(行動力+9)"}],tip2:TIPS.n},
+ request:{icon:"🛣️",q:"町の 人「うちの 前の 道、 直して ほしい！ 公約に して くれる？」",
+  c:[{l:"調べてから、 できる 範囲で 約束する",fx:G=>{G.st.tru+=12;G.st.pol+=5},r:"「責任を もって 検討します」 正直な 答えに 信頼が 上がった。(信頼+12 / 政策+5)"},
+     {l:"なんでも やります！と 約束する",fx:G=>{G.st.tru-=12},r:"あとで 『ほんとうに できるの？』 と 疑われて しまった…。(信頼-12)"}],tip2:"できない 約束を する のは ダメ。 <b>実現できる ことを 正直に 伝える</b> のが 信頼の もと。"},
+ speech:{icon:"🎤",q:"後援会の 人が 個人演説会を 開いてくれた。 なにを 話す？",
+  c:[{l:"地域の 課題と 解決策を 具体的に",fx:G=>{G.st.voi+=9;G.st.pol+=9},r:"会場から 大きな 拍手！ 声と 政策が のびた。(声+9 / 政策+9)"},
+     {l:"ほかの 候補を わるく 言う",fx:G=>{G.st.tru-=14;G.st.voi+=2},r:"ひそひそ…。 根拠の ない 悪口で 信頼が 下がった。(信頼-14)"}],tip2:"選挙運動には <b>街頭演説・個人演説会・選挙公報</b>などが ある。 根拠の ない 悪口ではなく、 <b>政策で 勝負</b> しよう。"},
+ district:{icon:"🗺️",q:"定数は 3。 でも ライバルが 多い。 どんな 作戦で いく？",
+  c:[{l:"地元の 票を しっかり かためる",fx:G=>{G.st.pow+=10;G.st.tru+=5},r:"足元を かためて 安定感が 出た。(行動力+10 / 信頼+5)"},
+     {l:"新しい 地域にも 足を のばす",fx:G=>{G.st.sta+=9;G.st.voi+=7;G.energy-=12},r:"遠くの 村まで 足を のばして 新しい 出会いが！(体力+9 / 声+7)"}],tip2:TIPS.j},
+ manifesto:{icon:"📜",q:"市政の 課題を まとめた マニフェストを 作る！ どう 書く？",
+  c:[{l:"数字と 期限を 入れて 具体的に",fx:G=>{G.st.pol+=15;G.st.tru+=5},r:"『3年で 待機児童ゼロ』 具体的な 目標が 市民に 伝わった。(政策+15 / 信頼+5)"},
+     {l:"かっこいい ことばだけ ならべる",fx:G=>{G.st.pol-=4;G.st.tru-=7},r:"『で、 具体的には？』 と つっこまれてしまった。(政策-4 / 信頼-7)"}],tip2:TIPS.k},
+ budget:{icon:"💰",q:"市の 予算の 資料。 数字が いっぱいで むずかしい…！",
+  c:[{l:"市役所の 人に 教えてもらう",fx:G=>{G.st.pol+=13;G.energy-=6},r:"税金の 使い道が よくわかった。(政策+13)"},
+     {l:"見なかった ことに する",fx:G=>{G.st.pol-=4},r:"…討論会で 困りそう。(政策-4)"}],tip2:"市の 予算は 市民の <b>税金</b>で まかなわれ、 <b>議会</b>で 話し合って 決まる。"},
+ endorse:{icon:"🤝",q:"ある 団体「推薦してあげる。 ただし 条件が ある」と 言われた…。",
+  c:[{l:"自分の 公約と 合うなら 受ける",fx:G=>{G.st.tru+=7;G.st.pow+=7},r:"ぶれない 姿勢で 信頼も 支持も ふえた。(信頼+7 / 行動力+7)"},
+     {l:"なんでも 条件を のむ",fx:G=>{G.st.tru-=12;G.st.pow+=9},r:"支持は ふえたが、 『言いなり？』 と 心配された。(信頼-12 / 行動力+9)"}],tip2:"団体から 推薦や 支持を もらう ことも ある。 でも <b>自分の 公約を 曲げない</b> ことが 大切。"},
+ bulletin:{icon:"📰",q:"選挙公報に 公約を 書く 日。 どう する？",
+  c:[{l:"実現できる ことだけを 書く",fx:G=>{G.st.tru+=11;G.st.pol+=3},r:"誠実な 内容が 好印象。(信頼+11 / 政策+3)"},
+     {l:"大きな ことを 盛って 書く",fx:G=>{G.st.tru-=10;G.st.pol-=2},r:"『ほんとうに？』 と 疑われて しまった。(信頼-10)"}],tip2:TIPS.l}
+});
+Object.assign(EVSC,{
+ assembly:{bg:"assembly",npc:()=>cardAct(vetCard()),who:VET,prop:"📜",fx:"question"},
+ request:{bg:"street",npc:()=>npcAct("citizen"),who:"町の 人",prop:"🛣️",fx:"question"},
+ speech:{bg:"hall",npc:()=>npcAct("mc"),who:"後援会の 人",prop:"🎤",fx:"sparkle"},
+ district:{bg:"farm",npc:()=>emoAct("🗺️",64),who:"",prop:"🗳️",fx:"question"},
+ manifesto:{bg:"library",npc:()=>emoAct("📜",64),who:"",prop:"✏️",fx:"idea"},
+ budget:{bg:"cityhall",npc:()=>cardAct(CARDS.find(c=>c.id==="c22")),who:"向井 係長",prop:"💰",fx:"question"},
+ endorse:{bg:"street",npc:()=>npcAct("suit"),who:"団体の 代表",prop:"🤝",fx:"question"},
+ bulletin:{bg:"library",npc:()=>emoAct("📰",64),who:"",prop:"✏️",fx:"idea"}
+});
+/* ---- シナリオ 専用 サポートカード ---- */
+CARDS.push(
+ {id:"c17",n:"水沢 ちとせ",role:"県庁職員",t:"pol",r:"SSR",e:"🏢",sc:"pref",line:"県の データなら ここに ぜんぶ あるわ。",art:{sk:"#ffdcc0",h:"#3a3a4a",hs:2,cl:"#4a6a8a",acc:[1],tie:true},
+  eps:[["ちとせ「県庁の 資料室へ ようこそ。 まず 県の 人口と 予算の グラフを 見ましょう。」","県全体の 姿が 見えてきた。 地域ごとの 差も 大きい。"],["ちとせ「約束は 大きくても いいわ。 でも 予算と 条例の うらづけが ないと 絵に かいた もちよ。」","実現できる 政策かどうかを たしかめる 大切さを 学んだ。"],["ちとせ「あなたの 公約、 県の 計画と つながったわ。 これなら 議会で 戦えるわ！」","公約が 現実の 計画に つながった！"]]},
+ {id:"c18",n:"田所 ゆたか",role:"農協の 青年部長",t:"pow",r:"SR",e:"🌾",sc:"pref",line:"うちの 田んぼまで 来てくれ！",art:{sk:"#e0b088",h:"#3a2a20",hs:0,cl:"#7a9a4a",acc:[3],cap:"#e8c860",tie:false},
+  eps:[["ゆたか「うちの 田んぼまで 来てくれて ありがとう！ 農家の 声を 聞いてくれ。」","朝から 田んぼ道を 歩いて 話を 聞いた。 足が 鍛えられた。"],["ゆたか「後継ぎが いない 農家が 多いんだ。 …県の 力で なんとか ならないか？」","農業の 課題を 知り、 県の 役割を 考えた。"],["ゆたか「青年部 みんなで 応援するぞ！ 収穫祭で 演説してくれ！」","収穫祭で 大きな 拍手！ 農家の 輪が ひろがった。"]]},
+ {id:"c19",n:"柏木 しおり",role:"県立高校の 先生",t:"tru",r:"SR",e:"📖",sc:"pref",line:"高校生にも 話を してみない？",art:{sk:"#ffdcc0",h:"#4a2a3a",hs:1,cl:"#8a7ab0",acc:[1],tie:false},
+  eps:[["しおり「生徒たちに 選挙の 話を してみない？ 18歳の 有権者も いるのよ。」","高校生に 話すと 質問が いっぱい！ 信頼が ふえた。"],["しおり「『投票しても 変わらない』って 言う 子が いるの。 …変えて みせて。」","若い 世代に 届く ことばを 探すと 決めた。"],["しおり「生徒会の みんなが 『選挙に 行こう』ポスターを 作ったわ！」","高校生たちの 応援で 勇気が わいた！"]]},
+ {id:"c20",n:"ジロー",role:"地元FMの DJ",t:"voi",r:"R",e:"🎧",sc:"pref",line:"ヘイ！ 声は 最高の 武器だぜ！",art:{sk:"#e8b98f",h:"#c05a2a",hs:3,cl:"#2a6a8a",acc:[],tie:false},
+  eps:[["ジロー「ヘイ！ 声は 最高の 武器だぜ！ マイクの 前で 練習だ！」","ラジオ局で 発声練習！ 声が のびた。"],["ジロー「じつは むかし 緊張して 放送事故を おこした ことが あってな…。」","失敗しても 続ける 勇気を もらった。"],["ジロー「今夜の 番組に ゲストで 出てくれよ！ 県じゅうに 届けるぜ！」","ラジオで 県内に 声が とどいた！"]]},
+ {id:"c21",n:"烈",role:"消防団員",t:"sta",r:"R",e:"🚒",sc:"pref",line:"体力は 地域を 守る 力だ！",art:{sk:"#e0b088",h:"#2a2a2a",hs:3,cl:"#c0392b",acc:[2],tie:false},
+  eps:[["烈「消防団の 朝練に 参加しろ！ 体力は 地域を 守る 力だ！」","朝練で ヘトヘト。 でも 体力が ついた。"],["烈「大雨の 日、 みんなで 川の 見回りを したんだ。 地域は 助け合いだ。」","防災への 関心が 高まった。"],["烈「消防団 全員で 君を 応援する。 地域の 安全は 任せたぞ！」","地域の 守り手たちが 背中を 押してくれた。"]]},
+ {id:"c22",n:"向井 あかり",role:"市役所の 係長",t:"pol",r:"SSR",e:"🏙️",sc:"city",line:"市の お金の 流れ、 いっしょに 読み解きましょう。",art:{sk:"#ffdcc0",h:"#2a2a3a",hs:2,cl:"#2f4f7f",acc:[1],tie:true},
+  eps:[["あかり「市の 予算書を 読み解くわよ。 税金が どこに 使われて いるか 見えるわ。」","市の お金の 流れが 少し 見えてきた。"],["あかり「市長は 市の 事務の 責任者。 大きな 約束ほど 実行力が 問われるの。」","市長の 仕事の 重さを 知った。"],["あかり「あなたの マニフェスト、 数値目標も 期限も 完璧よ！」","具体的な マニフェストが 完成した！"]]},
+ {id:"c23",n:"堂島 玄",role:"商工会議所の 会頭",t:"pow",r:"SR",e:"🏢",sc:"city",line:"市内の 経営者を 紹介しよう。",art:{sk:"#f0c8a0",h:"#6a6a70",hs:4,cl:"#3a3a4a",acc:[5],tie:true},
+  eps:[["玄「市内の 経営者を 紹介しよう。 まずは 現場を 見て 回れ。」","市内の 工場や 店を まわり、 行動力が ついた。"],["玄「市長は 経済も 見なきゃ ならん。 …ただし 企業の 言いなりは ダメだ。」","特定の 声だけを 聞かない 大切さを 学んだ。"],["玄「市内の 経営者 みんなが 君を 応援する。 市民の ために 働けよ！」","経済界の 応援で 行動の 幅が ひろがった。"]]},
+ {id:"c24",n:"若葉 みどり",role:"保育園の 園長",t:"tru",r:"SR",e:"🧸",sc:"city",line:"保護者の 声を 聞いて あげて。",art:{sk:"#ffdcc0",h:"#8a5a30",hs:5,cl:"#ffa8c0",acc:[4],tie:false},
+  eps:[["みどり「待機児童が ふえているの。 保護者の 声を 聞いて あげて。」","保護者の 話を 聞き、 信頼が ふえた。"],["みどり「子育て中の 親は 忙しくて 投票に 行く 時間が ないの。 期日前投票を 知ってもらえたら…。」","期日前投票の 大切さを 実感した。"],["みどり「保護者会が 総出で 応援するわ！ 子どもたちの 未来を お願いね。」","子育て世代の 応援が 力に なった。"]]},
+ {id:"c25",n:"速水 かける",role:"地元紙の 編集長",t:"pol",r:"R",e:"📰",sc:"city",line:"市政の 課題、 まとめておいたぞ。",art:{sk:"#f0c8a0",h:"#3a3a3a",hs:0,cl:"#7a6a50",acc:[1],tie:true},
+  eps:[["かける「市政の 課題を 一覧に したぞ。 目を 通しておけ。」","市政の 課題が 整理 できた。"],["かける「記者は 書く。 だが 決めるのは 市民だ。」","主権者は 市民だと 再確認した。"],["かける「今朝の 社説は 『若い 声に 期待』。 …がんばれよ。」","新聞の 後押しで 知名度が 上がった。"]]},
+ {id:"c26",n:"サトル",role:"市営バスの 運転手",t:"sta",r:"R",e:"🚌",sc:"city",line:"運転は 体力勝負だ！ いっしょに 走ろう！",art:{sk:"#e8b98f",h:"#2a2a2a",hs:0,cl:"#2f8f6a",acc:[3],cap:"#2f8f6a",tie:false},
+  eps:[["サトル「バスの 運転は 体力勝負だ。 いっしょに 早朝ランニングだ！」","早朝ランで 体力が ついた。"],["サトル「路線が 減ると 通院も 通学も 大変なんだ。」","公共交通の 大切さを 実感した。"],["サトル「全 車両に 応援の ステッカーを 貼ったぞ！」","市内を 走る バスが 応援団に なった！"]]}
+);
+Object.assign(CLOOK,{c17:{pose:"chart",bg:"assembly"},c18:{pose:"thumbs",bg:"farm",tilt:-2},c19:{pose:"book",bg:"chalk"},c20:{pose:"mic",bg:"radio",tilt:-3},c21:{pose:"fold",bg:"sunrise"},
+ c22:{pose:"note",bg:"cityhall",tilt:2},c23:{pose:"lapel",bg:"shop"},c24:{pose:"hug",bg:"balloon",tilt:-3},c25:{pose:"point",bg:"news",tilt:-2},c26:{pose:"wheel",bg:"taxi",tilt:-3}});
+Object.assign(BGMAP,{c17:"assembly",c18:"farm",c19:"library",c20:"stage",c21:"town",c22:"cityhall",c23:"street",c24:"park",c25:"library",c26:"street"});
+if(SV.cards.c20==null)SV.cards.c20=0;if(SV.cards.c26==null)SV.cards.c26=0;save();
+
+/* ---- メニュー／やめる ---- */
+function setMenuBtn(on){$("mbtn").classList.toggle("hide",!on)}
+function openMenu(){
+ if(!G)return;paused=true;
+ const nm=SK.map(k=>`<div class="st2"><b>${SN[k]}</b><span>${G.st[k]}</span></div>`).join("");
+ $("mn").classList.remove("hide");
+ $("mnb").innerHTML=`<h2>☰ メニュー</h2>
+  <p style="margin:0;font-size:12.5px">${G.cand.n}　第${Math.min(G.t,G.N)}/${G.N}ターン　元気 ${G.energy}　SP ${G.sp}</p>
+  <div class="st2w">${nm}</div>
+  <p style="font-size:12px;margin:4px 0">スキル：${G.skills.length?G.skills.map(id=>SKILLS.find(x=>x.id===id).n).join("、"):"なし"}</p>
+  <button class="btn" data-k="menuClose">▶ つづける</button>
+  <button class="btn sub" data-k="menuSound">${soundOn?"🔊 サウンド：ON":"🔇 サウンド：OFF"}</button>
+  <button class="btn sub" style="color:#c33" data-k="menuQuit">🚪 途中で やめる</button>`;
+}
+function closeMenu(){$("mn").classList.add("hide");paused=false}
+function menuQuitAsk(){
+ $("mnb").innerHTML=`<h2>🚪 やめますか？</h2><p>ここまでの 育成は <b>きろくに のこりません</b>。 ホームに もどります。</p>
+  <button class="btn sub" data-k="menuClose">つづける</button><button class="btn pk" data-k="menuQuitGo">やめる</button>`;
+}
+function quitRun(){
+ closeMenu();
+ if(SC){SC.ended=true;clearInterval(SC.typing);clearTimeout(SC.timer);SC.tm.forEach(clearTimeout);SC=null}
+ if(GC)gcEnd(false);
+ closeSheet();G=null;RC=null;hideBar();
+ home();
+}
+function hideBar(){$("cmt").innerHTML=""}
+addEventListener("keydown",e=>{if(e.code==="Escape"&&G){if($("mn").classList.contains("hide"))openMenu();else closeMenu()}});
+
 title();frame();
 </script>
 </body>
